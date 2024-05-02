@@ -32,7 +32,7 @@ resources:
     parameters:
       service: destination
       service-plan: lite
-      
+
   - name: northwindext-auth
     type: org.cloudfoundry.managed-service
     parameters:
@@ -46,5 +46,5 @@ resources:
   - name: northwindext-logs
     type: org.cloudfoundry.managed-service
     parameters:
-     service: application-logs
-     service-plan: lite
+      service: application-logs
+      service-plan: lite

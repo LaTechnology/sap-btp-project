@@ -9,9 +9,9 @@
     "@sap-cloud-sdk/http-client": "^3.9.0",
     "@sap-cloud-sdk/resilience": "^3.9.0",
     "@sap/cds": "^7",
-    "@sap/xssec": "^3.6.0",
+    "@sap/xssec": "^3",
     "express": "^4",
-    "passport": "^0.7.0"
+    "passport": "^0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
@@ -40,10 +40,11 @@
       },
       "[production]": {
         "auth": {
-          "kind": "xsuaa",
-          "restrict_all_services": false
+          "kind": "mocked",
+          "restrict_all_services": true
         }
-      }
+      },
+      "auth": "xsuaa"
     }
   }
 }
