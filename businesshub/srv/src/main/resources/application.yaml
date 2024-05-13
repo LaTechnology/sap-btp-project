@@ -1,0 +1,13 @@
+---
+spring:
+  config.activate.on-profile: cloud
+cds:
+  application.services:
+    -name: "business_partner_api_service"
+    model: "API_BUSINESS_PARTNER"
+  remote.services:
+    -name: "API_BUSINESS_PARTNER"
+    model: "API_BUSINESS_PARTNER"
+    destination:
+      name: "business_partner_api_service_destination"
+      type: "odata-v2"
