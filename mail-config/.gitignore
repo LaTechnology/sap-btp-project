@@ -1,9 +1,10 @@
-# CAP proposal
+# CAP mail-config
 _out
 *.db
 *.sqlite
 connection.properties
 default-*.json
+.cdsrc-private.json
 gen/
 node_modules/
 target/
@@ -31,15 +32,3 @@ mta_archives/
 
 # @cap-js/cds-typer
 @cds-models
-
-# added by cds
-
-
-# added by cds
-.cdsrc-private.json
-
-# added by cds
-.cdsrc-private.json
-
-# added by cds
-.cdsrc-private.json

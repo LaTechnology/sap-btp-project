@@ -4,8 +4,11 @@ sap.ui.define([
     "sap/m/BusyDialog"
 ], function (Controller,MessageToast,BusyDialog) {
     "use strict";
-    var newClientId;
+    // var newClientId;
     var cliName;
+    var newClientId = crypto.randomUUID();
+
+
     return Controller.extend("ns.propose.controller.ClientForm", {
         onInit: function () {
             this.usedNumbers = [];
@@ -103,8 +106,8 @@ sap.ui.define([
             var that = this;
             cliName = this.getView().byId("name").getValue();
                 console.log(oModel);
-                newClientId = this.generateUniqueShuffledNumber(this.usedNumbers);
-                this.usedNumbers.push(newClientId);
+                // newClientId = this.generateUniqueShuffledNumber(this.usedNumbers);
+                // this.usedNumbers.push(newClientId);
                 var onBusyDialog= new BusyDialog({
                     text:"Please wait......."
                 })

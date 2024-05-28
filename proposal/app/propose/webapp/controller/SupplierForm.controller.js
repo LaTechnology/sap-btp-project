@@ -4,8 +4,9 @@ sap.ui.define([
     "sap/m/BusyDialog"
 ], function (Controller,MessageToast,BusyDialog) {
     "use strict";
-    var newSupplierId;
+    // var newSupplierId;
     var supName;
+    var newSupplierId = crypto.randomUUID();
     return Controller.extend("ns.propose.controller.SupplierForm", {
         // Function to generate a random 5-digit number
         generateRandomNumber: function () {
@@ -101,8 +102,8 @@ sap.ui.define([
         MessageToast.show("Invalid Pincode. Please enter a valid Pincode.");
         return;
     }
-    newSupplierId = this.generateUniqueShuffledNumber(this.usedNumbers);
-            this.usedNumbers.push(newSupplierId);
+    // newSupplierId = this.generateUniqueShuffledNumber(this.usedNumbers);
+    //         this.usedNumbers.push(newSupplierId);
             var oModel = this.getView().getModel();
             supName= this.getView().byId("name").getValue();
             var that = this;

@@ -5,7 +5,7 @@
         "binding": {
           "type": "cf",
           "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
-          "org": "b204042dtrial",
+          "org": "c9c44076trial",
           "space": "dev",
           "instance": "proposal-db",
           "key": "proposal-db-key",

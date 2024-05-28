@@ -12,7 +12,7 @@ entity PS_USER{
 }
 
 entity PS_VENDOR_ORG{
-    key id                                :   Integer;
+    key id                                :   UUID;
     name                                  :   String(100);
     logo                                  :   LargeBinary;
     website                                 :   String;
@@ -26,7 +26,7 @@ entity PS_VENDOR_ORG{
     
 }
 entity PS_VENDOR_ORG_CONTACT{
-    key id                                :   Integer;
+    key id                                :   UUID;
     addressLine1                          :   String(30);
     addressLine2                          :   String(50);
     addressLine3                          :   String(50);
@@ -49,7 +49,7 @@ entity PS_VENDOR_ORG_CONTACT{
 }
 //NOTE: CLIENT OR CALLED CUSTOMER
 entity PS_CUSTOMER_ORG{
-    key id                                 :   Integer;
+    key id                                 :   UUID;
     name                                   :   String(100);
     logo                                   :   LargeBinary;
     website                                 :   String;
@@ -64,7 +64,7 @@ entity PS_CUSTOMER_ORG{
 
 
 entity PS_CUSTOMER_ORG_CONTACT{
-    key id                                 :   Integer;
+    key id                                 :   UUID;
     addressLine1                           :   String(30);
     addressLine2                           :   String(50);
     addressLine3                           :   String(50);

@@ -9,7 +9,6 @@
     "@sap/cds": "^7",
     "@sap/cds-hana": "^2",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
-    "@sap/hana-client": "^2.19.18",
     "@sap/xssec": "^3",
     "express": "^4",
     "passport": "^0.7.0"
@@ -33,17 +32,23 @@
         "users": {
           "support@sap.com": {
             "password": "initial",
-            "roles": ["support"]
+            "roles": [
+              "support"
+            ]
           },
           "BookViewer": {
-            "ID":"BookViewer",
-            "password":"1234",
-            "roles": ["BookViewer"]
+            "ID": "BookViewer",
+            "password": "1234",
+            "roles": [
+              "BookViewer"
+            ]
           },
           "Admin": {
-            "ID":"Admin",
-            "password":"123",
-            "roles": ["Admin"]
+            "ID": "Admin",
+            "password": "123",
+            "roles": [
+              "Admin"
+            ]
           }
         }
       },
