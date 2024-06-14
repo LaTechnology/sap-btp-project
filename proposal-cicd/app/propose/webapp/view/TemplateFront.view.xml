@@ -1,0 +1,94 @@
+<mvc:View controllerName="ns.propose.controller.TemplateFront"
+xmlns:l="sap.ui.layout"
+xmlns:f="sap.ui.layout.form"
+xmlns:m="sap.m"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns:core="sap.ui.core"
+xmlns="sap.m">
+<Page id="page" title="Proposal" showNavButton="true" navButtonPress=".onNavBack">
+<VBox class="customVBoxClass sapUiSmallMargin">
+    <f:SimpleForm id="SimpleFormToolbar"
+        class="customSimpleForm"
+        editable="true"
+        layout="ResponsiveGridLayout"
+        labelSpanXL="4"
+        labelSpanL="3"
+        labelSpanM="4"
+        labelSpanS="12"
+        adjustLabelSpan="false"
+        emptySpanXL="0"
+        emptySpanL="4"
+        emptySpanM="0"
+        emptySpanS="0"
+        columnsXL="2"
+        columnsL="1"
+        columnsM="1"
+        singleContainerFullSize="false"
+        ariaLabelledBy="Title1" >
+        <f:toolbar>
+            <Toolbar id="TB1">
+                <Title id="Title1" text="Create New Proposal"/>
+            </Toolbar>
+        </f:toolbar>
+        <f:content>
+            <Label text="Project Name" class="columnsLable"/>
+            <Input value="{ProductName}"  maxLength="20"/>
+            <Label text="SOW Reference ID" />
+            <Input value="{ProjectId}" id="projectId"/>
+            <Label text="Project Type" />
+            <!-- <Select id="projecttype" selectedKey="{ProjectType}">
+                <items>
+                    <core:Item text="Hybris" key="Hyrbis"/>
+                    <core:Item text="Java" key="Java"/>
+                    <core:Item text="Btp" key="Btp"/>
+                </items>
+            </Select> -->
+           
+<Select
+    items="{path: 'dataModel>/value'
+    }"
+    autoAdjustWidth="true">
+ 
+               <core:Item text="{dataModel>projectType}" key="{dataModel>id}" />
+</Select>
+
+
+            <Label text="Project StartDate" />
+            <m:DatePicker id="DP1" />
+            <Label text="Proposal Valid Till" />
+            <m:DatePicker id="DP2" />
+            <Label text="Supplier Details" />
+            
+            <Select
+            items="{path: 'dataModel2>/value',
+            formatter: '.formatItems'
+            }"
+            autoAdjustWidth="true">
+            <core:Item text="{= ${dataModel2>state} + ' - ' + ${dataModel2>PS_VENDOR_ORG/name} }" key="{dataModel2>id}" />
+                <core:Item text="{= ${dataModel2>PS_VENDOR_ORG/name} + ' - ' + ${dataModel2>state} }" key="{dataModel2>id}" />
+
+                      
+        </Select>
+            <Label text="Customer Details" />
+           
+            <Select
+            items="{path: 'dataModel3>/value'
+            }"
+            autoAdjustWidth="true">
+         
+                       <core:Item text="{dataModel3>name}" key="{dataModel3>id}" />
+        </Select>
+            <Label text="Template" />
+            <Input id ="template" enabled="false"/>
+            <Button text="Undo" press="onUndoPress" icon="sap-icon://undo" />
+            <Button text="Choose Template" press=".createTemplate1" design="Emphasized"></Button>
+            <Label text="" />
+            <Button text="Back" press=".onNavBack" design="Emphasized"></Button>
+           <Button text="Continue" press=".createTemplate2" design="Emphasized"></Button>
+          
+        </f:content>
+    </f:SimpleForm>
+</VBox>
+
+</Page>
+</mvc:View>

@@ -1,0 +1,6271 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Service for namespace proposal.service.proposal",
+    "description": "This service is located at [/odata/v4/proposal/](/odata/v4/proposal/)",
+    "version": ""
+  },
+  "x-sap-api-type": "ODATAV4",
+  "x-odata-version": "4.01",
+  "x-sap-shortText": "Service for namespace proposal.service.proposal",
+  "servers": [
+    {
+      "url": "/odata/v4/proposal"
+    }
+  ],
+  "tags": [
+    {
+      "name": "LoginCredentials"
+    },
+    {
+      "name": "ProposalCustomer"
+    },
+    {
+      "name": "ProposalCustomerContact"
+    },
+    {
+      "name": "ProposalSupplier"
+    },
+    {
+      "name": "ProposalSupplierContact"
+    },
+    {
+      "name": "PS_DETAILS"
+    },
+    {
+      "name": "PS_MAIN_SECTION"
+    },
+    {
+      "name": "PS_PROJECT_TYPE"
+    },
+    {
+      "name": "PS_SUB_SECTION"
+    },
+    {
+      "name": "PS_TEMPLATE"
+    }
+  ],
+  "paths": {
+    "/$batch": {
+      "post": {
+        "summary": "Sends a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+        "tags": [
+          "Batch Requests"
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Batch request",
+          "content": {
+            "multipart/mixed;boundary=request-separator": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET LoginCredentials HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch response",
+            "content": {
+              "multipart/mixed": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/LoginCredentials": {
+      "get": {
+        "summary": "Retrieves a list of login credentials.",
+        "tags": [
+          "LoginCredentials"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "emailId",
+                  "emailId desc",
+                  "password",
+                  "password desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "emailId",
+                  "password",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved login credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of LoginCredentials",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.LoginCredentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single login credential.",
+        "tags": [
+          "LoginCredentials"
+        ],
+        "requestBody": {
+          "description": "New login credential",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.LoginCredentials-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created login credential",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.LoginCredentials"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/LoginCredentials({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single login credential.",
+        "tags": [
+          "LoginCredentials"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "emailId",
+                  "password",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved login credential",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.LoginCredentials"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single login credential.",
+        "tags": [
+          "LoginCredentials"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.LoginCredentials-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single login credential.",
+        "tags": [
+          "LoginCredentials"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_DETAILS": {
+      "get": {
+        "summary": "Retrieves a list of p s_ d e t a i l s.",
+        "tags": [
+          "PS_DETAILS"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "referenceId",
+                  "referenceId desc",
+                  "projectName",
+                  "projectName desc",
+                  "PS_PROJECT_TYPE_id",
+                  "PS_PROJECT_TYPE_id desc",
+                  "proposedDate",
+                  "proposedDate desc",
+                  "validTillDate",
+                  "validTillDate desc",
+                  "proposedBy",
+                  "proposedBy desc",
+                  "proposerRole",
+                  "proposerRole desc",
+                  "proposerDepartment",
+                  "proposerDepartment desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "referenceId",
+                  "projectName",
+                  "PS_PROJECT_TYPE_id",
+                  "proposedDate",
+                  "validTillDate",
+                  "proposedBy",
+                  "proposerRole",
+                  "proposerDepartment",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_PROJECT_TYPE",
+                  "PS_MAIN_SECTION",
+                  "PS_TEMPLATE"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ d e t a i l s",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of PS_DETAILS",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.PS_DETAILS"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ d e t a i l .",
+        "tags": [
+          "PS_DETAILS"
+        ],
+        "requestBody": {
+          "description": "New p s_ d e t a i l ",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_DETAILS-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ d e t a i l ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_DETAILS"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_DETAILS({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single p s_ d e t a i l .",
+        "tags": [
+          "PS_DETAILS"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "referenceId",
+                  "projectName",
+                  "PS_PROJECT_TYPE_id",
+                  "proposedDate",
+                  "validTillDate",
+                  "proposedBy",
+                  "proposerRole",
+                  "proposerDepartment",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_PROJECT_TYPE",
+                  "PS_MAIN_SECTION",
+                  "PS_TEMPLATE"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ d e t a i l ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_DETAILS"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single p s_ d e t a i l .",
+        "tags": [
+          "PS_DETAILS"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_DETAILS-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single p s_ d e t a i l .",
+        "tags": [
+          "PS_DETAILS"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_DETAILS({id})/PS_MAIN_SECTION": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a list of p s_ m a i n_ s e c t i o n of a p s_ d e t a i l .",
+        "tags": [
+          "PS_DETAILS",
+          "PS_MAIN_SECTION"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "title",
+                  "title desc",
+                  "description",
+                  "description desc",
+                  "section_image",
+                  "section_image desc",
+                  "table_data",
+                  "table_data desc",
+                  "tableArea",
+                  "tableArea desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "PS_DETAILS_id",
+                  "PS_DETAILS_id desc",
+                  "section_table",
+                  "section_table desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "title",
+                  "description",
+                  "section_image",
+                  "table_data",
+                  "tableArea",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_DETAILS_id",
+                  "section_table"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_DETAILS",
+                  "PS_SUB_SECTION"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ m a i n_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of PS_MAIN_SECTION",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ m a i n_ s e c t i o n of a p s_ d e t a i l .",
+        "tags": [
+          "PS_DETAILS",
+          "PS_MAIN_SECTION"
+        ],
+        "requestBody": {
+          "description": "New p s_ m a i n_ s e c t i o n",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ m a i n_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_DETAILS({id})/PS_PROJECT_TYPE": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves p s_ p r o j e c t_ t y p e of a p s_ d e t a i l .",
+        "tags": [
+          "PS_DETAILS",
+          "PS_PROJECT_TYPE"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "projectType"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ p r o j e c t_ t y p e",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_PROJECT_TYPE"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_DETAILS({id})/PS_TEMPLATE": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a list of p s_ t e m p l a t e of a p s_ d e t a i l .",
+        "tags": [
+          "PS_DETAILS",
+          "PS_TEMPLATE"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "name",
+                  "name desc",
+                  "description",
+                  "description desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "PS_DETAILS_id",
+                  "PS_DETAILS_id desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "description",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_DETAILS_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_DETAILS"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ t e m p l a t e",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of PS_TEMPLATE",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.PS_TEMPLATE"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ t e m p l a t e of a p s_ d e t a i l .",
+        "tags": [
+          "PS_DETAILS",
+          "PS_TEMPLATE"
+        ],
+        "requestBody": {
+          "description": "New p s_ t e m p l a t e",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_TEMPLATE-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ t e m p l a t e",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_TEMPLATE"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_MAIN_SECTION": {
+      "get": {
+        "summary": "Retrieves a list of p s_ m a i n_ s e c t i o n.",
+        "tags": [
+          "PS_MAIN_SECTION"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "title",
+                  "title desc",
+                  "description",
+                  "description desc",
+                  "section_image",
+                  "section_image desc",
+                  "table_data",
+                  "table_data desc",
+                  "tableArea",
+                  "tableArea desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "PS_DETAILS_id",
+                  "PS_DETAILS_id desc",
+                  "section_table",
+                  "section_table desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "title",
+                  "description",
+                  "section_image",
+                  "table_data",
+                  "tableArea",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_DETAILS_id",
+                  "section_table"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_DETAILS",
+                  "PS_SUB_SECTION"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ m a i n_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of PS_MAIN_SECTION",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ m a i n_ s e c t i o n.",
+        "tags": [
+          "PS_MAIN_SECTION"
+        ],
+        "requestBody": {
+          "description": "New p s_ m a i n_ s e c t i o n",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ m a i n_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_MAIN_SECTION({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single p s_ m a i n_ s e c t i o n.",
+        "tags": [
+          "PS_MAIN_SECTION"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "title",
+                  "description",
+                  "section_image",
+                  "table_data",
+                  "tableArea",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_DETAILS_id",
+                  "section_table"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_DETAILS",
+                  "PS_SUB_SECTION"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ m a i n_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single p s_ m a i n_ s e c t i o n.",
+        "tags": [
+          "PS_MAIN_SECTION"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single p s_ m a i n_ s e c t i o n.",
+        "tags": [
+          "PS_MAIN_SECTION"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_MAIN_SECTION({id})/PS_DETAILS": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves p s_ d e t a i l s of a p s_ m a i n_ s e c t i o n.",
+        "tags": [
+          "PS_MAIN_SECTION",
+          "PS_DETAILS"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "referenceId",
+                  "projectName",
+                  "PS_PROJECT_TYPE_id",
+                  "proposedDate",
+                  "validTillDate",
+                  "proposedBy",
+                  "proposerRole",
+                  "proposerDepartment",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_PROJECT_TYPE",
+                  "PS_MAIN_SECTION",
+                  "PS_TEMPLATE"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ d e t a i l s",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_DETAILS"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_MAIN_SECTION({id})/PS_SUB_SECTION": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a list of p s_ s u b_ s e c t i o n of a p s_ m a i n_ s e c t i o n.",
+        "tags": [
+          "PS_MAIN_SECTION",
+          "PS_SUB_SECTION"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "sub_title",
+                  "sub_title desc",
+                  "sub_description",
+                  "sub_description desc",
+                  "sub_section_image",
+                  "sub_section_image desc",
+                  "sub_table_data",
+                  "sub_table_data desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "sub_section_table",
+                  "sub_section_table desc",
+                  "PS_MAIN_SECTION_id",
+                  "PS_MAIN_SECTION_id desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "sub_title",
+                  "sub_description",
+                  "sub_section_image",
+                  "sub_table_data",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "sub_section_table",
+                  "PS_MAIN_SECTION_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_MAIN_SECTION"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ s u b_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of PS_SUB_SECTION",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.PS_SUB_SECTION"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ s u b_ s e c t i o n of a p s_ m a i n_ s e c t i o n.",
+        "tags": [
+          "PS_MAIN_SECTION",
+          "PS_SUB_SECTION"
+        ],
+        "requestBody": {
+          "description": "New p s_ s u b_ s e c t i o n",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_SUB_SECTION-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ s u b_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_SUB_SECTION"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_PROJECT_TYPE": {
+      "get": {
+        "summary": "Retrieves a list of p s_ p r o j e c t_ t y p e.",
+        "tags": [
+          "PS_PROJECT_TYPE"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "projectType",
+                  "projectType desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "projectType"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ p r o j e c t_ t y p e",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of PS_PROJECT_TYPE",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.PS_PROJECT_TYPE"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ p r o j e c t_ t y p e.",
+        "tags": [
+          "PS_PROJECT_TYPE"
+        ],
+        "requestBody": {
+          "description": "New p s_ p r o j e c t_ t y p e",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_PROJECT_TYPE-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ p r o j e c t_ t y p e",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_PROJECT_TYPE"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_PROJECT_TYPE({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single p s_ p r o j e c t_ t y p e.",
+        "tags": [
+          "PS_PROJECT_TYPE"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "projectType"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ p r o j e c t_ t y p e",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_PROJECT_TYPE"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single p s_ p r o j e c t_ t y p e.",
+        "tags": [
+          "PS_PROJECT_TYPE"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_PROJECT_TYPE-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single p s_ p r o j e c t_ t y p e.",
+        "tags": [
+          "PS_PROJECT_TYPE"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_SUB_SECTION": {
+      "get": {
+        "summary": "Retrieves a list of p s_ s u b_ s e c t i o n.",
+        "tags": [
+          "PS_SUB_SECTION"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "sub_title",
+                  "sub_title desc",
+                  "sub_description",
+                  "sub_description desc",
+                  "sub_section_image",
+                  "sub_section_image desc",
+                  "sub_table_data",
+                  "sub_table_data desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "sub_section_table",
+                  "sub_section_table desc",
+                  "PS_MAIN_SECTION_id",
+                  "PS_MAIN_SECTION_id desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "sub_title",
+                  "sub_description",
+                  "sub_section_image",
+                  "sub_table_data",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "sub_section_table",
+                  "PS_MAIN_SECTION_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_MAIN_SECTION"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ s u b_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of PS_SUB_SECTION",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.PS_SUB_SECTION"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ s u b_ s e c t i o n.",
+        "tags": [
+          "PS_SUB_SECTION"
+        ],
+        "requestBody": {
+          "description": "New p s_ s u b_ s e c t i o n",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_SUB_SECTION-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ s u b_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_SUB_SECTION"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_SUB_SECTION({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single p s_ s u b_ s e c t i o n.",
+        "tags": [
+          "PS_SUB_SECTION"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "sub_title",
+                  "sub_description",
+                  "sub_section_image",
+                  "sub_table_data",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "sub_section_table",
+                  "PS_MAIN_SECTION_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_MAIN_SECTION"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ s u b_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_SUB_SECTION"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single p s_ s u b_ s e c t i o n.",
+        "tags": [
+          "PS_SUB_SECTION"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_SUB_SECTION-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single p s_ s u b_ s e c t i o n.",
+        "tags": [
+          "PS_SUB_SECTION"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_SUB_SECTION({id})/PS_MAIN_SECTION": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves p s_ m a i n_ s e c t i o n of a p s_ s u b_ s e c t i o n.",
+        "tags": [
+          "PS_SUB_SECTION",
+          "PS_MAIN_SECTION"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "title",
+                  "description",
+                  "section_image",
+                  "table_data",
+                  "tableArea",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_DETAILS_id",
+                  "section_table"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_DETAILS",
+                  "PS_SUB_SECTION"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ m a i n_ s e c t i o n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_TEMPLATE": {
+      "get": {
+        "summary": "Retrieves a list of p s_ t e m p l a t e.",
+        "tags": [
+          "PS_TEMPLATE"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "name",
+                  "name desc",
+                  "description",
+                  "description desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "PS_DETAILS_id",
+                  "PS_DETAILS_id desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "description",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_DETAILS_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_DETAILS"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ t e m p l a t e",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of PS_TEMPLATE",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.PS_TEMPLATE"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ t e m p l a t e.",
+        "tags": [
+          "PS_TEMPLATE"
+        ],
+        "requestBody": {
+          "description": "New p s_ t e m p l a t e",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_TEMPLATE-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ t e m p l a t e",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_TEMPLATE"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_TEMPLATE({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single p s_ t e m p l a t e.",
+        "tags": [
+          "PS_TEMPLATE"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "description",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_DETAILS_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_DETAILS"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ t e m p l a t e",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_TEMPLATE"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single p s_ t e m p l a t e.",
+        "tags": [
+          "PS_TEMPLATE"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_TEMPLATE-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single p s_ t e m p l a t e.",
+        "tags": [
+          "PS_TEMPLATE"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/PS_TEMPLATE({id})/PS_DETAILS": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves p s_ d e t a i l s of a p s_ t e m p l a t e.",
+        "tags": [
+          "PS_TEMPLATE",
+          "PS_DETAILS"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "referenceId",
+                  "projectName",
+                  "PS_PROJECT_TYPE_id",
+                  "proposedDate",
+                  "validTillDate",
+                  "proposedBy",
+                  "proposerRole",
+                  "proposerDepartment",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_PROJECT_TYPE",
+                  "PS_MAIN_SECTION",
+                  "PS_TEMPLATE"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ d e t a i l s",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.PS_DETAILS"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalCustomer": {
+      "get": {
+        "summary": "Retrieves a list of proposal customer.",
+        "tags": [
+          "ProposalCustomer"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "name",
+                  "name desc",
+                  "logo",
+                  "logo desc",
+                  "website",
+                  "website desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "logo",
+                  "website",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_CUSTOMER_ORG_CONTACT"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved proposal customer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ProposalCustomer",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single proposal customer.",
+        "tags": [
+          "ProposalCustomer"
+        ],
+        "requestBody": {
+          "description": "New proposal customer",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomer-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created proposal customer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomer"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalCustomer({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single proposal customer.",
+        "tags": [
+          "ProposalCustomer"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "logo",
+                  "website",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_CUSTOMER_ORG_CONTACT"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved proposal customer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomer"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single proposal customer.",
+        "tags": [
+          "ProposalCustomer"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomer-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single proposal customer.",
+        "tags": [
+          "ProposalCustomer"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalCustomer({id})/PS_CUSTOMER_ORG_CONTACT": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a list of p s_ c u s t o m e r_ o r g_ c o n t a c t of a proposal customer.",
+        "tags": [
+          "ProposalCustomer",
+          "ProposalCustomerContact"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "addressLine1",
+                  "addressLine1 desc",
+                  "addressLine2",
+                  "addressLine2 desc",
+                  "addressLine3",
+                  "addressLine3 desc",
+                  "city",
+                  "city desc",
+                  "pincode",
+                  "pincode desc",
+                  "state",
+                  "state desc",
+                  "country",
+                  "country desc",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_mobileNumber desc",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_telephoneNumber desc",
+                  "contact_person_1_emailId",
+                  "contact_person_1_emailId desc",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_mobileNumber desc",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_telephoneNumber desc",
+                  "contact_person_2_emailId",
+                  "contact_person_2_emailId desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "PS_CUSTOMER_ORG_id",
+                  "PS_CUSTOMER_ORG_id desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "addressLine1",
+                  "addressLine2",
+                  "addressLine3",
+                  "city",
+                  "pincode",
+                  "state",
+                  "country",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_emailId",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_emailId",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_CUSTOMER_ORG_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_CUSTOMER_ORG"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ c u s t o m e r_ o r g_ c o n t a c t",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ProposalCustomerContact",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomerContact"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ c u s t o m e r_ o r g_ c o n t a c t of a proposal customer.",
+        "tags": [
+          "ProposalCustomer",
+          "ProposalCustomerContact"
+        ],
+        "requestBody": {
+          "description": "New p s_ c u s t o m e r_ o r g_ c o n t a c t",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomerContact-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ c u s t o m e r_ o r g_ c o n t a c t",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomerContact"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalCustomerContact": {
+      "get": {
+        "summary": "Retrieves a list of proposal customer contact.",
+        "tags": [
+          "ProposalCustomerContact"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "addressLine1",
+                  "addressLine1 desc",
+                  "addressLine2",
+                  "addressLine2 desc",
+                  "addressLine3",
+                  "addressLine3 desc",
+                  "city",
+                  "city desc",
+                  "pincode",
+                  "pincode desc",
+                  "state",
+                  "state desc",
+                  "country",
+                  "country desc",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_mobileNumber desc",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_telephoneNumber desc",
+                  "contact_person_1_emailId",
+                  "contact_person_1_emailId desc",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_mobileNumber desc",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_telephoneNumber desc",
+                  "contact_person_2_emailId",
+                  "contact_person_2_emailId desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "PS_CUSTOMER_ORG_id",
+                  "PS_CUSTOMER_ORG_id desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "addressLine1",
+                  "addressLine2",
+                  "addressLine3",
+                  "city",
+                  "pincode",
+                  "state",
+                  "country",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_emailId",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_emailId",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_CUSTOMER_ORG_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_CUSTOMER_ORG"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved proposal customer contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ProposalCustomerContact",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomerContact"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single proposal customer contact.",
+        "tags": [
+          "ProposalCustomerContact"
+        ],
+        "requestBody": {
+          "description": "New proposal customer contact",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomerContact-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created proposal customer contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomerContact"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalCustomerContact({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single proposal customer contact.",
+        "tags": [
+          "ProposalCustomerContact"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "addressLine1",
+                  "addressLine2",
+                  "addressLine3",
+                  "city",
+                  "pincode",
+                  "state",
+                  "country",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_emailId",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_emailId",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_CUSTOMER_ORG_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_CUSTOMER_ORG"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved proposal customer contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomerContact"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single proposal customer contact.",
+        "tags": [
+          "ProposalCustomerContact"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomerContact-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single proposal customer contact.",
+        "tags": [
+          "ProposalCustomerContact"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalCustomerContact({id})/PS_CUSTOMER_ORG": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves p s_ c u s t o m e r_ o r g of a proposal customer contact.",
+        "tags": [
+          "ProposalCustomerContact",
+          "ProposalCustomer"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "logo",
+                  "website",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_CUSTOMER_ORG_CONTACT"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ c u s t o m e r_ o r g",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomer"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalSupplier": {
+      "get": {
+        "summary": "Retrieves a list of proposal supplier.",
+        "tags": [
+          "ProposalSupplier"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "name",
+                  "name desc",
+                  "logo",
+                  "logo desc",
+                  "website",
+                  "website desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "logo",
+                  "website",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_VENDOR_ORG_CONTACT"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved proposal supplier",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ProposalSupplier",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplier"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single proposal supplier.",
+        "tags": [
+          "ProposalSupplier"
+        ],
+        "requestBody": {
+          "description": "New proposal supplier",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplier-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created proposal supplier",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplier"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalSupplier({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single proposal supplier.",
+        "tags": [
+          "ProposalSupplier"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "logo",
+                  "website",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_VENDOR_ORG_CONTACT"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved proposal supplier",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplier"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single proposal supplier.",
+        "tags": [
+          "ProposalSupplier"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplier-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single proposal supplier.",
+        "tags": [
+          "ProposalSupplier"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalSupplier({id})/PS_VENDOR_ORG_CONTACT": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a list of p s_ v e n d o r_ o r g_ c o n t a c t of a proposal supplier.",
+        "tags": [
+          "ProposalSupplier",
+          "ProposalSupplierContact"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "addressLine1",
+                  "addressLine1 desc",
+                  "addressLine2",
+                  "addressLine2 desc",
+                  "addressLine3",
+                  "addressLine3 desc",
+                  "city",
+                  "city desc",
+                  "pincode",
+                  "pincode desc",
+                  "state",
+                  "state desc",
+                  "country",
+                  "country desc",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_mobileNumber desc",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_telephoneNumber desc",
+                  "contact_person_1_emailId",
+                  "contact_person_1_emailId desc",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_mobileNumber desc",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_telephoneNumber desc",
+                  "contact_person_2_emailId",
+                  "contact_person_2_emailId desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "PS_VENDOR_ORG_id",
+                  "PS_VENDOR_ORG_id desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "addressLine1",
+                  "addressLine2",
+                  "addressLine3",
+                  "city",
+                  "pincode",
+                  "state",
+                  "country",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_emailId",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_emailId",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_VENDOR_ORG_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_VENDOR_ORG"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ v e n d o r_ o r g_ c o n t a c t",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ProposalSupplierContact",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplierContact"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single p s_ v e n d o r_ o r g_ c o n t a c t of a proposal supplier.",
+        "tags": [
+          "ProposalSupplier",
+          "ProposalSupplierContact"
+        ],
+        "requestBody": {
+          "description": "New p s_ v e n d o r_ o r g_ c o n t a c t",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplierContact-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created p s_ v e n d o r_ o r g_ c o n t a c t",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplierContact"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalSupplierContact": {
+      "get": {
+        "summary": "Retrieves a list of proposal supplier contact.",
+        "tags": [
+          "ProposalSupplierContact"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "id desc",
+                  "addressLine1",
+                  "addressLine1 desc",
+                  "addressLine2",
+                  "addressLine2 desc",
+                  "addressLine3",
+                  "addressLine3 desc",
+                  "city",
+                  "city desc",
+                  "pincode",
+                  "pincode desc",
+                  "state",
+                  "state desc",
+                  "country",
+                  "country desc",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_mobileNumber desc",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_telephoneNumber desc",
+                  "contact_person_1_emailId",
+                  "contact_person_1_emailId desc",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_mobileNumber desc",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_telephoneNumber desc",
+                  "contact_person_2_emailId",
+                  "contact_person_2_emailId desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "modifiedBy",
+                  "modifiedBy desc",
+                  "modifiedAt",
+                  "modifiedAt desc",
+                  "PS_VENDOR_ORG_id",
+                  "PS_VENDOR_ORG_id desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "addressLine1",
+                  "addressLine2",
+                  "addressLine3",
+                  "city",
+                  "pincode",
+                  "state",
+                  "country",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_emailId",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_emailId",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_VENDOR_ORG_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_VENDOR_ORG"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved proposal supplier contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ProposalSupplierContact",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplierContact"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single proposal supplier contact.",
+        "tags": [
+          "ProposalSupplierContact"
+        ],
+        "requestBody": {
+          "description": "New proposal supplier contact",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplierContact-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created proposal supplier contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplierContact"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalSupplierContact({id})": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single proposal supplier contact.",
+        "tags": [
+          "ProposalSupplierContact"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "addressLine1",
+                  "addressLine2",
+                  "addressLine3",
+                  "city",
+                  "pincode",
+                  "state",
+                  "country",
+                  "contact_person_1_mobileNumber",
+                  "contact_person_1_telephoneNumber",
+                  "contact_person_1_emailId",
+                  "contact_person_2_mobileNumber",
+                  "contact_person_2_telephoneNumber",
+                  "contact_person_2_emailId",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt",
+                  "PS_VENDOR_ORG_id"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_VENDOR_ORG"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved proposal supplier contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplierContact"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single proposal supplier contact.",
+        "tags": [
+          "ProposalSupplierContact"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplierContact-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single proposal supplier contact.",
+        "tags": [
+          "ProposalSupplierContact"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProposalSupplierContact({id})/PS_VENDOR_ORG": {
+      "parameters": [
+        {
+          "description": "key: id",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves p s_ v e n d o r_ o r g of a proposal supplier contact.",
+        "tags": [
+          "ProposalSupplierContact",
+          "ProposalSupplier"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "logo",
+                  "website",
+                  "createdBy",
+                  "createdAt",
+                  "modifiedBy",
+                  "modifiedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$expand",
+            "description": "The value of $expand query option is a comma-separated list of navigation property names, stream property names, or $value indicating the stream content of a media-entity. The corresponding related entities and stream values will be represented inline, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "*",
+                  "PS_VENDOR_ORG_CONTACT"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved p s_ v e n d o r_ o r g",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplier"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "proposal.service.proposal.LoginCredentials": {
+        "title": "LoginCredentials",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.LoginCredentials-create": {
+        "title": "LoginCredentials (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.LoginCredentials-update": {
+        "title": "LoginCredentials (for update)",
+        "type": "object",
+        "properties": {
+          "emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.PS_DETAILS": {
+        "title": "PS_DETAILS",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "referenceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "PS_PROJECT_TYPE": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_PROJECT_TYPE"
+              }
+            ],
+            "nullable": true
+          },
+          "PS_PROJECT_TYPE_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "proposedDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "validTillDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "proposedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "proposerRole": {
+            "type": "string",
+            "nullable": true
+          },
+          "proposerDepartment": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_MAIN_SECTION": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION"
+            }
+          },
+          "PS_MAIN_SECTION@count": {
+            "$ref": "#/components/schemas/count"
+          },
+          "PS_TEMPLATE": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/proposal.service.proposal.PS_TEMPLATE"
+            }
+          },
+          "PS_TEMPLATE@count": {
+            "$ref": "#/components/schemas/count"
+          }
+        }
+      },
+      "proposal.service.proposal.PS_DETAILS-create": {
+        "title": "PS_DETAILS (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "referenceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "PS_PROJECT_TYPE_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "proposedDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "validTillDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "proposedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "proposerRole": {
+            "type": "string",
+            "nullable": true
+          },
+          "proposerDepartment": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.PS_DETAILS-update": {
+        "title": "PS_DETAILS (for update)",
+        "type": "object",
+        "properties": {
+          "referenceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "PS_PROJECT_TYPE_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "proposedDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "validTillDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "proposedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "proposerRole": {
+            "type": "string",
+            "nullable": true
+          },
+          "proposerDepartment": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.PS_MAIN_SECTION": {
+        "title": "PS_MAIN_SECTION",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "section_image": {
+            "type": "string",
+            "nullable": true
+          },
+          "table_data": {
+            "type": "string",
+            "nullable": true
+          },
+          "tableArea": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_DETAILS": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_DETAILS"
+              }
+            ],
+            "nullable": true
+          },
+          "PS_DETAILS_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "section_table": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "PS_SUB_SECTION": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/proposal.service.proposal.PS_SUB_SECTION"
+            }
+          },
+          "PS_SUB_SECTION@count": {
+            "$ref": "#/components/schemas/count"
+          }
+        }
+      },
+      "proposal.service.proposal.PS_MAIN_SECTION-create": {
+        "title": "PS_MAIN_SECTION (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "section_image": {
+            "type": "string",
+            "nullable": true
+          },
+          "table_data": {
+            "type": "string",
+            "nullable": true
+          },
+          "tableArea": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_DETAILS_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "section_table": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.PS_MAIN_SECTION-update": {
+        "title": "PS_MAIN_SECTION (for update)",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "section_image": {
+            "type": "string",
+            "nullable": true
+          },
+          "table_data": {
+            "type": "string",
+            "nullable": true
+          },
+          "tableArea": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_DETAILS_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "section_table": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.PS_PROJECT_TYPE": {
+        "title": "PS_PROJECT_TYPE",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "projectType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.PS_PROJECT_TYPE-create": {
+        "title": "PS_PROJECT_TYPE (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "projectType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.PS_PROJECT_TYPE-update": {
+        "title": "PS_PROJECT_TYPE (for update)",
+        "type": "object",
+        "properties": {
+          "projectType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.PS_SUB_SECTION": {
+        "title": "PS_SUB_SECTION",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sub_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_section_image": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_table_data": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "sub_section_table": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "PS_MAIN_SECTION": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_MAIN_SECTION"
+              }
+            ],
+            "nullable": true
+          },
+          "PS_MAIN_SECTION_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.PS_SUB_SECTION-create": {
+        "title": "PS_SUB_SECTION (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sub_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_section_image": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_table_data": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "sub_section_table": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "PS_MAIN_SECTION_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.PS_SUB_SECTION-update": {
+        "title": "PS_SUB_SECTION (for update)",
+        "type": "object",
+        "properties": {
+          "sub_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_section_image": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_table_data": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "sub_section_table": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "PS_MAIN_SECTION_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.PS_TEMPLATE": {
+        "title": "PS_TEMPLATE",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_DETAILS": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/proposal.service.proposal.PS_DETAILS"
+              }
+            ],
+            "nullable": true
+          },
+          "PS_DETAILS_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.PS_TEMPLATE-create": {
+        "title": "PS_TEMPLATE (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_DETAILS_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.PS_TEMPLATE-update": {
+        "title": "PS_TEMPLATE (for update)",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_DETAILS_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.ProposalCustomer": {
+        "title": "ProposalCustomer",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_CUSTOMER_ORG_CONTACT": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomerContact"
+            }
+          },
+          "PS_CUSTOMER_ORG_CONTACT@count": {
+            "$ref": "#/components/schemas/count"
+          }
+        }
+      },
+      "proposal.service.proposal.ProposalCustomer-create": {
+        "title": "ProposalCustomer (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.ProposalCustomer-update": {
+        "title": "ProposalCustomer (for update)",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.ProposalCustomerContact": {
+        "title": "ProposalCustomerContact",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "addressLine1": {
+            "type": "string",
+            "maxLength": 30,
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "addressLine3": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "pincode": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_CUSTOMER_ORG": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalCustomer"
+              }
+            ],
+            "nullable": true
+          },
+          "PS_CUSTOMER_ORG_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.ProposalCustomerContact-create": {
+        "title": "ProposalCustomerContact (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "addressLine1": {
+            "type": "string",
+            "maxLength": 30,
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "addressLine3": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "pincode": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_CUSTOMER_ORG_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.ProposalCustomerContact-update": {
+        "title": "ProposalCustomerContact (for update)",
+        "type": "object",
+        "properties": {
+          "addressLine1": {
+            "type": "string",
+            "maxLength": 30,
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "addressLine3": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "pincode": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_CUSTOMER_ORG_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.ProposalSupplier": {
+        "title": "ProposalSupplier",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_VENDOR_ORG_CONTACT": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplierContact"
+            }
+          },
+          "PS_VENDOR_ORG_CONTACT@count": {
+            "$ref": "#/components/schemas/count"
+          }
+        }
+      },
+      "proposal.service.proposal.ProposalSupplier-create": {
+        "title": "ProposalSupplier (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.ProposalSupplier-update": {
+        "title": "ProposalSupplier (for update)",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "format": "base64url",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.ProposalSupplierContact": {
+        "title": "ProposalSupplierContact",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "addressLine1": {
+            "type": "string",
+            "maxLength": 30,
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "addressLine3": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "pincode": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_VENDOR_ORG": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/proposal.service.proposal.ProposalSupplier"
+              }
+            ],
+            "nullable": true
+          },
+          "PS_VENDOR_ORG_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "proposal.service.proposal.ProposalSupplierContact-create": {
+        "title": "ProposalSupplierContact (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "addressLine1": {
+            "type": "string",
+            "maxLength": 30,
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "addressLine3": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "pincode": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_VENDOR_ORG_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "proposal.service.proposal.ProposalSupplierContact-update": {
+        "title": "ProposalSupplierContact (for update)",
+        "type": "object",
+        "properties": {
+          "addressLine1": {
+            "type": "string",
+            "maxLength": 30,
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "addressLine3": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "pincode": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_1_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_mobileNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_telephoneNumber": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "contact_person_2_emailId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "PS_VENDOR_ORG_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "count": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+      },
+      "error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "target": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "innererror": {
+                "type": "object",
+                "description": "The structure of this object is service-specific"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "top": {
+        "name": "$top",
+        "in": "query",
+        "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "example": 50
+      },
+      "skip": {
+        "name": "$skip",
+        "in": "query",
+        "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "count": {
+        "name": "$count",
+        "in": "query",
+        "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "search": {
+        "name": "$search",
+        "in": "query",
+        "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

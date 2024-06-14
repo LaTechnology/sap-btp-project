@@ -1,0 +1,38 @@
+<mvc:View xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+    controllerName="ns.propose.controller.PreviewForm"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"   >
+
+<Page>
+    <Bar>
+        <contentMiddle>
+            <Title text="Proposal Details" level="H1" titleStyle="H3" />
+        </contentMiddle>
+    </Bar>
+   <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="{dataFromDB>\title}"/>
+			</OverflowToolbar>
+		</headerToolbar>
+		<content>
+			<layout:HorizontalLayout>
+				<Image id="imagePreview" src="{path: 'dataFromDB>/section_image'}" width="20%" />
+
+               
+                
+			</layout:HorizontalLayout>
+
+            <Text text="{dataFromDB>description}"/>
+			
+		</content>
+	</Panel>
+
+
+</Page>
+
+
+
+
+</mvc:View>

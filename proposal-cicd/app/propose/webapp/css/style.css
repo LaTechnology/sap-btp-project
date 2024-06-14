@@ -1,0 +1,207 @@
+/* Enter your custom styles here */
+.desc{
+    display: none;
+  }
+  .vertical-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .centerText {
+    margin-left: 29px;
+}
+.blueLabel {
+  color: blue;
+}
+
+.boldText {
+  font-weight: bold;
+}
+
+
+/* Enter your custom styles here */
+
+.vbox{
+  background-image: url("https://www.4cpl.tech/ast/uploads/2022/04/proposal-management-system-case-study-main.jpg");
+  background-size: cover;
+  
+ ;
+}
+
+.lable{
+  text-decoration: white ;
+  font-weight: bold;
+  color: white;
+  lighting-color: chocolate;
+}
+.lables{
+
+  font-weight: bold;
+  color: black;
+  lighting-color: white;
+}
+
+.edit{
+  background: transparent;
+  
+}
+
+.size{
+  font-size: 10px;
+}
+
+/* .tileLayout {
+  border: solid 2px;
+  box-sizing: content-box;
+  display:flow-root;
+} */
+
+.tilecss {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  margin: 10px;
+  padding: 10px;
+}
+
+/* Title */
+.tilecss .title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Description */
+.tilecss .description {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Image */
+.tilecss .image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.customBar .sapMBarLeftContent {
+  display: flex;
+  align-items: center;
+}
+
+.customBar {
+  height: 100px;
+}
+
+/* Styling for the entire Wizard */
+.sapMWizard {
+  /* Add your styling properties here */
+  background-color: #f0f0f0; /* Example background color */
+  border: 1px solid #ccc; /* Example border */
+  padding: 20px; /* Example padding */
+}
+
+/* Styling for Wizard steps */
+.sapMWizardStep {
+  /* Add your styling properties here */
+  background-color: #fff; /* Example background color */
+  border: 1px solid #ccc; /* Example border */
+  padding: 10px; /* Example padding */
+  margin-bottom: 10px; /* Example margin between steps */
+}
+
+/* Styling for active Wizard steps */
+.sapMWizardStep.sapMWizardStepActive {
+  /* Add your styling properties here */
+  background-color: #007bff; /* Example background color */
+  color: #fff; /* Example text color */
+}
+
+/* Styling for Wizard step titles */
+.sapMWizardStepTitle {
+  /* Add your styling properties here */
+  font-weight: bold; /* Example font weight */
+}
+
+/* Styling for Wizard step icons */
+.sapMWizardStepIcon {
+  /* Add your styling properties here */
+  color: #007bff; /* Example icon color */
+}
+
+.prorposal{border: solid 4px;}
+
+.buttonfortool{border-style: inherit; border-color: black;}
+
+/* Style for the table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #060907; /* Indigo border for the table */
+}
+
+/* Style for table header */
+th {
+  background-color: #7eac73; /* Indigo */
+  color: white;
+  font-weight: bold;
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 2px solid #b82542; /* Darker Indigo */
+  border-right: 1px solid #4e5dab; /* Darker Indigo border on the right */
+}
+
+/* Style for table rows */
+tr {
+  background-color: #f8f9fc; /* Light Grayish Blue */
+  border-bottom: 1px solid #ccc; /* Light Gray border for each row */
+}
+
+/* Style for alternating rows */
+tr:nth-child(even) {
+  background-color: #edf1f7; /* Light Gray */
+}
+
+/* Style for table data */
+td {
+  padding: 10px 15px;
+  border-right: 1px solid #ccc; /* Light Gray border on the right of each cell */
+}
+
+/* Hover effect for table rows */
+tr:hover {
+  background-color: #e2e6ea; /* Lighter Gray */
+}
+
+.image{
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.redMessageToast {
+  background-color: red !important;
+  color: white !important;
+}
+
+.invisibleBar {
+ 
+  visibility: hidden;
+}
+
+.layoutVerticalLayout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.imagePreview {
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+

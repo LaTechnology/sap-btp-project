@@ -1,0 +1,277 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "ns.propose",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.12.1",
+      "toolsId": "6b50c97f-ca46-4bde-b81e-387c70cbb4ab"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/v2/odata/v4/proposal/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.6",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {},
+        "sap.ui.unified": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ns.propose.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "ns.propose.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "Routepropose",
+          "pattern": "",
+          "target": [
+            "Targetpropose"
+          ]
+        },
+        {
+          "name": "supplierForm",
+          "pattern": "supplierForm",
+          "target": [
+            "supplierForm"
+          ]
+        },
+        {
+          "name": "clientForm",
+          "pattern": "clientForm",
+          "target": [
+            "clientForm"
+          ]
+        },
+        {
+          "name": "clientView",
+          "pattern": "clientView/{clientId}",
+          "target": [
+            "clientView"
+          ]
+        },
+        {
+          "name": "supplierView",
+          "pattern": "supplierView/{supplierId}",
+          "target": [
+            "supplierView"
+          ]
+        },
+        {
+          "name": "supplierViewEdit",
+          "pattern": "supplierViewEdit",
+          "target": [
+            "supplierViewEdit"
+          ]
+        },
+        {
+          "name": "clientViewEdit",
+          "pattern": "clientViewEdit",
+          "target": [
+            "clientViewEdit"
+          ]
+        },
+        {
+          "name": "clientUpdateForm",
+          "pattern": "clientUpdateForm/{SelectedItem}",
+          "target": [
+            "clientUpdateForm"
+          ]
+        },
+        {
+          "name": "supplierUpdateForm",
+          "pattern": "supplierUpdateForm/{SelectedItem}",
+          "target": [
+            "supplierUpdateForm"
+          ]
+        },
+
+        {
+          "name": "PreviewForm",
+          "pattern": "PreviewForm/{previewId}",
+          "target": ["PreviewForm"]
+        },
+
+        {
+          "name": "ProposalCreation",
+          "pattern": "ProposalCreation/{templatedataid}",
+          "target": [
+            "ProposalCreation"
+          ]
+        },
+
+        
+        {
+          "name": "TemplateFront",
+          "pattern": "TemplateFront",
+          "target": [
+            "TemplateFront"
+          ]
+        },
+
+        {
+          "name": "supplierPreviewEdit",
+          "pattern": "supplierPreviewEdit",
+          "target": [
+            "supplierPreviewEdit"
+          ]
+        },
+
+        {
+          "name": "Home",
+          "pattern": "Home",
+          "target": [
+            "Home"
+          ]
+        }
+      ],
+      "targets": {
+        "Targetpropose": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Main",
+          "viewName": "Main"
+        },
+        "supplierForm": {
+          "viewId": "SupplierForm",
+          "viewName": "SupplierForm"
+        },
+        "clientForm": {
+          "viewId": "ClientForm",
+          "viewName": "ClientForm"
+        },
+        "clientView": {
+          "viewId": "ClientView",
+          "viewName": "ClientView"
+        },
+        "supplierView": {
+          "viewId": "SupplierView",
+          "viewName": "SupplierView"
+        },
+        "supplierViewEdit": {
+          "viewId": "SupplierViewEdit",
+          "viewName": "SupplierViewEdit"
+        },
+        "clientViewEdit": {
+          "viewId": "ClientViewEdit",
+          "viewName": "ClientViewEdit"
+        },
+        "clientUpdateForm": {
+          "viewId": "ClientUpdateForm",
+          "viewName": "ClientUpdateForm"
+        },
+        "supplierUpdateForm": {
+          "viewId": "SupplierUpdateForm",
+          "viewName": "SupplierUpdateForm"
+        },
+        "ProposalCreation": {
+          "viewId": "ProposalForm",
+          "viewName": "ProposalForm"
+        },
+        "supplierPreviewEdit": {
+          "viewId": "SupplierPreviewEdit",
+          "viewName": "SupplierPreviewEdit"
+        },
+        "PreviewForm":{
+          "viewName": "PreviewForm",
+          "viewLevel": 2
+        },
+
+        "TemplateFront":{
+          "viewName": "TemplateFront",
+          "viewLevel": 2
+        },
+
+        "Home":{
+          "viewName": "Main",
+          "viewLevel": 2
+        }
+
+      }
+    },
+    "rootView": {
+      "viewName": "ns.propose.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

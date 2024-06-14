@@ -1,0 +1,141 @@
+<mvc:View
+    controllerName="ns.propose.controller.ClientView"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+>
+<Page id="page">
+<Bar id="_IDGenBar1">
+        <contentLeft>
+            <Title id="_IDGenTitle1"
+                text="Customer Details"
+                level="H1"
+                titleStyle="H3"
+            />
+        </contentLeft>
+    </Bar>
+    <List id="_IDGenList1" >
+        <ObjectListItem id="_IDGenObjectListItem1">
+            <attributes>
+                <ObjectAttribute id="_IDGenObjectAttribute1"
+                    class="bigFont"
+                    title="Customer ID"
+                    text="{id}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute2"
+                    class="bigFont"
+                    title="Name of the Customer"
+                    text="{name}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute3"
+                    class="bigFont"
+                    title="Customer Website"
+                    text="{website}"
+                />
+
+            </attributes>
+        </ObjectListItem>
+    </List>
+    
+
+<Bar id="_IDGenBar2" class="space1">
+        <contentLeft>
+            <Title id="_IDGenTitle2"
+                text="Customer Contact Details"
+                level="H1"
+                titleStyle="H3"
+            />
+        </contentLeft>
+    </Bar>
+    <List id="_IDGenList2" items="{path: 'PS_CUSTOMER_ORG_CONTACT'}">
+        <ObjectListItem id="_IDGenObjectListItem2">
+            <attributes>
+                <!-- <ObjectAttribute id="_IDGenObjectAttribute4"
+                    class="bigFont"
+                    title="Address ID"
+                    text="{id}"
+                /> -->
+
+                <ObjectAttribute id="_IDGenObjectAttribute5"
+                    class="bigFont"
+                    title="Address Line1"
+                    text="{path: 'ven>/addressLine1'}" 
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute6"
+                    class="bigFont"
+                    title="Address Line2"
+                    text="{path: 'ven>/addressLine2'}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute7"
+                    class="bigFont"
+                    title="Address Line3"
+                    text="{path: 'ven>/addressLine3'}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute8"
+                    class="bigFont"
+                    title="City"
+                    text="{path: 'ven>/city'}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute9"
+                    class="bigFont"
+                    title="Pincode"
+                    text="{path: 'ven>/pincode'}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute10"
+                    class="bigFont"
+                    title="State"
+                    text="{path: 'ven>/state'}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute11"
+                    class="bigFont"
+                    title="Country"
+                    text="{path: 'ven>/country'}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute12"
+                    class="bigFont"
+                    title="Person1 Mobile Number"
+                    text="{path: 'ven>/contact_person_1_mobileNumber'}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute13"
+                    class="bigFont"
+                    title="Person1 Email Id"
+                    text="{path: 'ven>/contact_person_1_emailId'}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute14"
+                    class="bigFont"
+                    title="Person2 Mobile Number"
+                    text="{path: 'ven>/contact_person_2_mobileNumber'}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute15"
+                    class="bigFont"
+                    title="Person2 Email Id"
+                    text="{path: 'ven>/contact_person_2_emailId'}"
+                />
+
+            </attributes>
+        </ObjectListItem>
+    </List>
+    
+<footer>
+            <Bar id="_IDGenBar3" >
+                <contentRight>
+                <Button id="_IDGenButton1" text="Edit" press="onBack" icon="sap-icon://nav-back" type="Emphasized"></Button>
+                <Button id="_IDGenButton2" text="Go to home" press="onSaveandContinue" type="Success" icon="sap-icon://accept" />
+                </contentRight>
+            </Bar>
+         </footer> 
+
+    </Page>
+</mvc:View>
