@@ -1,0 +1,172 @@
+<mvc:View controllerName="ultratech.controller.Checkout"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m">
+    <Page id="idPage" title="UTCL Checkout" class="sapUiResponsivePadding--header">
+        <content>
+            <IconTabBar id="idIconTabBar" expanded="{CustomerType}" class="sapUiSmallMarginBottom sapUiResponsiveContentPadding">
+                <items>
+                    <!-- Previous Tabs -->
+                    <IconTabFilter key="info" text="1.Customer Selection">
+                        <f:SimpleForm layout="ResponsiveGridLayout">
+                            <f:title>
+                                <core:Title text="Select Customer Type" />
+                            </f:title>
+                            <Button id="fragment" class="sapUiSmallMarginBottom" text="Add/Remove Dealer and Retailer" press=".handleTableSelectDialogPress" ariaHasPopup="Dialog">
+                                <customData>
+                                    <core:CustomData key="growing" value="true" />
+                                </customData>
+                            </Button>
+                        </f:SimpleForm>
+                    </IconTabFilter>
+                    <!-- Additional Tabs (2, 3, 4) -->
+                    <IconTabFilter key="attachments" text="2.Shipping Address">
+                        <f:SimpleForm layout="ResponsiveGridLayout">
+                            <Label text="Address Line 1 *" />
+                            <Input id="addressLine1" placeholder="Enter Address Line 1" value="{formData>/shippingAddress/addressLine1}" />
+                            <Label text="Address Line 2" />
+                            <Input id="addressLine2" placeholder="Enter Address Line 2" value="{formData>/shippingAddress/addressLine2}" />
+                            <Label text="Address Line 3" />
+                            <Input id="addressLine3" placeholder="Enter Address Line 3" value="{formData>/shippingAddress/addressLine3}" />
+                        </f:SimpleForm>
+                        <f:SimpleForm layout="ResponsiveGridLayout">
+                            <Label text="PinCode *" />
+                            <Select id="selectPincode" change="onSelectPincode" selectedKey="{formData>/shippingAddress/pinCode}">
+                                <core:Item key="600249" text="600249" />
+                                <core:Item key="600028" text="600028" />
+                                <core:Item key="654002" text="654002" />
+                            </Select>
+                            <Label text="Mobile Number" />
+                            <Input id="mobileNumber" placeholder="Enter Mobile Number" value="{formData>/shippingAddress/mobileNumber}" />
+                            <Label text="State" />
+                            <Input id="state" placeholder="Enter State" value="{formData>/shippingAddress/state}" />
+                            <Button text="Next" press="onNextPress" class="next" />
+                        </f:SimpleForm>
+                    </IconTabFilter>
+
+                    <IconTabFilter key="notes" text="3.Product Details">
+                        <f:SimpleForm layout="ResponsiveGridLayout">
+                            <HBox justifyContent="End" width="100%">
+                                <Button text="Add Product" press="handleResponsivePopoverPress" ariaHasPopup="Dialog" width="auto" />
+                            </HBox>
+                            <Label text="Product Code *" />
+                            <Input id="productCode" placeholder="Enter Product Code" value="{formData>/productDetails/productCode}" />
+                            <Label text="Description" />
+                            <Input id="description" placeholder="Enter Description" value="{formData>/productDetails/description}" />
+                            <Label text="Qty in MT *" />
+                            <Input id="qty" placeholder="Enter Qty in MT" value="{formData>/productDetails/qty}" />
+                            <Label text="No.of Bags" />
+                            <Input id="noOfBags" placeholder="Enter No.of Bags" value="{formData>/productDetails/noOfBags}" />
+                            <Label text="Dealer Qty In MT" />
+                            <Input id="dealerQty" placeholder="Enter Dealer Qty In MT" value="{formData>/productDetails/dealerQty}" />
+                            <Label text="Delivery Period *" />
+                            <Select id="deliveryPeriod" change="ondeliveryPeriod" selectedKey="{formData>/productDetails/deliveryPeriod}">
+                                <core:Item key="NOON" text="NOON" />
+                                <core:Item key="EVENING" text="EVENING" />
+                            </Select>
+                            <Label text="Requested Date *" />
+                            <DatePicker id="date" class="sapUiSmallMarginBottom" value="{formData>/productDetails/requestedDate}" />
+                            <Button text="Next" press="onNextPress" />
+                        </f:SimpleForm>
+                    </IconTabFilter>
+
+                    <IconTabFilter key="deliveryInstructions" text="4.Delivery Instructions">
+                        <f:SimpleForm layout="ResponsiveGridLayout">
+                            <Label text="Special Instruction *" />
+                            <Select id="specialInstruction" change="onspecialInstruction" selectedKey="{formData>/deliveryInstructions/specialInstruction}">
+                                <core:Item key="NOON" text="NOON" />
+                                <core:Item key="EVENING" text="EVENING" />
+                            </Select>
+                            <Label text="Special Instruction Description" />
+                            <Input id="specialInstructionDescription" placeholder="Enter Special Instruction Description" value="{formData>/deliveryInstructions/specialInstructionDescription}" />
+                            <Label text="Truck Number" />
+                            <Input id="truckNumber" placeholder="Enter Truck Number" value="{formData>/deliveryInstructions/truckNumber}" />
+                            <Label text="Driver Name" />
+                            <Input id="driverName" placeholder="Enter Driver Name" value="{formData>/deliveryInstructions/driverName}" />
+                            <Label text="Driver Mobile Number(+91) (Optional)" />
+                            <Input id="driverMobileNumber" placeholder="Enter Driver Mobile Number" value="{formData>/deliveryInstructions/driverMobileNumber}" />
+                            <Label text="End User of Material" />
+                            <Select id="endUserOfMaterial" change="onendUserOfMaterial" selectedKey="{formData>/deliveryInstructions/endUserOfMaterial}">
+                                <core:Item key="NOON" text="NOON" />
+                                <core:Item key="EVENING" text="EVENING" />
+                            </Select>
+                            <Label text="End User Contact Person" />
+                            <Input id="endUserContactPerson" placeholder="Enter End User Contact Person" value="{formData>/deliveryInstructions/endUserContactPerson}" />
+                            <Label text="End User Mobile Number" />
+                            <Input id="endUserMobileNumber" placeholder="Enter End User Mobile Number" value="{formData>/deliveryInstructions/endUserMobileNumber}" />
+                            <Button text="Next" press="onNextPress" />
+                        </f:SimpleForm>
+                    </IconTabFilter>
+
+                    <IconTabFilter key="finalReview" text="5.Order Summary">
+                        <f:SimpleForm layout="ResponsiveGridLayout">
+                            <f:title>
+                                <core:Title text="Customer Selection" />
+                            </f:title>
+                            <!-- Add Customer Selection Summary Here -->
+
+                            <f:title>
+                                <core:Title text="Shipping Address" />
+                            </f:title>
+                            <Label text="Address Line 1" />
+                            <Text text="{formData>/shippingAddress/addressLine1}" />
+                            <Label text="Address Line 2" />
+                            <Text text="{formData>/shippingAddress/addressLine2}" />
+                            <Label text="Address Line 3" />
+                            <Text text="{formData>/shippingAddress/addressLine3}" />
+                            <Label text="PinCode" />
+                            <Text text="{formData>/shippingAddress/pinCode}" />
+                            <Label text="Mobile Number" />
+                            <Text text="{formData>/shippingAddress/mobileNumber}" />
+                            <Label text="State" />
+                            <Text text="{formData>/shippingAddress/state}" />
+
+                            <f:title>
+                                <core:Title text="Product Details" />
+                            </f:title>
+                            <Label text="Product Code" />
+                            <Text text="{formData>/productDetails/productCode}" />
+                            <Label text="Description" />
+                            <Text text="{formData>/productDetails/description}" />
+                            <Label text="Qty in MT" />
+                            <Text text="{formData>/productDetails/qty}" />
+                            <Label text="No.of Bags" />
+                            <Text text="{formData>/productDetails/noOfBags}" />
+                            <Label text="Dealer Qty In MT" />
+                            <Text text="{formData>/productDetails/dealerQty}" />
+                            <Label text="Delivery Period" />
+                            <Text text="{formData>/productDetails/deliveryPeriod}" />
+                            <Label text="Requested Date" />
+                            <Text text="{formData>/productDetails/requestedDate}" />
+
+                            <f:title>
+                                <core:Title text="Order Summary" />
+                            </f:title>
+                            <Label text="Special Instruction" />
+                            <Text text="{formData>/deliveryInstructions/specialInstruction}" />
+                            <Label text="Special Instruction Description" />
+                            <Text text="{formData>/deliveryInstructions/specialInstructionDescription}" />
+                            <Label text="Truck Number" />
+                            <Text text="{formData>/deliveryInstructions/truckNumber}" />
+                            <Label text="Driver Name" />
+                            <Text text="{formData>/deliveryInstructions/driverName}" />
+                            <Label text="Driver Mobile Number" />
+                            <Text text="{formData>/deliveryInstructions/driverMobileNumber}" />
+                            <Label text="End User of Material" />
+                            <Text text="{formData>/deliveryInstructions/endUserOfMaterial}" />
+                            <Label text="End User Contact Person" />
+                            <Text text="{formData>/deliveryInstructions/endUserContactPerson}" />
+                            <Label text="End User Mobile Number" />
+                            <Text text="{formData>/deliveryInstructions/endUserMobileNumber}" />
+                            
+							<Button text="Place Order" enabled="{formData>/isPlaceOrderEnabled}" press="onPlaceOrder" />
+
+                        </f:SimpleForm>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>
