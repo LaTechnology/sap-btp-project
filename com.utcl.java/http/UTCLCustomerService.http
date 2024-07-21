@@ -1,0 +1,24 @@
+@server = http://localhost:8080
+
+
+### UTCLCustomerService.Customer
+GET {{server}}/odata/v4/UTCLCustomerService/Customer
+Content-Type: application/json
+
+
+### UTCLCustomerService.CustomerAddress
+GET {{server}}/odata/v4/UTCLCustomerService/CustomerAddress
+Content-Type: application/json
+
+
+### UTCLCustomerService.CustomerType
+POST  {{server}}/odata/v4/UTCLCustomerService/CustomerType
+Content-Type: application/json
+Authorization: Basic mock:mock@123
+
+{
+    "id" : "abaecbed-6b88-4336-91ed-9ec0e887878f",
+    "customerTypeId" : 123,
+    "customerType" : "DEALER"
+
+}
