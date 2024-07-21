@@ -1,0 +1,13 @@
+/* Enter your custom styles here */
+.tableCss{
+
+    width: 80%;
+    margin: 20px 0;
+    border-bottom: 2px solid darkcyan;
+    border-top: 2px solid darkcyan;
+    border-right: 2px solid darkcyan;
+    border-left: 2px solid darkcyan;
+
+}
+
+

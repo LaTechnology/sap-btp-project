@@ -1,0 +1,93 @@
+<mvc:View
+    controllerName="utcltechfrontend.controller.Checkout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+
+    <App>
+        <Page id="page" title="{i18n>title}">
+            <content>
+                <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+                    <items>
+                        <IconTabFilter key="customerSelection" icon="sap-icon://customer-and-contacts" 
+                            iconColor="Tile" text="Customer Selection" design="Horizontal">
+                            <content>
+                                <Button text="Select Customer" icon="sap-icon://cursor-arrow" id="selectCustomerBtn"
+                                    press="onOpenDialog" class="sapUiSmallMarginEnd"></Button>
+
+                                <Table id="selectedCustomerTable" inset="false" mode="MultiSelect" items="{viewModel>/selectedCustomers}" class="tableCss">
+                                    <columns>
+                                        <Column>
+                                            <Text text="First Name" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Last Name" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Email" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Mobile Number" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Customer Type" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Text text="{viewModel>firstName}" />
+                                                <Text text="{viewModel>lastName}" />
+                                                <Text text="{viewModel>email}" />
+                                                <Text text="{viewModel>mobileNumber}" />
+                                                <Text text="{viewModel>customerType}" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+
+                                
+                            </content>
+
+                            <Bar >
+                            
+                            <contentRight>
+                            
+                           
+                            
+                            </contentRight>
+                            
+                            </Bar>
+                            
+                        </IconTabFilter>
+
+                        
+                        <IconTabSeparator icon="sap-icon://step"></IconTabSeparator>
+                        <IconTabFilter key="shippingAddress" icon="sap-icon://shipping-status" 
+                            iconColor="Negative" text="Shipping Address" design="Horizontal" id="shippingAddressTab">
+                            
+                            <content>
+                            
+                             <HBox id="customerToggleContainer" class="customerToggleContainer" wrap="Wrap"/>
+                            
+                            </content>
+                            
+                            
+                            </IconTabFilter>
+                        <IconTabSeparator icon="sap-icon://step"></IconTabSeparator>
+                        <IconTabFilter key="productDetails" icon="sap-icon://s4hana" 
+                            iconColor="Positive" text="Product Details" design="Horizontal"></IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </content>
+
+            <footer>
+                <Bar>
+                    <contentRight>
+                        <Button text="Next" type="Success" press="onNextPage"></Button>
+                    </contentRight>
+                </Bar>
+            </footer>
+        </Page>
+    </App>
+</mvc:View>

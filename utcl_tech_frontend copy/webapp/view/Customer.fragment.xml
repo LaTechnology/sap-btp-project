@@ -1,0 +1,113 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+>
+    <Dialog
+        title="Select the type of customer"
+        id="customerDialog"
+        class="sapUiResponsiveContentPadding"
+    >
+        <VBox>
+            <Table
+                id="customerFragment" selectionChange="onSelectionChange"
+                inset="false"
+                mode="MultiSelect"
+                items="{path : 'odataModel>/Customer', parameters:{expand : 'toCustomerType'}, 
+                filters: [{path: 'toCustomerType/customerType',operator: 'EQ',value1: 'RETAILER'}]}"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Retailer" />
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column>
+                        <Text text="First Name" />
+                    </Column>
+                    <Column>
+                        <Text text="Last Name" />
+                    </Column>
+                    <Column>
+                        <Text text="Email" />
+                    </Column>
+                    <Column>
+                        <Text text="Mobile Number" />
+                    </Column>
+                    <Column>
+                        <Text text="Customer Type" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{odataModel>firstName}" />
+                            <Text text="{odataModel>lastName}" /> 
+                            <Text text="{odataModel>email}" />
+                            <Text text="{odataModel>mobileNumber}" />
+                            <Text text="{odataModel>toCustomerType/customerType}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+            <Table
+                id="customerFragment1" selectionChange="onSelectionChange"
+                inset="false"
+                mode="MultiSelect"
+                items="{path : 'odataModel>/Customer', parameters:{expand : 'toCustomerType'},
+                filters: [{path: 'toCustomerType/customerType',operator: 'EQ',value1: 'DEALER'}]}"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Dealer" />
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column>
+                        <Text text="First Name" />
+                    </Column>
+                    <Column>
+                        <Text text="Last Name" />
+                    </Column>
+                    <Column>
+                        <Text text="Email" />
+                    </Column>
+                    <Column>
+                        <Text text="Mobile Number" />
+                    </Column>
+                    <Column>
+                        <Text text="Customer Type" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{odataModel>firstName}" />
+                            <Text text="{odataModel>lastName}" /> 
+                            <Text text="{odataModel>email}" />
+                            <Text text="{odataModel>mobileNumber}" />
+                            <Text text="{odataModel>toCustomerType/customerType}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </VBox>
+
+        <beginButton>
+            <Button
+                text="Save and Continue"
+                press="onSave"
+                type="Emphasized"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="Close"
+                press="onClose"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
