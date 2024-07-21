@@ -1,4 +1,0 @@
-id,code,name,productImage,description,rating,manufactureId,sellerId,price,currency_code,unit
-6001,PRODUCT001,Astro Laptop 1516,https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/cart/webapp/localService/mockdata/images/HT-1251.jpg, Flexible Laptop with 2.5 GHz Quad Core 15" HD TN 16 GB DDR SDRAM 256 GB SSD Windows 10 Pro,4.5,,,98900,,100
-6002,PRODUCT002,Benda Laptop 1408,https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/cart/webapp/localService/mockdata/images/HT-1253.jpg, Flexible Laptop with 2.5 GHz Dual Core 14" HD+ TN 8 GB DDR SDRAM 324 GB SSD Windows 10 Pro,3.2,,,97600,,98
-6003,PRODUCT003,Cordless Mouse,https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/cart/webapp/localService/mockdata/images/HT-1060.jpg,Cordless Optical USB MI Laptop Color: Black Plug&Play,4.3,,,900,,50

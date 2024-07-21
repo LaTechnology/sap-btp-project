@@ -1,4 +1,0 @@
-id,customerId,firstName,lastName,dateOfBirth,title_id,password,emailId
-1001,CUSTOMER001,Ajay,D,2000-02-19,13001,ajay@123,ajay@gmail.com
-1002,CUSTOMER002,Siva,Durai,2000-12-30,13001,siva@123,siva@gmail.com
-1003,CUSTOMER003,Abi,K,1999-10-16,13002,abi@123,abi@gmail.com

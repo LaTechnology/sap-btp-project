@@ -1,1 +1,0 @@
-using com.ladera.linkapi.LinkApi as service from '../../srv/mashup';

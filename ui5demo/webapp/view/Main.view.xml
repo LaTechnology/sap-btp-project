@@ -1,5 +1,0 @@
-<mvc:View xmlns:ajay="sap.ui.core.mvc" xmlns="sap.m" controllerName="ui5demo.Main">
-
-<Button text="Click me" press="pressMe"/>
-
-</mvc:View>

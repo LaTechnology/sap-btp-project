@@ -1,4 +1,0 @@
-AddmissionId,patientFirstName,patientLastName,gender,PatientAddress,patientType,criticallity,description
-HM120,Ananth,Krishnan,M,Chennai,Adult,Low,Fever HeadPain
-HM121,Rohith,Ramachandran,M,Kerla,Adult,Medium,Stomach HeadPain
-HM122,Malarkani,Murugan,F,Chennai,Child,High,Heart attack
