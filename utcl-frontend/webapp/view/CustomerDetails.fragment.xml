@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout">
+    <WizardStep id="CustomerDetails" title="Customer Details" icon="sap-icon://customer-and-supplier">
+        <layout:VerticalLayout width="50%">
+            <Title text="Address Line 1 *" titleStyle="H5" />
+            <Input id="addressLine1" value="" width="60%" class="sapUiVerticalLayout"/>
+            <Title text="Address Line 3 (Optional)" titleStyle="H5" />
+            <Input id="addressLine3" value="" width="60%" class="sapUiVerticalLayout"/>
+            <Title text="Pincode" titleStyle="H5" />
+            <Input id="pincodeValue" value="" width="60%" class="sapUiVerticalLayout"/>
+            <Button text="Validate Pincode" type="Accept" press="loadPincodeData" class="sapUiVerticalLayout"></Button>
+        </layout:VerticalLayout>
+        <layout:VerticalLayout width="50%">
+            <Title text="Address Line 2 (Optional)" titleStyle="H5" />
+            <Input id="addressLine2" value="" width="60%" class="sapUiVerticalLayout"/>
+            <Title text="Address Line 4" titleStyle="H5" />
+            <Input id="addressLine4" value="" width="60%" class="sapUiVerticalLayout"/>
+
+            <Title text="Mobile Number (Optional)" titleStyle="H5" />
+            <Input id="mobileNumber" value="" width="60%" class="sapUiVerticalLayout"/>
+
+
+        </layout:VerticalLayout>
+    </WizardStep>
+    
+</core:FragmentDefinition>

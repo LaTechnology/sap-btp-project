@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="MDkServices" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Customer" EntityType="MDkServices.Customer"/>
+                <EntitySet Name="CustomerAddress" EntityType="MDkServices.CustomerAddress"/>
+                <EntitySet Name="CustomerType" EntityType="MDkServices.CustomerType"/>
+                <EntitySet Name="DeliveryInstruction" EntityType="MDkServices.DeliveryInstruction"/>
+                <EntitySet Name="SpecialInstruction" EntityType="MDkServices.SpecialInstruction"/>
+                <EntitySet Name="DeliveryPeriod" EntityType="MDkServices.DeliveryPeriod"/>
+                <EntitySet Name="EndUserDetails" EntityType="MDkServices.EndUserDetails"/>
+                <EntitySet Name="EndUserOfMaterial" EntityType="MDkServices.EndUserOfMaterial"/>
+                <EntitySet Name="Order" EntityType="MDkServices.Order"/>
+                <EntitySet Name="OrderItem" EntityType="MDkServices.OrderItem"/>
+                <EntitySet Name="Payment" EntityType="MDkServices.Payment"/>
+                <EntitySet Name="ProductDetails" EntityType="MDkServices.ProductDetails"/>
+                <FunctionImport Name="getCustomerType" ReturnType="Edm.String" m:HttpMethod="GET">
+                    <Parameter Name="id" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="getSpecialInstruction" ReturnType="Edm.String" m:HttpMethod="GET">
+                    <Parameter Name="id" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="getEndUserofMaterial" ReturnType="Edm.String" m:HttpMethod="GET">
+                    <Parameter Name="id" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="getDeliveryPeriod" ReturnType="Edm.String" m:HttpMethod="GET">
+                    <Parameter Name="id" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="calculateNumberOfBags" ReturnType="Edm.Int32" m:HttpMethod="GET">
+                    <Parameter Name="quantity" Type="Edm.Double" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <AssociationSet Name="Customer_toCustomerType" Association="MDkServices.Customer_toCustomerType">
+                    <End Role="Customer" EntitySet="Customer"/>
+                    <End Role="CustomerType" EntitySet="CustomerType"/>
+                </AssociationSet>
+                <AssociationSet Name="CustomerAddress_toCustomer" Association="MDkServices.CustomerAddress_toCustomer">
+                    <End Role="CustomerAddress" EntitySet="CustomerAddress"/>
+                    <End Role="Customer" EntitySet="Customer"/>
+                </AssociationSet>
+                <AssociationSet Name="DeliveryInstruction_toSpecialinstruction" Association="MDkServices.DeliveryInstruction_toSpecialinstruction">
+                    <End Role="DeliveryInstruction" EntitySet="DeliveryInstruction"/>
+                    <End Role="SpecialInstruction" EntitySet="SpecialInstruction"/>
+                </AssociationSet>
+                <AssociationSet Name="DeliveryInstruction_toEndUserToMaterial" Association="MDkServices.DeliveryInstruction_toEndUserToMaterial">
+                    <End Role="DeliveryInstruction" EntitySet="DeliveryInstruction"/>
+                    <End Role="EndUserOfMaterial" EntitySet="EndUserOfMaterial"/>
+                </AssociationSet>
+                <AssociationSet Name="EndUserDetails_toEndUserToMaterial" Association="MDkServices.EndUserDetails_toEndUserToMaterial">
+                    <End Role="EndUserDetails" EntitySet="EndUserDetails"/>
+                    <End Role="EndUserOfMaterial" EntitySet="EndUserOfMaterial"/>
+                </AssociationSet>
+                <AssociationSet Name="Order_toCustomer" Association="MDkServices.Order_toCustomer">
+                    <End Role="Order" EntitySet="Order"/>
+                    <End Role="Customer" EntitySet="Customer"/>
+                </AssociationSet>
+                <AssociationSet Name="Order_toPayment" Association="MDkServices.Order_toPayment">
+                    <End Role="Order" EntitySet="Order"/>
+                    <End Role="Payment" EntitySet="Payment"/>
+                </AssociationSet>
+                <AssociationSet Name="Order_toShippingAddress" Association="MDkServices.Order_toShippingAddress">
+                    <End Role="Order" EntitySet="Order"/>
+                    <End Role="CustomerAddress" EntitySet="CustomerAddress"/>
+                </AssociationSet>
+                <AssociationSet Name="OrderItem_toOrder" Association="MDkServices.OrderItem_toOrder">
+                    <End Role="OrderItem" EntitySet="OrderItem"/>
+                    <End Role="Order" EntitySet="Order"/>
+                </AssociationSet>
+                <AssociationSet Name="Payment_toOrder" Association="MDkServices.Payment_toOrder">
+                    <End Role="Payment" EntitySet="Payment"/>
+                    <End Role="Order" EntitySet="Order"/>
+                </AssociationSet>
+                <AssociationSet Name="ProductDetails_toDeliveryPeriod" Association="MDkServices.ProductDetails_toDeliveryPeriod">
+                    <End Role="ProductDetails" EntitySet="ProductDetails"/>
+                    <End Role="DeliveryPeriod" EntitySet="DeliveryPeriod"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="Customer">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="userId" Type="Edm.String"/>
+                <Property Name="firstName" Type="Edm.String" MaxLength="20"/>
+                <Property Name="lastName" Type="Edm.String" MaxLength="20"/>
+                <Property Name="email" Type="Edm.String" MaxLength="20"/>
+                <Property Name="mobileNumber" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="toCustomerType" Relationship="MDkServices.Customer_toCustomerType" FromRole="Customer" ToRole="CustomerType"/>
+                <Property Name="toCustomerType_id" Type="Edm.Guid"/>
+                <NavigationProperty Name="toAddress" Relationship="MDkServices.CustomerAddress_toCustomer" FromRole="Customer" ToRole="CustomerAddress"/>
+                <NavigationProperty Name="toOrders" Relationship="MDkServices.Order_toCustomer" FromRole="Customer" ToRole="Order"/>
+            </EntityType>
+            <EntityType Name="CustomerAddress">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="addressLine1" Type="Edm.String"/>
+                <Property Name="addressLine2" Type="Edm.String"/>
+                <Property Name="addressLine3" Type="Edm.String"/>
+                <Property Name="addressLine4" Type="Edm.String"/>
+                <Property Name="pincode" Type="Edm.String"/>
+                <Property Name="mobileNumber" Type="Edm.String"/>
+                <NavigationProperty Name="toCustomer" Relationship="MDkServices.CustomerAddress_toCustomer" FromRole="CustomerAddress" ToRole="Customer"/>
+                <Property Name="toCustomer_id" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="CustomerType">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="customerType" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="DeliveryInstruction">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="truckNumber" Type="Edm.String"/>
+                <Property Name="driverName" Type="Edm.String"/>
+                <Property Name="driverMobileNumber" Type="Edm.String"/>
+                <NavigationProperty Name="toSpecialinstruction" Relationship="MDkServices.DeliveryInstruction_toSpecialinstruction" FromRole="DeliveryInstruction" ToRole="SpecialInstruction"/>
+                <Property Name="toSpecialinstruction_id" Type="Edm.Guid"/>
+                <NavigationProperty Name="toEndUserToMaterial" Relationship="MDkServices.DeliveryInstruction_toEndUserToMaterial" FromRole="DeliveryInstruction" ToRole="EndUserOfMaterial"/>
+                <Property Name="toEndUserToMaterial_id" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="SpecialInstruction">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="instruction" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="DeliveryPeriod">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="period" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="EndUserDetails">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="mobileNumber" Type="Edm.String"/>
+                <Property Name="contactPersonName" Type="Edm.String"/>
+                <NavigationProperty Name="toEndUserToMaterial" Relationship="MDkServices.EndUserDetails_toEndUserToMaterial" FromRole="EndUserDetails" ToRole="EndUserOfMaterial"/>
+                <Property Name="toEndUserToMaterial_id" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="EndUserOfMaterial">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="endUserMaterial" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Order">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="orderDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <NavigationProperty Name="toCustomer" Relationship="MDkServices.Order_toCustomer" FromRole="Order" ToRole="Customer"/>
+                <Property Name="toCustomer_id" Type="Edm.Guid"/>
+                <NavigationProperty Name="toOrderItems" Relationship="MDkServices.OrderItem_toOrder" FromRole="Order" ToRole="OrderItem"/>
+                <NavigationProperty Name="toPayment" Relationship="MDkServices.Order_toPayment" FromRole="Order" ToRole="Payment"/>
+                <Property Name="toPayment_id" Type="Edm.Guid"/>
+                <NavigationProperty Name="toShippingAddress" Relationship="MDkServices.Order_toShippingAddress" FromRole="Order" ToRole="CustomerAddress"/>
+                <Property Name="toShippingAddress_id" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="OrderItem">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="entryNumber" Type="Edm.String"/>
+                <Property Name="quantity" Type="Edm.Int32"/>
+                <Property Name="price" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <NavigationProperty Name="toOrder" Relationship="MDkServices.OrderItem_toOrder" FromRole="OrderItem" ToRole="Order"/>
+                <Property Name="toOrder_id" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Payment">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="paymentMethod" Type="Edm.String"/>
+                <Property Name="payment" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="amount" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <NavigationProperty Name="toOrder" Relationship="MDkServices.Payment_toOrder" FromRole="Payment" ToRole="Order"/>
+                <Property Name="toOrder_id" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="ProductDetails">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="code" Type="Edm.String"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="numberOfBags" Type="Edm.Int32"/>
+                <Property Name="quantity" Type="Edm.Double"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="requestedDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="price" Type="Edm.Double"/>
+                <NavigationProperty Name="toDeliveryPeriod" Relationship="MDkServices.ProductDetails_toDeliveryPeriod" FromRole="ProductDetails" ToRole="DeliveryPeriod"/>
+                <Property Name="toDeliveryPeriod_id" Type="Edm.Guid"/>
+            </EntityType>
+            <Association Name="Customer_toCustomerType">
+                <End Role="Customer" Type="MDkServices.Customer" Multiplicity="*"/>
+                <End Role="CustomerType" Type="MDkServices.CustomerType" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="CustomerType">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="Customer">
+                        <PropertyRef Name="toCustomerType_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="CustomerAddress_toCustomer">
+                <End Role="CustomerAddress" Type="MDkServices.CustomerAddress" Multiplicity="*"/>
+                <End Role="Customer" Type="MDkServices.Customer" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Customer">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="CustomerAddress">
+                        <PropertyRef Name="toCustomer_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="DeliveryInstruction_toSpecialinstruction">
+                <End Role="DeliveryInstruction" Type="MDkServices.DeliveryInstruction" Multiplicity="*"/>
+                <End Role="SpecialInstruction" Type="MDkServices.SpecialInstruction" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="SpecialInstruction">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="DeliveryInstruction">
+                        <PropertyRef Name="toSpecialinstruction_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="DeliveryInstruction_toEndUserToMaterial">
+                <End Role="DeliveryInstruction" Type="MDkServices.DeliveryInstruction" Multiplicity="*"/>
+                <End Role="EndUserOfMaterial" Type="MDkServices.EndUserOfMaterial" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="EndUserOfMaterial">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="DeliveryInstruction">
+                        <PropertyRef Name="toEndUserToMaterial_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="EndUserDetails_toEndUserToMaterial">
+                <End Role="EndUserDetails" Type="MDkServices.EndUserDetails" Multiplicity="*"/>
+                <End Role="EndUserOfMaterial" Type="MDkServices.EndUserOfMaterial" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="EndUserOfMaterial">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="EndUserDetails">
+                        <PropertyRef Name="toEndUserToMaterial_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Order_toCustomer">
+                <End Role="Order" Type="MDkServices.Order" Multiplicity="*"/>
+                <End Role="Customer" Type="MDkServices.Customer" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Customer">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="Order">
+                        <PropertyRef Name="toCustomer_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Order_toPayment">
+                <End Role="Order" Type="MDkServices.Order" Multiplicity="*"/>
+                <End Role="Payment" Type="MDkServices.Payment" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Payment">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="Order">
+                        <PropertyRef Name="toPayment_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Order_toShippingAddress">
+                <End Role="Order" Type="MDkServices.Order" Multiplicity="*"/>
+                <End Role="CustomerAddress" Type="MDkServices.CustomerAddress" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="CustomerAddress">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="Order">
+                        <PropertyRef Name="toShippingAddress_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="OrderItem_toOrder">
+                <End Role="OrderItem" Type="MDkServices.OrderItem" Multiplicity="*"/>
+                <End Role="Order" Type="MDkServices.Order" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Order">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="OrderItem">
+                        <PropertyRef Name="toOrder_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Payment_toOrder">
+                <End Role="Payment" Type="MDkServices.Payment" Multiplicity="*"/>
+                <End Role="Order" Type="MDkServices.Order" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Order">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="Payment">
+                        <PropertyRef Name="toOrder_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ProductDetails_toDeliveryPeriod">
+                <End Role="ProductDetails" Type="MDkServices.ProductDetails" Multiplicity="*"/>
+                <End Role="DeliveryPeriod" Type="MDkServices.DeliveryPeriod" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DeliveryPeriod">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="ProductDetails">
+                        <PropertyRef Name="toDeliveryPeriod_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Annotations Target="MDkServices.Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="Aspect to capture changes by user and name&#xA;&#xA;See https://cap.cloud.sap/docs/cds/common#aspect-managed"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Customer/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Customer/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Customer/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Customer/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Customer/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Customer/firstName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Customer/mobileNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="MDkServices.CustomerAddress" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="Aspect to capture changes by user and name&#xA;&#xA;See https://cap.cloud.sap/docs/cds/common#aspect-managed"/>
+            </Annotations>
+            <Annotations Target="MDkServices.CustomerAddress/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.CustomerAddress/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.CustomerAddress/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.CustomerAddress/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.CustomerAddress/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.CustomerAddress/addressLine1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="MDkServices.CustomerType/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.DeliveryInstruction/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.SpecialInstruction/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.DeliveryPeriod/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.EndUserDetails" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="Aspect to capture changes by user and name&#xA;&#xA;See https://cap.cloud.sap/docs/cds/common#aspect-managed"/>
+            </Annotations>
+            <Annotations Target="MDkServices.EndUserDetails/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.EndUserDetails/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.EndUserDetails/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.EndUserDetails/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.EndUserDetails/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.EndUserDetails/mobileNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="MDkServices.EndUserOfMaterial/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Order" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="Aspect to capture changes by user and name&#xA;&#xA;See https://cap.cloud.sap/docs/cds/common#aspect-managed"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Order/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Order/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Order/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Order/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Order/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.OrderItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="Aspect to capture changes by user and name&#xA;&#xA;See https://cap.cloud.sap/docs/cds/common#aspect-managed"/>
+            </Annotations>
+            <Annotations Target="MDkServices.OrderItem/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.OrderItem/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.OrderItem/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.OrderItem/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.OrderItem/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Payment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="Aspect to capture changes by user and name&#xA;&#xA;See https://cap.cloud.sap/docs/cds/common#aspect-managed"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Payment/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Payment/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Payment/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Payment/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.Payment/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.ProductDetails" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="Aspect to capture changes by user and name&#xA;&#xA;See https://cap.cloud.sap/docs/cds/common#aspect-managed"/>
+            </Annotations>
+            <Annotations Target="MDkServices.ProductDetails/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.ProductDetails/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.ProductDetails/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="MDkServices.ProductDetails/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="A user's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="MDkServices.ProductDetails/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="MDkServices.ProductDetails/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
