@@ -38,6 +38,9 @@
                     <Column>
                         <Text text="Customer Type" />
                     </Column>
+                     <Column>
+                        <Text text="Address Line 1" />
+                    </Column>
                 </columns>
                 <items>
                     <ColumnListItem>
@@ -47,6 +50,7 @@
                             <Text text="{odataModel>email}" />
                             <Text text="{odataModel>mobileNumber}" />
                             <Text text="{odataModel>toCustomerType/customerType}" />
+                            <Text text="{odataModel>toAddress[1]/addressLine1}" />
                         </cells>
                     </ColumnListItem>
                 </items>
@@ -98,7 +102,7 @@
 
         <beginButton>
             <Button
-                text="Save and Continue"
+                text="Select and Continue"
                 press="onSave"
                 type="Emphasized"
             />

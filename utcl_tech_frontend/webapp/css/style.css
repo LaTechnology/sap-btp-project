@@ -11,3 +11,14 @@
 }
 
 
+.barContent {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #dcdcdc; 
+    padding: 10px 20px; 
+}
+
+.barContent .sapMImg {
+    vertical-align: middle; 
+}
+
+
