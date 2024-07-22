@@ -10,7 +10,7 @@ sap.ui.define([
     "sap/m/Toolbar",
     "sap/m/Title",
     "sap/m/Button"
-], function (Controller, JSONModel, Fragment,Form, FormContainer, FormElement, ResponsiveGridLayout, Input, Toolbar, Title, Button) {
+], function (Controller, JSONModel, Fragment, Form, FormContainer, FormElement, ResponsiveGridLayout, Input, Toolbar, Title, Button) {
     "use strict";
 
     return Controller.extend("utcltechfrontend.controller.Checkout", {
@@ -102,134 +102,116 @@ sap.ui.define([
         onNextPage: function () {
             var oView = this.getView();
             var oIconTabBar = oView.byId("iconTabBar");
+            var oShippingAddressContainer = oView.byId("shippingAddressContainer");
+            var oNoAddressText = oView.byId("noAddressText"); // Update this to match your control
+            // var oNoAddressImage = oView.byId("noAddressImage"); // If using an Image control
         
             if (oIconTabBar) {
-                // Set the selected key to switch to the "Shipping Address" tab
                 oIconTabBar.setSelectedKey("shippingAddress");
         
-                // Find the VBox directly in the view
-                var oCustomerToggleContainer = oView.byId("customerToggleContainer");
+                // Retrieve selected customers from the model
+                var oViewModel = this.getView().getModel("viewModel");
+                var aSelectedCustomers = oViewModel.getProperty("/selectedCustomers");
         
-                if (oCustomerToggleContainer) {
-                    // Clear existing items
-                    oCustomerToggleContainer.removeAllItems();
+                if (aSelectedCustomers && aSelectedCustomers.length > 0) {
+                    oShippingAddressContainer.destroyItems(); // Clear existing items
+                    oNoAddressText.setVisible(false); // Hide the illustration
+                    // oNoAddressImage.setVisible(false); // If using an Image control
         
-                    // Retrieve selected customers from the model
-                    var oViewModel = this.getView().getModel("viewModel");
-                    var aSelectedCustomers = oViewModel.getProperty("/selectedCustomers");
+                    aSelectedCustomers.forEach(function (oCustomer) {
+                        // Check if toAddress has data
+                        if (oCustomer.toAddress && oCustomer.toAddress.__list && oCustomer.toAddress.__list.length > 0) {
+                            var oModel = oView.getModel("odataModel");
+                            var sAddressPath = "/" + oCustomer.toAddress.__list[0];
+                            var oAddress = oModel.getProperty(sAddressPath);
         
-                    if (aSelectedCustomers && aSelectedCustomers.length > 0) {
-                        // Add a ToggleButton for each selected customer
-                        aSelectedCustomers.forEach(function (oCustomer) {
-                            var oToggleButton = new sap.m.ToggleButton({
-                                text: oCustomer.firstName + " " + oCustomer.lastName,
-                                pressed: oCustomer.selected // Set the initial state based on selection
-                            });
-                            oCustomerToggleContainer.addItem(oToggleButton);
-                        });
-                    }
+                            if (oAddress) {
+                                // Create and add a new Form for each selected customer
+                                var oForm = new Form({
+                                    editable: true,
+                                    ariaLabelledBy: "headerAddress",
+                                    layout: new ResponsiveGridLayout({
+                                        labelSpanXL: 4,
+                                        labelSpanL: 3,
+                                        labelSpanM: 4,
+                                        labelSpanS: 12,
+                                        adjustLabelSpan: false,
+                                        emptySpanXL: 0,
+                                        emptySpanL: 4,
+                                        emptySpanM: 0,
+                                        emptySpanS: 0,
+                                        columnsXL: 2,
+                                        columnsL: 1,
+                                        columnsM: 1,
+                                        singleContainerFullSize: false
+                                    }),
+                                    formContainers: [
+                                        new FormContainer({
+                                            ariaLabelledBy: "ShippingTitle",
+                                            formElements: [
+                                                new FormElement({
+                                                    label: "Name",
+                                                    fields: [
+                                                        new Input({
+                                                            value: oCustomer.firstName + " " + oCustomer.lastName
+                                                        })
+                                                    ]
+                                                }),
+                                                new FormElement({
+                                                    label: "Address Line 1",
+                                                    fields: [
+                                                        new Input({
+                                                            value: oAddress.addressLine1
+                                                        }),
+                                                        new Input({
+                                                            value: oAddress.addressLine2
+                                                        }),
+                                                        new Input({
+                                                            value: oAddress.addressLine3
+                                                        }),
+                                                        new Input({
+                                                            value: oAddress.addressLine4
+                                                        })
+                                                    ]
+                                                }),
+                                                new FormElement({
+                                                    label: "ZIP Code/Pincode",
+                                                    fields: [
+                                                        new Input({
+                                                            value: oAddress.pincode
+                                                        }),
+                                                        new Button({
+                                                            text: "Validate",
+                                                            type: "Emphasized"
+                                                        })
+                                                    ]
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                });
+        
+                                oShippingAddressContainer.addItem(oForm);
+                            } else {
+                                console.error("Address not found for path:", sAddressPath);
+                            }
+                        } else {
+                            console.error("No address found for customer:", oCustomer);
+                        }
+                    });
                 } else {
-                    console.error("VBox 'customerToggleContainer' not found.");
+                    // No customers selected, show the illustration
+                    oNoAddressText.setVisible(true);
+                    // oNoAddressImage.setVisible(true); // If using an Image control
                 }
             } else {
                 console.error("IconTabBar not found.");
             }
         },
 
-         onNextPage: function () {
-            var oView = this.getView();
-            var oIconTabBar = oView.byId("iconTabBar");
+        goBackAndAddCustomer: function(){
 
-            if (oIconTabBar) {
-                // Set the selected key to switch to the "Shipping Address" tab
-                oIconTabBar.setSelectedKey("shippingAddress");
-
-                // Retrieve selected customers from the model
-                var oViewModel = this.getView().getModel("viewModel");
-                var aSelectedCustomers = oViewModel.getProperty("/selectedCustomers");
-
-                var oShippingAddressContainer = oView.byId("shippingAddressContainer");
-                oShippingAddressContainer.destroyItems(); // Clear existing items
-
-
-
-                if (aSelectedCustomers && aSelectedCustomers.length > 0) {
-
-                    aSelectedCustomers.forEach(function (oCustomer) {
-                        // Create and add a new Form for each selected customer
-                        var oForm = new Form({
-                            editable: true,
-                            ariaLabelledBy: "headerAddress",
-                            layout: new ResponsiveGridLayout({
-                                labelSpanXL: 4,
-                                labelSpanL: 3,
-                                labelSpanM: 4,
-                                labelSpanS: 12,
-                                adjustLabelSpan: false,
-                                emptySpanXL: 0,
-                                emptySpanL: 4,
-                                emptySpanM: 0,
-                                emptySpanS: 0,
-                                columnsXL: 2,
-                                columnsL: 1,
-                                columnsM: 1,
-                                singleContainerFullSize: false
-                            }),
-                            formContainers: [
-                                new FormContainer({
-                                    ariaLabelledBy: "ShippingTitle",
-                                    formElements: [
-                                        new FormElement({
-                                            label: "Name",
-                                            fields: [
-                                                new Input({
-                                                    value: oCustomer.firstName
-                                                })
-                                            ]
-                                        }),
-                                        new FormElement({
-                                            label: "Address Line 1",
-                                            fields: [
-                                                new Input({
-                                                    value: oCustomer.addressLine1
-                                                }),
-                                                new Input({
-                                                    value: oCustomer.addressLine2
-                                                }),
-                                                new Input({
-                                                    value: oCustomer.addressLine3
-                                                }),
-                                                new Input({
-                                                    value: oCustomer.addressLine4
-                                                })
-                                            ]
-                                        }),
-                                        new FormElement({
-                                            label: "ZIP Code/Pincode",
-                                            fields: [
-                                                new Input({
-                                                    value: oCustomer.pincode
-                                                }),
-                                                new Button({
-                                                    text: "Validate",
-                                                    type: "Emphasized"
-                                                })
-                                            ]
-                                        })
-                                    ]
-                                })
-                            ]
-                        });
-
-                        oShippingAddressContainer.addItem(oForm);
-                    });
-
-                 } else {
-                    console.error("No selected customers found.");
-                }
-            } else {
-                console.error("IconTabBar not found.");
-            }
+            
         }
         
         

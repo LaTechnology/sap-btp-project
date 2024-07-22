@@ -10,57 +10,59 @@
     >
         <VBox>
             <Table
-                id="customerFragment" selectionChange="onSelectionChange"
-                inset="false"
-                mode="MultiSelect"
-                items="{path : 'odataModel>/Customer', parameters:{expand : 'toCustomerType'}, 
-                filters: [{path: 'toCustomerType/customerType',operator: 'EQ',value1: 'RETAILER'}]}"
-            >
-                <headerToolbar>
-                    <OverflowToolbar>
-                        <Title text="Retailer" />
-                    </OverflowToolbar>
-                </headerToolbar>
+    id="customerFragment"
+    selectionChange="onSelectionChange"
+    inset="false"
+    mode="MultiSelect"
+    items="{
+        path: 'odataModel>/Customer',
+        parameters: {
+            expand: 'toCustomerType,toAddress'
+        },
+        filters: [{
+            path: 'toCustomerType/customerType',
+            operator: 'EQ',
+            value1: 'RETAILER'
+        }]
+    }"
+>
+    <headerToolbar>
+        <Toolbar>
+            <Title text="Customers" />
+        </Toolbar>
+    </headerToolbar>
+    <columns>
+        <Column>
+            <Text text="First Name" />
+        </Column>
+        <Column>
+            <Text text="Last Name" />
+        </Column>
+        <Column>
+            <Text text="Email" />
+        </Column>
+        <Column>
+            <Text text="Customer Type" />
+        </Column>
+    </columns>
+    <items>
+        <ColumnListItem>
+            <cells>
+                <Text text="{odataModel>firstName}" />
+                <Text text="{odataModel>lastName}" />
+                <Text text="{odataModel>email}" />
+                <Text text="{odataModel>toCustomerType/customerType}" />
+            </cells>
+        </ColumnListItem>
+    </items>
+</Table>
 
-                <columns>
-                    <Column>
-                        <Text text="First Name" />
-                    </Column>
-                    <Column>
-                        <Text text="Last Name" />
-                    </Column>
-                    <Column>
-                        <Text text="Email" />
-                    </Column>
-                    <Column>
-                        <Text text="Mobile Number" />
-                    </Column>
-                    <Column>
-                        <Text text="Customer Type" />
-                    </Column>
-                     <Column>
-                        <Text text="Address Line 1" />
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <Text text="{odataModel>firstName}" />
-                            <Text text="{odataModel>lastName}" /> 
-                            <Text text="{odataModel>email}" />
-                            <Text text="{odataModel>mobileNumber}" />
-                            <Text text="{odataModel>toCustomerType/customerType}" />
-                            <Text text="{odataModel>toAddress[1]/addressLine1}" />
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
 
             <Table
                 id="customerFragment1" selectionChange="onSelectionChange"
                 inset="false"
                 mode="MultiSelect"
-                items="{path : 'odataModel>/Customer', parameters:{expand : 'toCustomerType'},
+                items="{path : 'odataModel>/Customer', parameters:{expand : 'toCustomerType,toAddress'},
                 filters: [{path: 'toCustomerType/customerType',operator: 'EQ',value1: 'DEALER'}]}"
             >
                 <headerToolbar>
@@ -80,9 +82,6 @@
                         <Text text="Email" />
                     </Column>
                     <Column>
-                        <Text text="Mobile Number" />
-                    </Column>
-                    <Column>
                         <Text text="Customer Type" />
                     </Column>
                 </columns>
@@ -92,7 +91,6 @@
                             <Text text="{odataModel>firstName}" />
                             <Text text="{odataModel>lastName}" /> 
                             <Text text="{odataModel>email}" />
-                            <Text text="{odataModel>mobileNumber}" />
                             <Text text="{odataModel>toCustomerType/customerType}" />
                         </cells>
                     </ColumnListItem>

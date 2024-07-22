@@ -12,6 +12,7 @@
             id="page"
             title="{i18n>title}"
         >
+     
             <content>
                 <IconTabBar
                     id="iconTabBar"
@@ -92,6 +93,18 @@
                                     wrap="Wrap"
                                     width="100%"
                                 />
+
+                                <Text id="noAddressText1" text="No address found" visible="false" />
+                                <IllustratedMessage id="noAddressText" illustrationSize="Spot" illustrationType="sapIllus-AddPeople" title="No customer has been selected " description="Select atleast 1 or 2 customer to continue" >
+                                <additionalContent>
+                                
+                                <Button text="Add Customer(s)" id="goBackAndAddCustomer"></Button>
+                                
+                                </additionalContent>
+                                
+                                
+                                
+                                </IllustratedMessage>
                             </content>
                         </IconTabFilter>
                         <IconTabSeparator icon="sap-icon://step" />
@@ -104,6 +117,10 @@
                         />
                     </items>
                 </IconTabBar>
+
+                <!-- <IllustratedMessage illustrationSize="Dialog" >
+                
+                </IllustratedMessage> -->
             </content>
 
             <footer>
