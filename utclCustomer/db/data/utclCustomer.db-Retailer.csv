@@ -1,6 +1,0 @@
-id,retailerId,toDealer_id,firstName,lastName,email,mobileNumber
-c5ef8b10-89e8-48ea-8b94-f74dced4e48i,R001,b4de8b09-89e8-48ea-8b93-f74dced4e46g,Emily,Davis,emily.davis@retailer.com,6789012345
-d6ef8b11-89e8-48ea-8b95-f74dced4e49j,R002,d5ef8b11-89e8-48ea-8b95-f74dced4e49i,James,Miller,james.miller@retailer.com,7890123456
-e7ef8b12-89e8-48ea-8b96-f74dced4e50k,R003,e6fe8b13-89e8-48ea-8b97-f74dced4e51k,Sarah,Wilson,sarah.wilson@retailer.com,8901234567
-f8ef8b13-89e8-48ea-8b97-f74dced4e51l,R004,f7gf8b15-89e8-48ea-8b99-f74dced4e53m,David,Moore,david.moore@retailer.com,9012345678
-g9ef8b14-89e8-48ea-8b98-f74dced4e52m,R005,g8hf8b17-89e8-48ea-8b99-f74dced4e55o,Laura,Taylor,laura.taylor@retailer.com,0123456789
