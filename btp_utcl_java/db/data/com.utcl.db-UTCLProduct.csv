@@ -1,0 +1,6 @@
+id,code,name,numberOfBags,quantity,description,requestedDate,price,toDeliveryPeriod_id
+d290f1ee-6c54-4b01-90e6-d701748f0801,P001,Product A,10,100.0,Product A Description,2024-01-01,500.0,d290f1ee-6c54-4b01-90e6-d701748f0701
+d290f1ee-6c54-4b01-90e6-d701748f0802,P002,Product B,20,200.0,Product B Description,2024-02-01,1000.0,d290f1ee-6c54-4b01-90e6-d701748f0702
+d290f1ee-6c54-4b01-90e6-d701748f0803,P003,Product C,30,300.0,Product C Description,2024-03-01,1500.0,d290f1ee-6c54-4b01-90e6-d701748f0703
+d290f1ee-6c54-4b01-90e6-d701748f0804,P004,Product D,40,400.0,Product D Description,2024-04-01,2000.0,d290f1ee-6c54-4b01-90e6-d701748f0704
+d290f1ee-6c54-4b01-90e6-d701748f0805,P005,Product E,50,500.0,Product E Description,2024-05-01,2500.0,d290f1ee-6c54-4b01-90e6-d701748f0705
