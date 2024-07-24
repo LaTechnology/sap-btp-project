@@ -1,0 +1,6 @@
+id,dealerID,firstName,lastName,email,mobileNumber
+b4de8b09-89e8-48ea-8b93-f74dced4e46g,D001,John,Smith,john.smith@dealer.com,1234567890
+d5ef8b11-89e8-48ea-8b95-f74dced4e49i,D002,Mary,Johnson,mary.johnson@dealer.com,2345678901
+e6fe8b13-89e8-48ea-8b97-f74dced4e51k,D003,Robert,Williams,robert.williams@dealer.com,3456789012
+f7gf8b15-89e8-48ea-8b99-f74dced4e53m,D004,Patricia,Brown,patricia.brown@dealer.com,4567890123
+g8hf8b17-89e8-48ea-8b99-f74dced4e55o,D005,Michael,Jones,michael.jones@dealer.com,5678901234
