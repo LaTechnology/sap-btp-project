@@ -132,6 +132,8 @@
 								<command>build --for java</command>
 								<command>deploy --to h2 --dry &gt; "${project.basedir}/src/main/resources/schema-h2.sql"</command>
 								<command>compile ${project.basedir} -s all -l all -2 edmx-v2 -o ${project.basedir}/src/main/resources/edmx/v2</command>
+								<command>compile srv/utcl-customer-service.cds -2 openapi --openapi:url /odata/v4/UTCLCustomerService &gt;
+									"${project.basedir}/src/main/resources/swagger/openapi.json"</command>
 
 							</commands>
 						</configuration>
@@ -163,7 +165,11 @@
 			</activation>
 			<properties>
 				<cdsdk-global>true</cdsdk-global>
+				
 			</properties>
+
+		
+
 		</profile>
 	</profiles>
 </project>
