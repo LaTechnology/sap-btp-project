@@ -1,0 +1,16 @@
+@server = http://localhost:8080
+
+
+### btp_utcl_java.srv.UTCLCustomerService.customer
+GET {{server}}/odata/v4/btp_utcl_java.srv.UTCLCustomerService/customer
+Content-Type: application/json
+
+
+### btp_utcl_java.srv.UTCLCustomerService.CustomerType
+GET {{server}}/odata/v4/btp_utcl_java.srv.UTCLCustomerService/CustomerType
+Content-Type: application/json
+
+
+### btp_utcl_java.srv.UTCLCustomerService.address
+GET {{server}}/odata/v4/btp_utcl_java.srv.UTCLCustomerService/address
+Content-Type: application/json

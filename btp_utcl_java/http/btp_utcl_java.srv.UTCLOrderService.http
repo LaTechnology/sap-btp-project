@@ -1,0 +1,16 @@
+@server = http://localhost:8080
+
+
+### btp_utcl_java.srv.UTCLOrderService.order
+GET {{server}}/odata/v4/utcl/checkout/order
+Content-Type: application/json
+
+
+### btp_utcl_java.srv.UTCLOrderService.OrderItem
+GET {{server}}/odata/v4/utcl/checkout/OrderItem
+Content-Type: application/json
+
+
+### btp_utcl_java.srv.UTCLOrderService.payment
+GET {{server}}/odata/v4/utcl/checkout/payment
+Content-Type: application/json

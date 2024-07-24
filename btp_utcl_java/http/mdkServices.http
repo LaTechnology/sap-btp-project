@@ -1,0 +1,61 @@
+@server = http://localhost:8080
+
+
+### mdkServices.customer
+GET {{server}}/odata/v4/mdkServices/customer
+Content-Type: application/json
+
+
+### mdkServices.CustomerType
+GET {{server}}/odata/v4/mdkServices/CustomerType
+Content-Type: application/json
+
+
+### mdkServices.address
+GET {{server}}/odata/v4/mdkServices/address
+Content-Type: application/json
+
+
+### mdkServices.deliveryinstruction
+GET {{server}}/odata/v4/mdkServices/deliveryinstruction
+Content-Type: application/json
+
+
+### mdkServices.specialInstruction
+GET {{server}}/odata/v4/mdkServices/specialInstruction
+Content-Type: application/json
+
+
+### mdkServices.deliveryPeriod
+GET {{server}}/odata/v4/mdkServices/deliveryPeriod
+Content-Type: application/json
+
+
+### mdkServices.endUserDetails
+GET {{server}}/odata/v4/mdkServices/endUserDetails
+Content-Type: application/json
+
+
+### mdkServices.enduserofmaterial
+GET {{server}}/odata/v4/mdkServices/enduserofmaterial
+Content-Type: application/json
+
+
+### mdkServices.order
+GET {{server}}/odata/v4/mdkServices/order
+Content-Type: application/json
+
+
+### mdkServices.OrderItem
+GET {{server}}/odata/v4/mdkServices/OrderItem
+Content-Type: application/json
+
+
+### mdkServices.payment
+GET {{server}}/odata/v4/mdkServices/payment
+Content-Type: application/json
+
+
+### mdkServices.productdetails
+GET {{server}}/odata/v4/mdkServices/productdetails
+Content-Type: application/json

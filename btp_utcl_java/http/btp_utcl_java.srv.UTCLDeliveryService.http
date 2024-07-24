@@ -1,0 +1,26 @@
+@server = http://localhost:8080
+
+
+### btp_utcl_java.srv.UTCLDeliveryService.deliveryinstruction
+GET {{server}}/odata/v4/btp_utcl_java.srv.UTCLDeliveryService/deliveryinstruction
+Content-Type: application/json
+
+
+### btp_utcl_java.srv.UTCLDeliveryService.specialInstruction
+GET {{server}}/odata/v4/btp_utcl_java.srv.UTCLDeliveryService/specialInstruction
+Content-Type: application/json
+
+
+### btp_utcl_java.srv.UTCLDeliveryService.deliveryPeriod
+GET {{server}}/odata/v4/btp_utcl_java.srv.UTCLDeliveryService/deliveryPeriod
+Content-Type: application/json
+
+
+### btp_utcl_java.srv.UTCLDeliveryService.endUserDetails
+GET {{server}}/odata/v4/btp_utcl_java.srv.UTCLDeliveryService/endUserDetails
+Content-Type: application/json
+
+
+### btp_utcl_java.srv.UTCLDeliveryService.enduserofmaterial
+GET {{server}}/odata/v4/btp_utcl_java.srv.UTCLDeliveryService/enduserofmaterial
+Content-Type: application/json

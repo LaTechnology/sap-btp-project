@@ -1,0 +1,22 @@
+@server = http://localhost:8080
+
+
+### btp_utcl_java.srv.UTCLProductService.productdetails
+GET {{server}}/odata/v2/btp_utcl_java.srv.UTCLProductService/productdetails
+Content-Type: application/json
+
+
+### btp_utcl_java.srv.UTCLProductService.calculateNumberOfBag
+POST {{server}}/odata/v4/btp_utcl_java.srv.UTCLProductService/srv
+Content-Type: application/json
+
+{
+  "quantity": null
+}
+
+
+### btp_utcl_java.srv.UTCLProductService.calculateNumberOfBag
+GET {{server}}/odata/v2/mdkServices/calculateNumberOfBag(quantity=10)
+Content-Type: application/json
+
+
