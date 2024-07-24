@@ -13,7 +13,7 @@
                 id="customerFragment" selectionChange="onSelectionChange"
                 inset="false"
                 mode="MultiSelect"
-                items="{path : 'odataModel>/Customer', parameters:{expand : 'toCustomerType'}, 
+                items="{path : 'odataModel>/customer', parameters:{expand : 'toCustomerType'}, 
                 filters: [{path: 'toCustomerType/customerType',operator: 'EQ',value1: 'RETAILER'}]}"
             >
                 <headerToolbar>
@@ -60,7 +60,7 @@
                 id="customerFragment1" selectionChange="onSelectionChange"
                 inset="false"
                 mode="MultiSelect"
-                items="{path : 'odataModel>/Customer', parameters:{expand : 'toCustomerType'},
+                items="{path : 'odataModel>/customer', parameters:{expand : 'toCustomerType'},
                 filters: [{path: 'toCustomerType/customerType',operator: 'EQ',value1: 'DEALER'}]}"
             >
                 <headerToolbar>

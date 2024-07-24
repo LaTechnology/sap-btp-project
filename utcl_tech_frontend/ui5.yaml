@@ -17,7 +17,7 @@ server:
           url: https://ui5.sap.com
         backend:
           - path: /odata
-            url: https://c9c44076trial-dev-btp-utcl-srv.cfapps.us10-001.hana.ondemand.com
+            url: https://c21d9e61trial-dev-btp-utcl-java-srv.cfapps.us10-001.hana.ondemand.com
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

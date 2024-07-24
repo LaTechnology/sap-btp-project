@@ -34,7 +34,7 @@ sap.ui.define([
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
 
-                var oModel = new ODataModel("/odata/v2/MDkServices/");
+                var oModel = new ODataModel("/odata/v2/mdkServices/");
             this.setModel(oModel, "odataModel");
 
             console.log(oModel);
