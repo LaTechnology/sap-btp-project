@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="UTCLCustomer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Dealer" EntityType="UTCLCustomer.Dealer">
+                    <NavigationPropertyBinding Path="toRetailer" Target="Retailer"/>
+                    <NavigationPropertyBinding Path="toAddress" Target="Address"/>
+                </EntitySet>
+                <EntitySet Name="Retailer" EntityType="UTCLCustomer.Retailer">
+                    <NavigationPropertyBinding Path="toDealer" Target="Dealer"/>
+                    <NavigationPropertyBinding Path="toAddress" Target="Address"/>
+                </EntitySet>
+                <EntitySet Name="Address" EntityType="UTCLCustomer.Address">
+                    <NavigationPropertyBinding Path="toDealer" Target="Dealer"/>
+                    <NavigationPropertyBinding Path="toRetailer" Target="Retailer"/>
+                </EntitySet>
+                <FunctionImport Name="getdealerandretaler" Function="UTCLCustomer.getdealerandretaler" EntitySet="Dealer"/>
+            </EntityContainer>
+            <EntityType Name="Dealer">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="firstName" Type="Edm.String" MaxLength="20"/>
+                <Property Name="lastName" Type="Edm.String" MaxLength="20"/>
+                <Property Name="email" Type="Edm.String"/>
+                <Property Name="mobileNumber" Type="Edm.String"/>
+                <Property Name="dealerID" Type="Edm.String"/>
+                <NavigationProperty Name="toRetailer" Type="Collection(UTCLCustomer.Retailer)" Partner="toDealer"/>
+                <NavigationProperty Name="toAddress" Type="Collection(UTCLCustomer.Address)" Partner="toDealer"/>
+            </EntityType>
+            <EntityType Name="Retailer">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="firstName" Type="Edm.String" MaxLength="20"/>
+                <Property Name="lastName" Type="Edm.String" MaxLength="20"/>
+                <Property Name="email" Type="Edm.String"/>
+                <Property Name="mobileNumber" Type="Edm.String"/>
+                <Property Name="retailerId" Type="Edm.String"/>
+                <NavigationProperty Name="toDealer" Type="UTCLCustomer.Dealer" Partner="toRetailer">
+                    <ReferentialConstraint Property="toDealer_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="toDealer_id" Type="Edm.Guid"/>
+                <NavigationProperty Name="toAddress" Type="Collection(UTCLCustomer.Address)" Partner="toRetailer"/>
+            </EntityType>
+            <EntityType Name="Address">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="addressLine1" Type="Edm.String" MaxLength="20"/>
+                <Property Name="addressLine2" Type="Edm.String" MaxLength="20"/>
+                <Property Name="addressLine3" Type="Edm.String" MaxLength="20"/>
+                <Property Name="addressLine4" Type="Edm.String" MaxLength="20"/>
+                <Property Name="pincode" Type="Edm.String" MaxLength="10"/>
+                <Property Name="city" Type="Edm.String" MaxLength="20"/>
+                <Property Name="state" Type="Edm.String" MaxLength="20"/>
+                <Property Name="country" Type="Edm.String" MaxLength="20"/>
+                <Property Name="mobileNumber" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="toDealer" Type="UTCLCustomer.Dealer" Partner="toAddress">
+                    <ReferentialConstraint Property="toDealer_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="toDealer_id" Type="Edm.Guid"/>
+                <NavigationProperty Name="toRetailer" Type="UTCLCustomer.Retailer" Partner="toAddress">
+                    <ReferentialConstraint Property="toRetailer_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="toRetailer_id" Type="Edm.Guid"/>
+            </EntityType>
+            <Function Name="getdealerandretaler" IsBound="false" IsComposable="false">
+                <Parameter Name="id" Type="Edm.String"/>
+                <ReturnType Type="Collection(UTCLCustomer.Dealer)" Nullable="true"/>
+            </Function>
+            <Annotations Target="UTCLCustomer.Dealer/id">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="UTCLCustomer.Retailer/id">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="UTCLCustomer.Address/id">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,115 @@
+/* Enter your custom styles here */
+/* Enter your custom styles here */
+/* General table styles */
+.tableCss {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+/* Header styles */
+.tableCss .sapMListTblHeader {
+    background-color: #007acc; /* SAP Blue */
+    color: #ffffff;
+    border-bottom: 2px solid #005a9e;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.tableCss .sapMListTblHeader .sapMListTblCell {
+    padding: 14px 16px;
+}
+
+/* Cell styles */
+.tableCss .sapMListTblCell {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #333333;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tableCss .sapMListTblRow:hover .sapMListTblCell {
+    background-color: #e9f5ff; /* Light Blue */
+    color: #007acc;
+}
+
+/* Last row border */
+.tableCss .sapMListTblRow:last-child .sapMListTblCell {
+    border-bottom: none;
+}
+
+/* Empty state styles */
+.tableCss .sapMTableEmptyState {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    color: #888888;
+}
+
+.tableCss .sapMTableEmptyState .sapMText {
+    font-size: 16px;
+    color: #888888;
+}
+
+/* Button styling for Save and Next */
+.saveNextButton {
+    background-color: #007acc;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 20px 0;
+}
+
+.saveNextButton:hover {
+    background-color: #005a9e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.saveNextButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+.barContent {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #dcdcdc; 
+    padding: 10px 20px; 
+}
+
+.barContent .sapMImg {
+    vertical-align: middle; 
+}
+
+.selectButton {
+    background-color: #ffffcc;
+    border: none; /* Remove default border */
+    border-radius: 12px; /* Adjust radius for rounded corners */
+    padding: 10px 20px; /* Adjust padding as needed */
+    color: #333; /* Dark text color for contrast */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    outline: none; /* Remove default outline */
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition effect */
+}
+
+.selectButton:hover {
+    background-color: yellow; /* Slightly darker yellow on hover */
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.8); /* Glowing effect on hover */
+}
+
+
+

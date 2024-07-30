@@ -1,0 +1,21 @@
+@server = http://localhost:8080
+
+
+### UTCLCustomer.Dealer
+GET {{server}}/odata/v4/UTCLCustomer/Dealer
+Content-Type: application/json
+
+
+### UTCLCustomer.Retailer
+GET {{server}}/odata/v4/UTCLCustomer/Retailer
+Content-Type: application/json
+
+
+### UTCLCustomer.Address
+GET {{server}}/odata/v4/UTCLCustomer/Address
+Content-Type: application/json
+
+
+### UTCLCustomer.Retailer
+POST {{server}}/odata/v4/UTCLCustomer/action()
+Content-Type: application/json

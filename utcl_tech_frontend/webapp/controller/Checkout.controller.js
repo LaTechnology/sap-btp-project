@@ -104,22 +104,22 @@ sap.ui.define([
             var oIconTabBar = oView.byId("iconTabBar");
         
             if (oIconTabBar) {
-                // Set the selected key to switch to the "Shipping Address" tab
+                
                 oIconTabBar.setSelectedKey("shippingAddress");
         
-                // Find the VBox directly in the view
+               
                 var oCustomerToggleContainer = oView.byId("customerToggleContainer");
         
                 if (oCustomerToggleContainer) {
-                    // Clear existing items
+                  
                     oCustomerToggleContainer.removeAllItems();
         
-                    // Retrieve selected customers from the model
+                  
                     var oViewModel = this.getView().getModel("viewModel");
                     var aSelectedCustomers = oViewModel.getProperty("/selectedCustomers");
         
                     if (aSelectedCustomers && aSelectedCustomers.length > 0) {
-                        // Add a ToggleButton for each selected customer
+                       
                         aSelectedCustomers.forEach(function (oCustomer) {
                             var oToggleButton = new sap.m.ToggleButton({
                                 text: oCustomer.firstName + " " + oCustomer.lastName,

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sap.cds.Result;
 import com.sap.cds.ql.Select;
 import com.sap.cds.ql.cqn.CqnSelect;
 import com.sap.cds.services.handler.EventHandler;
@@ -16,6 +17,7 @@ import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.persistence.PersistenceService;
 
 import cds.gen.utclcustomer.Dealer;
+import cds.gen.utclcustomer.DealerSampleContext;
 import cds.gen.utclcustomer.Dealer_;
 import cds.gen.utclcustomer.GetdealerandretalerContext;
 import cds.gen.utclcustomer.Retailer_;
@@ -96,6 +98,13 @@ public class getCustomer implements EventHandler{
         
 
         
+    }
+
+    @On(entity = Dealer_.CDS_NAME)
+    public void dummy(DealerSampleContext context){
+
+        System.out.println("Hello");
+
     }
     
 }

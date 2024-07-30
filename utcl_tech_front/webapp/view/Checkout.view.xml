@@ -1,0 +1,119 @@
+<mvc:View
+    controllerName="utcltechfront.controller.Checkout"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+>
+    <App>
+        <Page
+            id="page"
+            title="{i18n>title}"
+        >
+            <content>
+                <IconTabBar
+                    id="iconTabBar"
+                    class="sapUiResponsiveContentPadding"
+                >
+                    <items>
+                        <IconTabFilter
+                            key="customerSelection"
+                            icon="sap-icon://customer-and-contacts"
+                            iconColor="Tile"
+                            text="Customer Selection"
+                            design="Horizontal"
+                        >
+                            <content>
+                                <Button
+                                    text="Select Customer"
+                                    icon="sap-icon://cursor-arrow"
+                                    id="selectCustomerBtn"
+                                    press="onOpenDialog"
+                                    class="selectButton"
+                                />
+
+                                 <Table id="selectedDealerTable" inset="false" items="{viewModel>/selectedDealers}" class="tableCss" headerText="Dealer" noDataText="No Data Selected" autoPopinMode="true">
+                                    <columns>
+                                        <Column><Text text="First Name" /></Column>
+                                        <Column><Text text="Last Name" /></Column>
+                                        <Column><Text text="Email" /></Column>
+                                        <Column><Text text="Mobile Number" /></Column>
+                                        <Column><Text text="Action" /></Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem vAlign="Middle" type="Inactive">
+                                            <cells>
+                                                <Text text="{viewModel>firstName}" />
+                                                <Text text="{viewModel>lastName}" />
+                                                <Text text="{viewModel>email}" />
+                                                <Text text="{viewModel>mobileNumber}" />
+                                                <Button icon="sap-icon://delete" press="onRemoveDealer" type="Transparent" class="actionButton" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+
+                                <Table id="selectedRetailerTable" inset="false" items="{viewModel>/selectedRetailers}" class="tableCss" headerText="Retailer" noDataText="No Data Selected" autoPopinMode="true">
+                                    <columns>
+                                        <Column><Text text="First Name" /></Column>
+                                        <Column><Text text="Last Name" /></Column>
+                                        <Column><Text text="Email" /></Column>
+                                        <Column><Text text="Mobile Number" /></Column>
+                                        <Column><Text text="Action" /></Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem vAlign="Middle" type="Inactive">
+                                            <cells>
+                                                <Text text="{viewModel>firstName}" />
+                                                <Text text="{viewModel>lastName}" />
+                                                <Text text="{viewModel>email}" />
+                                                <Text text="{viewModel>mobileNumber}" />
+                                                <Button icon="sap-icon://delete" press="onRemoveRetailer" type="Transparent" class="actionButton" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+
+                                <Button
+                                    text="Save and Next"
+                                    type="Attention"
+                                    enabled="{viewModel>/isSaveNextEnabled}"
+                                    press="onNextPage"
+                                />
+                            </content>
+                        </IconTabFilter>
+
+                        <IconTabSeparator icon="sap-icon://step" />
+                        <IconTabFilter
+                            key="shippingAddress"
+                            icon="sap-icon://shipping-status"
+                            iconColor="Negative"
+                            text="Shipping Address"
+                            design="Horizontal"
+                            id="shippingAddressTab"
+                        >
+                            <content>
+                                <VBox
+                                    id="shippingAddressContainer"
+                                    class="shippingAddressContainer"
+                                    wrap="Wrap"
+                                    width="100%"
+                                />
+                            </content>
+                        </IconTabFilter>
+                        <IconTabSeparator icon="sap-icon://step" />
+                        <IconTabFilter
+                            key="productDetails"
+                            icon="sap-icon://s4hana"
+                            iconColor="Positive"
+                            text="Product Details"
+                            design="Horizontal"
+                        />
+                    </items>
+                </IconTabBar>
+            </content>
+        </Page>
+    </App>
+</mvc:View>
