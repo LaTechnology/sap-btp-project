@@ -1,31 +1,48 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
-    "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/model/odata/v4/ODataModel"
-],
-function (Controller,Fragment,Filter, FilterOperator,JSONModel,ODataModelV4) {
+    "sap/ui/model/odata/v2/ODataModel"
+], function (Controller, Fragment, JSONModel, ODataModelV2) {
     "use strict";
 
     return Controller.extend("utcltechfront.controller.Checkout", {
         onInit: function () {
-
             var oViewModel = new JSONModel({
                 selectedDealers: [],
                 selectedRetailers: []
             });
             this.getView().setModel(oViewModel, "viewModel");
 
+            var utclCustomer = new ODataModelV2({
+                serviceUrl: "/odata/v2/UTCLCustomer/"
+            });
 
-                var oModelV4 = new sap.ui.model.odata.v4.ODataModel({
-                    serviceUrl: "/odata/v4/UTCLCustomer/"
-                });
-                this.getView().setModel(oModelV4, "UTCLCustomer");
-        
-                console.log("ODataV4Model:", oModelV4);
+            utclCustomer.read("/Dealer", {
+                urlParameters: {
+                    "$expand": "toAddress"
+                },
+                success: function(oData) {
+                    var oDealerModel = new JSONModel(oData);
+                    this.getView().setModel(oDealerModel, "DealerModel");
+                }.bind(this),
+                error: function(oError) {
+                    console.error("Failed to read data:", oError);
+                }
+            });
 
+            utclCustomer.read("/Retailer", {
+                urlParameters: {
+                    "$expand": "toAddress"
+                },
+                success: function(oData) {
+                    var oRetailerModel = new JSONModel(oData);
+                    this.getView().setModel(oRetailerModel, "RetailerModel");
+                }.bind(this),
+                error: function(oError) {
+                    console.error("Failed to read data:", oError);
+                }
+            });
         },
 
         onOpenDialog: function () {
@@ -53,237 +70,107 @@ function (Controller,Fragment,Filter, FilterOperator,JSONModel,ODataModelV4) {
             }
         },
 
-        // onSelectionChange: function (oEvent) {
-        //     var oTable = oEvent.getSource();
-        //     var aSelectedItems = oTable.getSelectedItems();
-        //     var aSelectedDealers = [];
-        //     var aSelectedRetailers = [];
-        
-        //     aSelectedItems.forEach(function (oItem) {
-        //         var oBindingContext = oItem.getBindingContext("UTCLCustomer");
-        
-             
-        //             var oData = oBindingContext.getObject();
-        //             console.log("Selected Item Data:", oData);
-                   
-        //             if (oData.dealerID ) {
-        //                 aSelectedDealers.push(oData);
-        //             } else if (oData.retailerId) {
-        //                 aSelectedRetailers.push(oData);
-        //             }   
-
-
-
-                
-        //     });
-        //     var oViewModel = this.getView().getModel("viewModel");
-        //     oViewModel.setProperty("/selectedDealers", aSelectedDealers);
-        //     oViewModel.setProperty("/selectedRetailers", aSelectedRetailers);
-        // }
-        
-        onSave: function () {
-            var oView = this.getView();
-            var oDealerTable = Fragment.byId(oView.getId() + "--customerFragment", "dealerTable");
-            var oRetailerTable = Fragment.byId(oView.getId() + "--customerFragment", "retailerTable");
-            var aSelectedDealers = [];
-            var aSelectedRetailers = [];
-            var oViewModel = oView.getModel("viewModel");
-
-            console.log(oViewModel);
-
-            var aDealerSelectedItems = oDealerTable.getSelectedItems();
-            aDealerSelectedItems.forEach(function (oItem) {
-                var oBindingContext = oItem.getBindingContext("UTCLCustomer");
-                console.log(oBindingContext);
-                if (oBindingContext) {
-                    var oData = oBindingContext.getObject();
-
-                    console.log(oData);
-
-                    var selectedDealer = aSelectedDealers.push(oData);
-
-                    console.log(selectedDealer);
-                }
-            });
-
-            var aRetailerSelectedItems = oRetailerTable.getSelectedItems();
-            aRetailerSelectedItems.forEach(function (oItem) {
-                var oBindingContext = oItem.getBindingContext("UTCLCustomer");
-             
-                if (oBindingContext) {
-                    var oData = oBindingContext.getObject();
-
-                    console.log(oData);
-                    var selectedRetailer = aSelectedRetailers.push(oData);
-                    console.log(selectedRetailer);
-                }
-
-                
-            });
-
-            // Update the view model
-            oViewModel.setProperty("/selectedDealers", aSelectedDealers);
-            oViewModel.setProperty("/selectedRetailers", aSelectedRetailers);
-
-            // Close the dialog
-            this.onClose();
-        },
-
-        // onSelectionChange: function (oEvent) {
-        //     var oTable = oEvent.getSource();
-        //     var aSelectedItems = oTable.getSelectedItems();
-        
-        //     if (!aSelectedItems) {
-        //         console.error("No selected items");
-        //         return;
-        //     }
-        
-        //     aSelectedItems.forEach(function (oItem) {
-        //         var oBindingContext = oItem.getBindingContext("UTCLCustomer");
-        
-        //         if (oBindingContext) {
-        //             var oData = oBindingContext.getObject();
-        //             console.log("Selected Item Data:", oData);
-        //         }
-        //     });
-        // },
-
-        // onSelectionChange: function (oEvent) {
-        //     var oTable = oEvent.getSource();
-        //     var aSelectedItems = oTable.getSelectedItems();
-        
-        //     if (!aSelectedItems) {
-        //         console.error("No selected items");
-        //         return;
-        //     }
-        
-        //     aSelectedItems.forEach(function (oItem) {
-        //         var oBindingContext = oItem.getBindingContext("UTCLCustomer");
-
-        //         console.log(oBindingContext);
-        
-        //         if (oBindingContext) {
-
-        //             var sPath = oBindingContext.getPath();
-        //             var oModel = oBindingContext.getModel();
-        //             console.log(sPath);
-        //             console.log(oModel);
-        //             var oData = oBindingContext.getObject();
-        //             console.log("Selected Item Data:", oData);
-
-        //             console.log(Array.isArray(oData.toAddress));
-        //             // Check if toAddress is an array and log its contents
-        //             if (Array.isArray(oData.toAddress)) {
-        //                 console.log("toAddress:", oData.toAddress);
-        //             } else {
-        //                 console.error("toAddress is not an array:", oData.toAddress);
-        //             }
-        //         }
-        //     });
-        // },
-        
         onSelectionChange: function (oEvent) {
             var oTable = oEvent.getSource();
             var aSelectedItems = oTable.getSelectedItems();
-            
-            if (!aSelectedItems || aSelectedItems.length === 0) {
+
+            if (!aSelectedItems) {
                 console.error("No selected items");
                 return;
             }
-            
+
             aSelectedItems.forEach(function (oItem) {
                 var oBindingContext = oItem.getBindingContext("UTCLCustomer");
-                
+
                 if (oBindingContext) {
-                    var sPath = oBindingContext.getPath();
-                    var oModel = oBindingContext.getModel();
-        
-                    // Print the selected item data
-                    console.log("Selected Item Data:", oBindingContext.getObject());
-        
-                    // Construct the $expand query
-                    var sExpandPath = sPath + "?$expand=toAddress,toRetailer"; // Adjust the associations as needed
-        
-                    // Fetch expanded data using OData V4
-                    oModel.read(sExpandPath, {
-                        success: function (oData) {
-                            console.log("Expanded Data:", oData);
-        
-                            // Check if toAddress is an array and log its contents
-                            if (Array.isArray(oData.toAddress)) {
-                                console.log("toAddress:", oData.toAddress);
-                            } else {
-                                console.error("toAddress is not an array:", oData.toAddress);
-                            }
-        
-                            // Check if toRetailer is an array and log its contents
-                            if (Array.isArray(oData.toRetailer)) {
-                                console.log("toRetailer:", oData.toRetailer);
-                            } else {
-                                console.error("toRetailer is not an array:", oData.toRetailer);
-                            }
-                        },
-                        error: function (oError) {
-                            console.error("Error fetching expanded data:", oError);
-                        }
-                    });
+                    var oData = oBindingContext.getObject();
+                    console.log("Selected Item Data:", oData);
                 }
             });
-        }
-,        
+        },
+
+        onSave: function () {
+            var oView = this.getView();
+            var oViewModel = oView.getModel("viewModel");
+
+            var oDealerTable = Fragment.byId(oView.getId() + "--customerFragment", "dealerTable");
+            var oRetailerTable = Fragment.byId(oView.getId() + "--customerFragment", "retailerTable");
+
+            var aSelectedDealers = [];
+            var aSelectedRetailers = [];
+
+            oDealerTable.getSelectedItems().forEach(function (oItem) {
+                var oBindingContext = oItem.getBindingContext("DealerModel");
+                if (oBindingContext) {
+                    aSelectedDealers.push(oBindingContext.getObject());
+                }
+            });
+
+            oRetailerTable.getSelectedItems().forEach(function (oItem) {
+                var oBindingContext = oItem.getBindingContext("RetailerModel");
+                if (oBindingContext) {
+                    aSelectedRetailers.push(oBindingContext.getObject());
+                }
+            });
+
+            oViewModel.setProperty("/selectedDealers", aSelectedDealers);
+            oViewModel.setProperty("/selectedRetailers", aSelectedRetailers);
+
+            this.onClose();
+        },
 
         onRemoveDealer: function (oEvent) {
             var oButton = oEvent.getSource();
             var oTable = this.byId("selectedDealerTable");
             var oItem = oButton.getParent(); // Get the parent ColumnListItem
-        
+
             // Get the model and data
             var oModel = this.getView().getModel("viewModel");
             var aDealers = oModel.getProperty("/selectedDealers");
-        
+
             // Find the index of the item to be removed
             var iIndex = aDealers.indexOf(oItem.getBindingContext("viewModel").getObject());
-        
+
             // Remove the item from the array
             if (iIndex !== -1) {
                 aDealers.splice(iIndex, 1);
                 oModel.setProperty("/selectedDealers", aDealers);
-        
-                // Update the fragment
-                this.updateFragmentSelections();
-            }
-        },
-        
-        onRemoveRetailer: function (oEvent) {
-            var oButton = oEvent.getSource();
-            var oTable = this.byId("selectedRetailerTable");
-            var oItem = oButton.getParent(); // Get the parent ColumnListItem
-        
-            // Get the model and data
-            var oModel = this.getView().getModel("viewModel");
-            var aRetailers = oModel.getProperty("/selectedRetailers");
-        
-            // Find the index of the item to be removed
-            var iIndex = aRetailers.indexOf(oItem.getBindingContext("viewModel").getObject());
-        
-            // Remove the item from the array
-            if (iIndex !== -1) {
-                aRetailers.splice(iIndex, 1);
-                oModel.setProperty("/selectedRetailers", aRetailers);
-        
+
                 // Update the fragment
                 this.updateFragmentSelections();
             }
         },
 
-        updateFragmentSelections: function () {
+        onRemoveRetailer: function (oEvent) {
+            var oButton = oEvent.getSource();
+            var oTable = this.byId("selectedRetailerTable");
+            var oItem = oButton.getParent(); // Get the parent ColumnListItem
+
+            // Get the model and data
+            var oModel = this.getView().getModel("viewModel");
+            var aRetailers = oModel.getProperty("/selectedRetailers");
+
+            // Find the index of the item to be removed
+            var iIndex = aRetailers.indexOf(oItem.getBindingContext("viewModel").getObject());
+
+            // Remove the item from the array
+            if (iIndex !== -1) {
+                aRetailers.splice(iIndex, 1);
+                oModel.setProperty("/selectedRetailers", aRetailers);
+
+                // Update the fragment
+                this.updateFragmentSelections();
+            }
+        },
+
+        updateFragmentSelections: function () {  
             var oView = this.getView();
             var oDialog = sap.ui.core.Fragment.byId(oView.getId() + "--customerFragment", "customerDialog");
-        
+
             if (oDialog) {
                 var oDealerTable = sap.ui.core.Fragment.byId(oView.getId() + "--customerFragment", "dealerTable");
                 var oRetailerTable = sap.ui.core.Fragment.byId(oView.getId() + "--customerFragment", "retailerTable");
-        
+
                 if (oDealerTable) {
                     oDealerTable.removeSelections(true);
                     var aDealers = oView.getModel("viewModel").getProperty("/selectedDealers");
@@ -300,7 +187,7 @@ function (Controller,Fragment,Filter, FilterOperator,JSONModel,ODataModelV4) {
                         });
                     });
                 }
-        
+
                 if (oRetailerTable) {
                     oRetailerTable.removeSelections(true);
                     var aRetailers = oView.getModel("viewModel").getProperty("/selectedRetailers");
@@ -320,6 +207,47 @@ function (Controller,Fragment,Filter, FilterOperator,JSONModel,ODataModelV4) {
             }
         },
 
+        validateExternalAPI: function (oEvent) {
+            console.log("validation pressed");
+            
+            var oButton = oEvent.getSource();
+            var oFormElement = oButton.getParent();
+
+            console.log(oButton);
+            console.log(oFormElement);
+
+            var oPincodeInput = oFormElement.getFields()[0];
+            var sPincode = oPincodeInput.getValue();
+
+            var sUrl = this.getOwnerComponent().getManifestEntry("/sap.app/dataSources/pincodeValidationAPI/uri") + "?pincode=" + sPincode;
+
+            console.log(oPincodeInput);
+            console.log(sPincode);
+
+            console.log(sUrl);
+
+            if (sUrl) {
+                console.log("pincode validated");
+                
+                // Make the AJAX call to the URL
+                jQuery.ajax({
+                    url: sUrl,
+                    method: "GET",
+                    success: function (data) {
+                        console.log("Validation successful", data);
+                        // Process the result here
+                        sap.m.MessageToast.show("Pincode validation successful!");
+                    },
+                    error: function (error) {
+                        console.error("Validation failed", error);
+                      
+                        sap.m.MessageToast.show("Pincode validation failed!");
+                    }
+                });
+            }
+
+        },
+        
         onNextPage: function () {
             var oView = this.getView();
             var oIconTabBar = oView.byId("iconTabBar");
@@ -331,15 +259,26 @@ function (Controller,Fragment,Filter, FilterOperator,JSONModel,ODataModelV4) {
                 var aSelectedDealers = oViewModel.getProperty("/selectedDealers");
                 var aSelectedRetailers = oViewModel.getProperty("/selectedRetailers");
         
+                console.log("Selected Dealers:", aSelectedDealers);
+                console.log("Selected Retailers:", aSelectedRetailers);
+        
                 var oShippingAddressContainer = oView.byId("shippingAddressContainer");
-                oShippingAddressContainer.destroyItems(); 
+                oShippingAddressContainer.destroyItems();
+        
+                var that = this; // Store the controller context
         
                 function addCustomerForms(aCustomers, customerType) {
                     if (aCustomers && aCustomers.length > 0) {
                         aCustomers.forEach(function (oCustomer) {
-                            // Assuming address details are available in oCustomer
+                            console.log("Customer Data:", oCustomer);
+        
+                            console.log("Customer ID:", oCustomer.dealerID);
+                            console.log("Dealer Name:", oCustomer.firstName);
+                            console.log("Retailer Name:", oCustomer.lastName);
+        
+                            var oAddress = oCustomer.toAddress && oCustomer.toAddress.results && oCustomer.toAddress.results[0];
                             var oForm = new sap.ui.layout.form.Form({
-                                editable: false, // Make form non-editable
+                                editable: false,
                                 ariaLabelledBy: "headerAddress",
                                 layout: new sap.ui.layout.form.ResponsiveGridLayout({
                                     labelSpanXL: 4,
@@ -358,64 +297,79 @@ function (Controller,Fragment,Filter, FilterOperator,JSONModel,ODataModelV4) {
                                 }),
                                 formContainers: [
                                     new sap.ui.layout.form.FormContainer({
-                                        ariaLabelledBy: "ShippingTitle",
-                                        title: customerType + " Shipping Address",
+                                        title: customerType + " Details",
                                         formElements: [
                                             new sap.ui.layout.form.FormElement({
                                                 label: "Name",
                                                 fields: [
                                                     new sap.m.Input({
-                                                        value: oCustomer.firstName + " " + oCustomer.lastName,
-                                                        enabled: false
+                                                        value: customerType === "Dealer"
+                                                            ? (oCustomer.firstName || "") + " " + (oCustomer.lastName || "") // Concatenate first name and last name
+                                                            : (oCustomer.firstName || "") + " " + (oCustomer.lastName || ""), // Adjust for retailer if necessary
+                                                        editable: false
                                                     })
                                                 ]
                                             }),
                                             new sap.ui.layout.form.FormElement({
-                                                label: "Address Line 1",
+                                                label: "Address",
                                                 fields: [
                                                     new sap.m.Input({
-                                                        value: oCustomer.addressLine1 || "",
-                                                        enabled: false
+                                                        value: oAddress ? oAddress.addressLine1 : "",
+                                                    }),
+                                                    new sap.m.Input({
+                                                        value: oAddress ? oAddress.addressLine2 : "NA"
                                                     })
                                                 ]
                                             }),
                                             new sap.ui.layout.form.FormElement({
-                                                label: "Address Line 2",
+                                                label: "City",
                                                 fields: [
                                                     new sap.m.Input({
-                                                        value: oCustomer.addressLine2 || "",
-                                                        enabled: false
+                                                        value: oAddress ? oAddress.city : "",
                                                     })
                                                 ]
                                             }),
                                             new sap.ui.layout.form.FormElement({
-                                                label: "Address Line 3",
+                                                label: "State",
                                                 fields: [
                                                     new sap.m.Input({
-                                                        value: oCustomer.addressLine3 || "",
-                                                        enabled: false
+                                                        value: oAddress ? oAddress.state : "",
                                                     })
                                                 ]
                                             }),
                                             new sap.ui.layout.form.FormElement({
-                                                label: "Address Line 4",
+                                                label: "Country",
                                                 fields: [
                                                     new sap.m.Input({
-                                                        value: oCustomer.addressLine4 || "",
-                                                        enabled: false
+                                                        value: oAddress ? oAddress.country : "",
                                                     })
                                                 ]
                                             }),
                                             new sap.ui.layout.form.FormElement({
-                                                label: "ZIP Code/Pincode",
+                                                label: "Pincode",
                                                 fields: [
                                                     new sap.m.Input({
-                                                        value: oCustomer.pincode || "",
-                                                        enabled: false
+                                                        value: oAddress ? oAddress.pincode : "",
                                                     }),
                                                     new sap.m.Button({
                                                         text: "Validate",
-                                                        type: "Emphasized"
+                                                        press: that.validateExternalAPI.bind(that) // Use 'that' to refer to the controller context
+                                                    })
+                                                ]
+                                            }),
+                                            new sap.ui.layout.form.FormElement({
+                                                label: "Phone",
+                                                fields: [
+                                                    new sap.m.Input({
+                                                        value: oCustomer.mobileNumber,
+                                                    })
+                                                ]
+                                            }),
+                                            new sap.ui.layout.form.FormElement({
+                                                label: "Email",
+                                                fields: [
+                                                    new sap.m.Input({
+                                                        value: oCustomer.email,
                                                     })
                                                 ]
                                             })
@@ -426,21 +380,14 @@ function (Controller,Fragment,Filter, FilterOperator,JSONModel,ODataModelV4) {
         
                             oShippingAddressContainer.addItem(oForm);
                         });
-                    } else {
-                        console.error("No selected " + customerType.toLowerCase() + "s found.");
                     }
                 }
         
                 addCustomerForms(aSelectedDealers, "Dealer");
                 addCustomerForms(aSelectedRetailers, "Retailer");
-        
-            } else {
-                console.error("IconTabBar not found.");
             }
         }
         
         
     });
 });
-                 
-

@@ -26,18 +26,15 @@
                 }
             },
             "UTCLCustomer": {
-                "uri": "/odata/v4/UTCLCustomer/",
+                "uri": "/odata/v2/UTCLCustomer/",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
-                    "defaultBindingMode": "TwoWay",
-                    "groupId": "$direct",
                     "localUri": "localService/UTCLCustomer/metadata.xml",
-                    "odataVersion": "4.0",
-                    "updateGroupId": "update",
-                    "autoExpandSelect": true
+                    "odataVersion": "2.0"
                 }
             }
+            
         }
     },
     "sap.ui": {
@@ -91,10 +88,12 @@
                 "dataSource": "UTCLCustomer",
                 "preload": true,
                 "settings": {
-                    "synchronizationMode": "None",
-                    "operationMode": "Server",
-                    "autoExpandSelect": true,
-                    "earlyRequests": true
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
                 }
             }
         },

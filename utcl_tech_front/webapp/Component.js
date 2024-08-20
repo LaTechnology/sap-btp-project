@@ -7,8 +7,7 @@ sap.ui.define([
     "sap/ui/Device",
     "utcltechfront/model/models",
     "sap/ui/model/odata/v2/ODataModel",
-    "sap/ui/model/odata/v4/ODataModel"
-], function (UIComponent, Device, models, ODataModelV2, ODataModelV4) {
+], function (UIComponent, Device, models, ODataModelV2) {
     "use strict";
 
     return UIComponent.extend("utcltechfront.Component", {
@@ -40,13 +39,21 @@ sap.ui.define([
             console.log("OData V2 Model:", oModelV2);
 
             // create and set OData V4 model
-            var oModel = new sap.ui.model.odata.v4.ODataModel({
-                serviceUrl: "/odata/v4/UTCLCustomer/",
-                synchronizationMode: "None"
-            });
-            this.setModel(oModel, "UTCLCustomer");
+            // var oModel = new sap.ui.model.odata.v4.ODataModel({
+            //     serviceUrl: "/odata/v4/UTCLCustomer/",
+            //     synchronizationMode: "None"
+            // });
+            // this.setModel(oModel, "UTCLCustomer");
 
-            console.log("OData V4 Model:", oModel);
+            // console.log("OData V4 Model:", oModel);
+
+            var oModelv2 = new ODataModelV2({
+                serviceUrl: this.getManifestEntry("/sap.app/dataSources/UTCLCustomer/uri")
+            });
+
+            this.setModel(oModelv2, "UTCLCustomerV2");
+
+            console.log("OData V2 Model:", oModelv2);
         }
     });
 });

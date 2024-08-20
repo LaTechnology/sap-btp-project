@@ -22,6 +22,10 @@ server:
             url: https://cloud-founddry-c21d9e61trial-dev-utclcustomer-srv.cfapps.us10-001.hana.ondemand.com
             destination: utcl_customer_v4
             authenticationType: NoAuthentication
+          - path: /odata/v2/UTCLCustomer/
+            url: https://cloud-founddry-c21d9e61trial-dev-utclcustomer-srv.cfapps.us10-001.hana.ondemand.com
+            destination: utcl_customer_v2
+            authenticationType: NoAuthentication
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -37,12 +41,12 @@ server:
             generateMockData: true
             metadataXmlPath: ./webapp/localService/mainService/metadata.xml
             mockdataRootPath: ./webapp/localService/data
-          - urlPath: /odata/v4/UTCLCustomer/
-            generateMockData: true
-            metadataXmlPath: ./webapp/localService/UTCLCustomer/metadata.xml
-            mockdataRootPath: ./webapp/localService/UTCLCustomer/mockdata
           - urlPath: /odata/v2/mdkServices/
-            metadataPath: ./webapp/localService/mainService/metadata.xml
-            mockdataPath: ./webapp/localService/mainService/mockdata
+            generateMockData: true
+            metadataXmlPath: ./webapp/localService/mainService/metadata.xml
+            mockdataRootPath: ./webapp/localService/mainService/mockdata
+          - urlPath: /odata/v2/UTCLCustomer/
+            metadataPath: ./webapp/localService/UTCLCustomer/metadata.xml
+            mockdataPath: ./webapp/localService/UTCLCustomer/mockdata
             generateMockData: true
         annotations: []

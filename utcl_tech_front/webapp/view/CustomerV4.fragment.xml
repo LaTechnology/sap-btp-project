@@ -11,7 +11,7 @@
                 id="dealerTable" selectionChange="onSelectionChange"
                 inset="false"
                 mode="MultiSelect"
-                items="{path : 'UTCLCustomer>/Dealer', parameters:{expand : 'toAddress,toRetailer'}}"
+                items="{DealerModel>/results}"
             >
                 <headerToolbar>
                     <OverflowToolbar>
@@ -20,11 +20,9 @@
                 </headerToolbar>
 
                 <columns>
-
-                 <Column>
+                    <Column>
                         <Text text="Dealer ID" />
                     </Column>
-
                     <Column>
                         <Text text="First Name" />
                     </Column>
@@ -37,20 +35,19 @@
                     <Column>
                         <Text text="Mobile Number" />
                     </Column>
-                     <Column>
+                    <Column>
                         <Text text="Address" />
                     </Column>
                 </columns>
                 <items>
                     <ColumnListItem>
                         <cells>
-                        <Text text="{UTCLCustomer>dealerID}" />
-                            <Text text="{UTCLCustomer>firstName}" />
-                            <Text text="{UTCLCustomer>lastName}" /> 
-                            <Text text="{UTCLCustomer>email}" />
-                            <Text text="{UTCLCustomer>mobileNumber}" />
-                           <Text text="{UTCLCustomer>toAddress/0/addressLine1}" />
-                            
+                            <Text text="{DealerModel>dealerID}" />
+                            <Text text="{DealerModel>firstName}" />
+                            <Text text="{DealerModel>lastName}" /> 
+                            <Text text="{DealerModel>email}" />
+                            <Text text="{DealerModel>mobileNumber}" />
+                            <Text text="{DealerModel>toAddress/0/addressLine1}" />
                         </cells>
                     </ColumnListItem>
                 </items>
@@ -60,8 +57,7 @@
                 id="retailerTable" selectionChange="onSelectionChange"
                 inset="false"
                 mode="MultiSelect"
-                items="{path : 'UTCLCustomer>/Retailer', parameters :{expand : 'toAddress'}}"
-           
+                items="{RetailerModel>/results}"
             >
                 <headerToolbar>
                     <OverflowToolbar>
@@ -70,11 +66,9 @@
                 </headerToolbar>
 
                 <columns>
-
-                       <Column>
+                    <Column>
                         <Text text="Retailer Id" />
                     </Column>
-
                     <Column>
                         <Text text="First Name" />
                     </Column>
@@ -87,21 +81,19 @@
                     <Column>
                         <Text text="Mobile Number" />
                     </Column>
-                      <Column>
+                    <Column>
                         <Text text="Address" />
                     </Column>
-             
-             
                 </columns>
                 <items>
                     <ColumnListItem>
                         <cells>
-                           <Text text="{UTCLCustomer>retailerId}" />
-                            <Text text="{UTCLCustomer>firstName}" />
-                            <Text text="{UTCLCustomer>lastName}" /> 
-                            <Text text="{UTCLCustomer>email}" />
-                            <Text text="{UTCLCustomer>mobileNumber}" />
-                            <Text text="{UTCLCustomer>/toAddress>addressLine1}" />
+                            <Text text="{RetailerModel>retailerId}" />
+                            <Text text="{RetailerModel>firstName}" />
+                            <Text text="{RetailerModel>lastName}" /> 
+                            <Text text="{RetailerModel>email}" />
+                            <Text text="{RetailerModel>mobileNumber}" />
+                            <Text text="{RetailerModel>toAddress/0/addressLine1}" />
                         </cells>
                     </ColumnListItem>
                 </items>

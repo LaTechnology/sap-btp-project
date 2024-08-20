@@ -38,7 +38,7 @@ public class getCustomer implements EventHandler{
 
         String id = context.getId();
 
-        System.out.println(id);
+        System.out.println(id); 
 
         log.info("Cusotmer id : " + id);
 

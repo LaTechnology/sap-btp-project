@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
     </edmx:Reference>
-    <edmx:DataServices>
-        <Schema Namespace="UTCLCustomer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-            <EntityContainer Name="EntityContainer">
-                <EntitySet Name="Dealer" EntityType="UTCLCustomer.Dealer">
-                    <NavigationPropertyBinding Path="toRetailer" Target="Retailer"/>
-                    <NavigationPropertyBinding Path="toAddress" Target="Address"/>
-                </EntitySet>
-                <EntitySet Name="Retailer" EntityType="UTCLCustomer.Retailer">
-                    <NavigationPropertyBinding Path="toDealer" Target="Dealer"/>
-                    <NavigationPropertyBinding Path="toAddress" Target="Address"/>
-                </EntitySet>
-                <EntitySet Name="Address" EntityType="UTCLCustomer.Address">
-                    <NavigationPropertyBinding Path="toDealer" Target="Dealer"/>
-                    <NavigationPropertyBinding Path="toRetailer" Target="Retailer"/>
-                </EntitySet>
-                <FunctionImport Name="getdealerandretaler" Function="UTCLCustomer.getdealerandretaler" EntitySet="Dealer"/>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="UTCLCustomer" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Dealer" EntityType="UTCLCustomer.Dealer"/>
+                <FunctionImport Name="Dealer_sample" m:HttpMethod="POST" sap:action-for="UTCLCustomer.Dealer">
+                    <Parameter Name="id" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                </FunctionImport>
+                <EntitySet Name="Retailer" EntityType="UTCLCustomer.Retailer"/>
+                <EntitySet Name="Address" EntityType="UTCLCustomer.Address"/>
+                <FunctionImport Name="getdealerandretaler" EntitySet="Dealer" ReturnType="Collection(UTCLCustomer.Dealer)" m:HttpMethod="GET">
+                    <Parameter Name="id" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <AssociationSet Name="Retailer_toDealer" Association="UTCLCustomer.Retailer_toDealer">
+                    <End Role="Retailer" EntitySet="Retailer"/>
+                    <End Role="Dealer" EntitySet="Dealer"/>
+                </AssociationSet>
+                <AssociationSet Name="Address_toDealer" Association="UTCLCustomer.Address_toDealer">
+                    <End Role="Address" EntitySet="Address"/>
+                    <End Role="Dealer" EntitySet="Dealer"/>
+                </AssociationSet>
+                <AssociationSet Name="Address_toRetailer" Association="UTCLCustomer.Address_toRetailer">
+                    <End Role="Address" EntitySet="Address"/>
+                    <End Role="Retailer" EntitySet="Retailer"/>
+                </AssociationSet>
             </EntityContainer>
             <EntityType Name="Dealer">
                 <Key>
@@ -33,8 +41,8 @@
                 <Property Name="email" Type="Edm.String"/>
                 <Property Name="mobileNumber" Type="Edm.String"/>
                 <Property Name="dealerID" Type="Edm.String"/>
-                <NavigationProperty Name="toRetailer" Type="Collection(UTCLCustomer.Retailer)" Partner="toDealer"/>
-                <NavigationProperty Name="toAddress" Type="Collection(UTCLCustomer.Address)" Partner="toDealer"/>
+                <NavigationProperty Name="toRetailer" Relationship="UTCLCustomer.Retailer_toDealer" FromRole="Dealer" ToRole="Retailer"/>
+                <NavigationProperty Name="toAddress" Relationship="UTCLCustomer.Address_toDealer" FromRole="Dealer" ToRole="Address"/>
             </EntityType>
             <EntityType Name="Retailer">
                 <Key>
@@ -46,11 +54,9 @@
                 <Property Name="email" Type="Edm.String"/>
                 <Property Name="mobileNumber" Type="Edm.String"/>
                 <Property Name="retailerId" Type="Edm.String"/>
-                <NavigationProperty Name="toDealer" Type="UTCLCustomer.Dealer" Partner="toRetailer">
-                    <ReferentialConstraint Property="toDealer_id" ReferencedProperty="id"/>
-                </NavigationProperty>
+                <NavigationProperty Name="toDealer" Relationship="UTCLCustomer.Retailer_toDealer" FromRole="Retailer" ToRole="Dealer"/>
                 <Property Name="toDealer_id" Type="Edm.Guid"/>
-                <NavigationProperty Name="toAddress" Type="Collection(UTCLCustomer.Address)" Partner="toRetailer"/>
+                <NavigationProperty Name="toAddress" Relationship="UTCLCustomer.Address_toRetailer" FromRole="Retailer" ToRole="Address"/>
             </EntityType>
             <EntityType Name="Address">
                 <Key>
@@ -66,26 +72,54 @@
                 <Property Name="state" Type="Edm.String" MaxLength="20"/>
                 <Property Name="country" Type="Edm.String" MaxLength="20"/>
                 <Property Name="mobileNumber" Type="Edm.String" MaxLength="20"/>
-                <NavigationProperty Name="toDealer" Type="UTCLCustomer.Dealer" Partner="toAddress">
-                    <ReferentialConstraint Property="toDealer_id" ReferencedProperty="id"/>
-                </NavigationProperty>
+                <NavigationProperty Name="toDealer" Relationship="UTCLCustomer.Address_toDealer" FromRole="Address" ToRole="Dealer"/>
                 <Property Name="toDealer_id" Type="Edm.Guid"/>
-                <NavigationProperty Name="toRetailer" Type="UTCLCustomer.Retailer" Partner="toAddress">
-                    <ReferentialConstraint Property="toRetailer_id" ReferencedProperty="id"/>
-                </NavigationProperty>
+                <NavigationProperty Name="toRetailer" Relationship="UTCLCustomer.Address_toRetailer" FromRole="Address" ToRole="Retailer"/>
                 <Property Name="toRetailer_id" Type="Edm.Guid"/>
             </EntityType>
-            <Function Name="getdealerandretaler" IsBound="false" IsComposable="false">
-                <Parameter Name="id" Type="Edm.String"/>
-                <ReturnType Type="Collection(UTCLCustomer.Dealer)" Nullable="true"/>
-            </Function>
-            <Annotations Target="UTCLCustomer.Dealer/id">
+            <Association Name="Retailer_toDealer">
+                <End Role="Retailer" Type="UTCLCustomer.Retailer" Multiplicity="*"/>
+                <End Role="Dealer" Type="UTCLCustomer.Dealer" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Dealer">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="Retailer">
+                        <PropertyRef Name="toDealer_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Address_toDealer">
+                <End Role="Address" Type="UTCLCustomer.Address" Multiplicity="*"/>
+                <End Role="Dealer" Type="UTCLCustomer.Dealer" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Dealer">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="Address">
+                        <PropertyRef Name="toDealer_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Address_toRetailer">
+                <End Role="Address" Type="UTCLCustomer.Address" Multiplicity="*"/>
+                <End Role="Retailer" Type="UTCLCustomer.Retailer" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Retailer">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="Address">
+                        <PropertyRef Name="toRetailer_id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Annotations Target="UTCLCustomer.Dealer/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
             </Annotations>
-            <Annotations Target="UTCLCustomer.Retailer/id">
+            <Annotations Target="UTCLCustomer.Retailer/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
             </Annotations>
-            <Annotations Target="UTCLCustomer.Address/id">
+            <Annotations Target="UTCLCustomer.Address/id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
             </Annotations>
         </Schema>

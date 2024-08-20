@@ -55,6 +55,8 @@
                                     </items>
                                 </Table>
 
+                                
+
                                 <Table id="selectedRetailerTable" inset="false" items="{viewModel>/selectedRetailers}" class="tableCss" headerText="Retailer" noDataText="No Data Selected" autoPopinMode="true">
                                     <columns>
                                         <Column><Text text="First Name" /></Column>

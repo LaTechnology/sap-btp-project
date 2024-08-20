@@ -38,6 +38,10 @@ server:
             url: https://cloud-founddry-c21d9e61trial-dev-utclcustomer-srv.cfapps.us10-001.hana.ondemand.com
             destination: utcl_customer_v4
             authenticationType: NoAuthentication
+          - path: /odata/v2/UTCLCustomer/
+            url: https://cloud-founddry-c21d9e61trial-dev-utclcustomer-srv.cfapps.us10-001.hana.ondemand.com
+            destination: utcl_customer_v2
+            authenticationType: NoAuthentication
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
