@@ -1,0 +1,8 @@
+VIEW Sales_Service_Shoes AS SELECT
+  Shoes_0.ID,
+  Shoes_0.category,
+  Shoes_0.type
+FROM app_shoes_Shoes AS Shoes_0
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN Sales_Service_Lancers AS SItem ON (SItem.shoes_ID = ID)
+)

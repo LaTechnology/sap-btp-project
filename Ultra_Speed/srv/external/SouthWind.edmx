@@ -1,0 +1,65 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+</edmx:Reference>
+<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+</edmx:Reference>
+<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+</edmx:Reference>
+<edmx:DataServices>
+<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="com.ladera.myservice.MyProcessor">
+<EntityContainer Name="EntityContainer">
+<EntitySet Name="Snail" EntityType="com.ladera.myservice.MyProcessor.Snail"/>
+</EntityContainer>
+<EntityType Name="Snail">
+<Key>
+<PropertyRef Name="id"/>
+</Key>
+<Property Name="id" Type="Edm.Int32" Nullable="false"/>
+<Property Name="name" Type="Edm.String"/>
+<Property Name="age" Type="Edm.Int32"/>
+</EntityType>
+<Annotations Target="com.ladera.myservice.MyProcessor.Snail">
+<Annotation Term="UI.LineItem">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="name"/>
+<PropertyValue Property="Value" Path="name"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="age"/>
+<PropertyValue Property="Value" Path="age"/>
+</Record>
+</Collection>
+</Annotation>
+<Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup1">
+<Record Type="UI.FieldGroupType">
+<PropertyValue Property="Data">
+<Collection>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="name"/>
+<PropertyValue Property="Value" Path="name"/>
+</Record>
+<Record Type="UI.DataField">
+<PropertyValue Property="Label" String="age"/>
+<PropertyValue Property="Value" Path="age"/>
+</Record>
+</Collection>
+</PropertyValue>
+</Record>
+</Annotation>
+<Annotation Term="UI.Facets">
+<Collection>
+<Record Type="UI.ReferenceFacet">
+<PropertyValue Property="ID" String="GeneratedFacet1"/>
+<PropertyValue Property="Label" String="General Information"/>
+<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneratedGroup1"/>
+</Record>
+</Collection>
+</Annotation>
+</Annotations>
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>

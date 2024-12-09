@@ -1,0 +1,9 @@
+VIEW Sales_Service_Lancers AS SELECT
+  Lancer_0.shoes_ID,
+  Lancer_0.lItem,
+  Lancer_0.material,
+  Lancer_0.type
+FROM app_shoes_Lancer AS Lancer_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN Sales_Service_Shoes AS shoes ON (shoes.ID = shoes_ID)
+)

@@ -1,0 +1,9 @@
+COLUMN TABLE app_shoes_Lancer (
+  shoes_ID NVARCHAR(10) NOT NULL,
+  lItem NVARCHAR(4) NOT NULL,
+  material NVARCHAR(10),
+  type NVARCHAR(4),
+  PRIMARY KEY(shoes_ID, lItem)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN app_shoes_Shoes AS shoes ON (shoes.ID = shoes_ID)
+)

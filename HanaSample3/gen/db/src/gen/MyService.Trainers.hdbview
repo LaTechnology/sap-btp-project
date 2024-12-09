@@ -1,0 +1,6 @@
+VIEW MyService_Trainers AS SELECT
+  Trainer_0.id,
+  Trainer_0.name,
+  Trainer_0.age,
+  Trainer_0.subject
+FROM HanaSample3_db_Trainer AS Trainer_0

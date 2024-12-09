@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="processor" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Parent" EntityType="processor.Parent">
+                    <NavigationPropertyBinding Path="relation" Target="Relations"/>
+                    <NavigationPropertyBinding Path="child" Target="Child"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Parent"/>
+                </EntitySet>
+                <EntitySet Name="Child" EntityType="processor.Child">
+                    <NavigationPropertyBinding Path="Genders" Target="Genders"/>
+                    <NavigationPropertyBinding Path="parent" Target="Parent"/>
+                    <NavigationPropertyBinding Path="grandchild" Target="Child_grandchild"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Child"/>
+                </EntitySet>
+                <EntitySet Name="GrandChilds" EntityType="processor.GrandChilds">
+                    <NavigationPropertyBinding Path="gender" Target="Genders"/>
+                    <NavigationPropertyBinding Path="hobby" Target="Hobbies"/>
+                    <NavigationPropertyBinding Path="child" Target="Child_grandchild"/>
+                </EntitySet>
+                <EntitySet Name="Relations" EntityType="processor.Relations">
+                    <NavigationPropertyBinding Path="texts" Target="Relations_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Relations_texts"/>
+                </EntitySet>
+                <EntitySet Name="Genders" EntityType="processor.Genders">
+                    <NavigationPropertyBinding Path="texts" Target="Genders_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Genders_texts"/>
+                </EntitySet>
+                <EntitySet Name="Hobbies" EntityType="processor.Hobbies">
+                    <NavigationPropertyBinding Path="texts" Target="Hobbies_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Hobbies_texts"/>
+                </EntitySet>
+                <EntitySet Name="Child_grandchild" EntityType="processor.Child_grandchild">
+                    <NavigationPropertyBinding Path="up_" Target="Child"/>
+                    <NavigationPropertyBinding Path="bond" Target="GrandChilds"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Child_grandchild"/>
+                </EntitySet>
+                <EntitySet Name="Relations_texts" EntityType="processor.Relations_texts"/>
+                <EntitySet Name="Genders_texts" EntityType="processor.Genders_texts"/>
+                <EntitySet Name="Hobbies_texts" EntityType="processor.Hobbies_texts"/>
+            </EntityContainer>
+            <EntityType Name="Parent">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="father" Type="Edm.String"/>
+                <Property Name="mother" Type="Edm.String"/>
+                <Property Name="parentdp" Type="Edm.String"/>
+                <Property Name="phonenumber" Type="Edm.Int32"/>
+                <NavigationProperty Name="relation" Type="processor.Relations">
+                    <ReferentialConstraint Property="relation_relation" ReferencedProperty="relation"/>
+                </NavigationProperty>
+                <Property Name="relation_relation" Type="Edm.String"/>
+                <NavigationProperty Name="child" Type="Collection(processor.Child)" Partner="parent"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="processor.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="processor.Parent"/>
+            </EntityType>
+            <EntityType Name="Child">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="age" Type="Edm.Int16"/>
+                <Property Name="occupation" Type="Edm.String"/>
+                <Property Name="childdp" Type="Edm.String"/>
+                <NavigationProperty Name="Genders" Type="processor.Genders">
+                    <ReferentialConstraint Property="Genders_gender" ReferencedProperty="gender"/>
+                </NavigationProperty>
+                <Property Name="Genders_gender" Type="Edm.String"/>
+                <NavigationProperty Name="parent" Type="processor.Parent" Partner="child">
+                    <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="parent_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="grandchild" Type="Collection(processor.Child_grandchild)" Partner="up_">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="processor.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="processor.Child"/>
+            </EntityType>
+            <EntityType Name="GrandChilds">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="age" Type="Edm.Int16"/>
+                <Property Name="granddp" Type="Edm.String"/>
+                <NavigationProperty Name="gender" Type="processor.Genders">
+                    <ReferentialConstraint Property="gender_gender" ReferencedProperty="gender"/>
+                </NavigationProperty>
+                <Property Name="gender_gender" Type="Edm.String"/>
+                <NavigationProperty Name="hobby" Type="processor.Hobbies">
+                    <ReferentialConstraint Property="hobby_hobby" ReferencedProperty="hobby"/>
+                </NavigationProperty>
+                <Property Name="hobby_hobby" Type="Edm.String"/>
+                <NavigationProperty Name="child" Type="Collection(processor.Child_grandchild)" Partner="bond"/>
+            </EntityType>
+            <EntityType Name="Relations">
+                <Key>
+                    <PropertyRef Name="relation"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="relation" Type="Edm.String" Nullable="false"/>
+                <Property Name="ricon" Type="Edm.Int32"/>
+                <NavigationProperty Name="texts" Type="Collection(processor.Relations_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="processor.Relations_texts">
+                    <ReferentialConstraint Property="relation" ReferencedProperty="relation"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Genders">
+                <Key>
+                    <PropertyRef Name="gender"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="gender" Type="Edm.String" Nullable="false"/>
+                <Property Name="gicon" Type="Edm.Int32"/>
+                <NavigationProperty Name="texts" Type="Collection(processor.Genders_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="processor.Genders_texts">
+                    <ReferentialConstraint Property="gender" ReferencedProperty="gender"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Hobbies">
+                <Key>
+                    <PropertyRef Name="hobby"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="hobby" Type="Edm.String" Nullable="false"/>
+                <Property Name="hicon" Type="Edm.Int32"/>
+                <NavigationProperty Name="texts" Type="Collection(processor.Hobbies_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="processor.Hobbies_texts">
+                    <ReferentialConstraint Property="hobby" ReferencedProperty="hobby"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="Child_grandchild">
+                <Key>
+                    <PropertyRef Name="up__ID"/>
+                    <PropertyRef Name="bond_ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <NavigationProperty Name="up_" Type="processor.Child" Nullable="false" Partner="grandchild">
+                    <ReferentialConstraint Property="up__ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="up__ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="bond" Type="processor.GrandChilds" Partner="child">
+                    <ReferentialConstraint Property="bond_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="bond_ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="processor.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="processor.Child_grandchild"/>
+            </EntityType>
+            <EntityType Name="Relations_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="relation"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="relation" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Genders_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="gender"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="gender" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Hobbies_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="hobby"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="hobby" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="processor.Parent"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="processor.Parent"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="processor.Child"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="processor.Child"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="processor.Child_grandchild"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="processor.Child_grandchild"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="processor.Parent"/>
+                <ReturnType Type="processor.Parent"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="processor.Child"/>
+                <ReturnType Type="processor.Child"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="processor.Parent"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="processor.Parent"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="processor.Child"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="processor.Child"/>
+            </Action>
+            <Annotations Target="processor.EntityContainer/Parent">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="processor.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="processor.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="processor.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="processor.Parent/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                </Annotations>
+                <Annotations Target="processor.Parent/createdBy">
+                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                    <Annotation Term="Core.Immutable" Bool="true"/>
+                    <Annotation Term="Core.Computed" Bool="true"/>
+                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                        </Annotations>
+                        <Annotations Target="processor.Parent/modifiedAt">
+                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                            <Annotation Term="Core.Computed" Bool="true"/>
+                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                            </Annotations>
+                            <Annotations Target="processor.Parent/modifiedBy">
+                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                <Annotation Term="Core.Computed" Bool="true"/>
+                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                    </Annotations>
+                                    <Annotations Target="processor.Parent/relation_relation">
+                                        <Annotation Term="Common.ValueList">
+                                            <Record Type="Common.ValueListType">
+                                                <PropertyValue Property="Label" String="Relations"/>
+                                                <PropertyValue Property="CollectionPath" String="Relations"/>
+                                                <PropertyValue Property="Parameters">
+                                                    <Collection>
+                                                        <Record Type="Common.ValueListParameterInOut">
+                                                            <PropertyValue Property="LocalDataProperty" PropertyPath="relation_relation"/>
+                                                            <PropertyValue Property="ValueListProperty" String="relation"/>
+                                                        </Record>
+                                                        <Record Type="Common.ValueListParameterDisplayOnly">
+                                                            <PropertyValue Property="ValueListProperty" String="name"/>
+                                                        </Record>
+                                                    </Collection>
+                                                </PropertyValue>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="processor.Parent/IsActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="processor.Parent/HasActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="processor.Parent/HasDraftEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="processor.Parent/DraftAdministrativeData">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="processor.EntityContainer/Child">
+                                        <Annotation Term="Common.DraftRoot">
+                                            <Record Type="Common.DraftRootType">
+                                                <PropertyValue Property="ActivationAction" String="processor.draftActivate"/>
+                                                <PropertyValue Property="EditAction" String="processor.draftEdit"/>
+                                                <PropertyValue Property="PreparationAction" String="processor.draftPrepare"/>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="processor.Child/Genders_gender">
+                                        <Annotation Term="Common.ValueList">
+                                            <Record Type="Common.ValueListType">
+                                                <PropertyValue Property="Label" String="Genders"/>
+                                                <PropertyValue Property="CollectionPath" String="Genders"/>
+                                                <PropertyValue Property="Parameters">
+                                                    <Collection>
+                                                        <Record Type="Common.ValueListParameterInOut">
+                                                            <PropertyValue Property="LocalDataProperty" PropertyPath="Genders_gender"/>
+                                                            <PropertyValue Property="ValueListProperty" String="gender"/>
+                                                        </Record>
+                                                        <Record Type="Common.ValueListParameterDisplayOnly">
+                                                            <PropertyValue Property="ValueListProperty" String="name"/>
+                                                        </Record>
+                                                    </Collection>
+                                                </PropertyValue>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="processor.Child/IsActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="processor.Child/HasActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="processor.Child/HasDraftEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="processor.Child/DraftAdministrativeData">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="processor.GrandChilds/gender_gender">
+                                        <Annotation Term="Common.ValueList">
+                                            <Record Type="Common.ValueListType">
+                                                <PropertyValue Property="Label" String="Genders"/>
+                                                <PropertyValue Property="CollectionPath" String="Genders"/>
+                                                <PropertyValue Property="Parameters">
+                                                    <Collection>
+                                                        <Record Type="Common.ValueListParameterInOut">
+                                                            <PropertyValue Property="LocalDataProperty" PropertyPath="gender_gender"/>
+                                                            <PropertyValue Property="ValueListProperty" String="gender"/>
+                                                        </Record>
+                                                        <Record Type="Common.ValueListParameterDisplayOnly">
+                                                            <PropertyValue Property="ValueListProperty" String="name"/>
+                                                        </Record>
+                                                    </Collection>
+                                                </PropertyValue>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="processor.GrandChilds/hobby_hobby">
+                                        <Annotation Term="Common.ValueList">
+                                            <Record Type="Common.ValueListType">
+                                                <PropertyValue Property="Label" String="Hobbies"/>
+                                                <PropertyValue Property="CollectionPath" String="Hobbies"/>
+                                                <PropertyValue Property="Parameters">
+                                                    <Collection>
+                                                        <Record Type="Common.ValueListParameterInOut">
+                                                            <PropertyValue Property="LocalDataProperty" PropertyPath="hobby_hobby"/>
+                                                            <PropertyValue Property="ValueListProperty" String="hobby"/>
+                                                        </Record>
+                                                        <Record Type="Common.ValueListParameterDisplayOnly">
+                                                            <PropertyValue Property="ValueListProperty" String="name"/>
+                                                        </Record>
+                                                    </Collection>
+                                                </PropertyValue>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="processor.Relations">
+                                        <Annotation Term="UI.Identification">
+                                            <Collection>
+                                                <Record Type="UI.DataField">
+                                                    <PropertyValue Property="Value" Path="name"/>
+                                                </Record>
+                                            </Collection>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="processor.Relations/name">
+                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                        </Annotations>
+                                        <Annotations Target="processor.Relations/descr">
+                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                            </Annotations>
+                                            <Annotations Target="processor.Relations/relation">
+                                                <Annotation Term="Validation.AllowedValues">
+                                                    <Collection>
+                                                        <Record Type="Validation.AllowedValue">
+                                                            <Annotation Term="Core.SymbolicName" String="love_marriage"/>
+                                                            <PropertyValue Property="Value" String="L"/>
+                                                        </Record>
+                                                        <Record Type="Validation.AllowedValue">
+                                                            <Annotation Term="Core.SymbolicName" String="arranged_marriage"/>
+                                                            <PropertyValue Property="Value" String="A"/>
+                                                        </Record>
+                                                        <Record Type="Validation.AllowedValue">
+                                                            <Annotation Term="Core.SymbolicName" String="love_come_arranged_marriage"/>
+                                                            <PropertyValue Property="Value" String="LA"/>
+                                                        </Record>
+                                                    </Collection>
+                                                </Annotation>
+                                            </Annotations>
+                                            <Annotations Target="processor.Genders">
+                                                <Annotation Term="UI.Identification">
+                                                    <Collection>
+                                                        <Record Type="UI.DataField">
+                                                            <PropertyValue Property="Value" Path="name"/>
+                                                        </Record>
+                                                    </Collection>
+                                                </Annotation>
+                                            </Annotations>
+                                            <Annotations Target="processor.Genders/name">
+                                                <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                </Annotations>
+                                                <Annotations Target="processor.Genders/descr">
+                                                    <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                    </Annotations>
+                                                    <Annotations Target="processor.Genders/gender">
+                                                        <Annotation Term="Validation.AllowedValues">
+                                                            <Collection>
+                                                                <Record Type="Validation.AllowedValue">
+                                                                    <Annotation Term="Core.SymbolicName" String="male"/>
+                                                                    <PropertyValue Property="Value" String="M"/>
+                                                                </Record>
+                                                                <Record Type="Validation.AllowedValue">
+                                                                    <Annotation Term="Core.SymbolicName" String="female"/>
+                                                                    <PropertyValue Property="Value" String="F"/>
+                                                                </Record>
+                                                                <Record Type="Validation.AllowedValue">
+                                                                    <Annotation Term="Core.SymbolicName" String="other"/>
+                                                                    <PropertyValue Property="Value" String="O"/>
+                                                                </Record>
+                                                            </Collection>
+                                                        </Annotation>
+                                                    </Annotations>
+                                                    <Annotations Target="processor.Hobbies">
+                                                        <Annotation Term="UI.Identification">
+                                                            <Collection>
+                                                                <Record Type="UI.DataField">
+                                                                    <PropertyValue Property="Value" Path="name"/>
+                                                                </Record>
+                                                            </Collection>
+                                                        </Annotation>
+                                                    </Annotations>
+                                                    <Annotations Target="processor.Hobbies/name">
+                                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                        </Annotations>
+                                                        <Annotations Target="processor.Hobbies/descr">
+                                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                            </Annotations>
+                                                            <Annotations Target="processor.Hobbies/hobby">
+                                                                <Annotation Term="Validation.AllowedValues">
+                                                                    <Collection>
+                                                                        <Record Type="Validation.AllowedValue">
+                                                                            <Annotation Term="Core.SymbolicName" String="football"/>
+                                                                            <PropertyValue Property="Value" String="F"/>
+                                                                        </Record>
+                                                                        <Record Type="Validation.AllowedValue">
+                                                                            <Annotation Term="Core.SymbolicName" String="photograpy"/>
+                                                                            <PropertyValue Property="Value" String="P"/>
+                                                                        </Record>
+                                                                        <Record Type="Validation.AllowedValue">
+                                                                            <Annotation Term="Core.SymbolicName" String="jogging"/>
+                                                                            <PropertyValue Property="Value" String="J"/>
+                                                                        </Record>
+                                                                        <Record Type="Validation.AllowedValue">
+                                                                            <Annotation Term="Core.SymbolicName" String="swimming"/>
+                                                                            <PropertyValue Property="Value" String="S"/>
+                                                                        </Record>
+                                                                        <Record Type="Validation.AllowedValue">
+                                                                            <Annotation Term="Core.SymbolicName" String="chating"/>
+                                                                            <PropertyValue Property="Value" String="C"/>
+                                                                        </Record>
+                                                                    </Collection>
+                                                                </Annotation>
+                                                            </Annotations>
+                                                            <Annotations Target="processor.DraftAdministrativeData">
+                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                                                                </Annotations>
+                                                                <Annotations Target="processor.DraftAdministrativeData/DraftUUID">
+                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                                                                    </Annotations>
+                                                                    <Annotations Target="processor.DraftAdministrativeData/CreationDateTime">
+                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                                                                        </Annotations>
+                                                                        <Annotations Target="processor.DraftAdministrativeData/CreatedByUser">
+                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+                                                                            </Annotations>
+                                                                            <Annotations Target="processor.DraftAdministrativeData/DraftIsCreatedByMe">
+                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                                                                </Annotations>
+                                                                                <Annotations Target="processor.DraftAdministrativeData/LastChangeDateTime">
+                                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="processor.DraftAdministrativeData/LastChangedByUser">
+                                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="processor.DraftAdministrativeData/InProcessByUser">
+                                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+                                                                                            </Annotations>
+                                                                                            <Annotations Target="processor.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="processor.EntityContainer/Child_grandchild">
+                                                                                                    <Annotation Term="Common.DraftNode">
+                                                                                                        <Record Type="Common.DraftNodeType">
+                                                                                                            <PropertyValue Property="PreparationAction" String="processor.draftPrepare"/>
+                                                                                                        </Record>
+                                                                                                    </Annotation>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="processor.Child_grandchild/IsActiveEntity">
+                                                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="processor.Child_grandchild/HasActiveEntity">
+                                                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="processor.Child_grandchild/HasDraftEntity">
+                                                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="processor.Child_grandchild/DraftAdministrativeData">
+                                                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="processor.Relations_texts/locale">
+                                                                                                    <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                    </Annotations>
+                                                                                                    <Annotations Target="processor.Relations_texts/name">
+                                                                                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                        </Annotations>
+                                                                                                        <Annotations Target="processor.Relations_texts/descr">
+                                                                                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="processor.Relations_texts/relation">
+                                                                                                                <Annotation Term="Validation.AllowedValues">
+                                                                                                                    <Collection>
+                                                                                                                        <Record Type="Validation.AllowedValue">
+                                                                                                                            <Annotation Term="Core.SymbolicName" String="love_marriage"/>
+                                                                                                                            <PropertyValue Property="Value" String="L"/>
+                                                                                                                        </Record>
+                                                                                                                        <Record Type="Validation.AllowedValue">
+                                                                                                                            <Annotation Term="Core.SymbolicName" String="arranged_marriage"/>
+                                                                                                                            <PropertyValue Property="Value" String="A"/>
+                                                                                                                        </Record>
+                                                                                                                        <Record Type="Validation.AllowedValue">
+                                                                                                                            <Annotation Term="Core.SymbolicName" String="love_come_arranged_marriage"/>
+                                                                                                                            <PropertyValue Property="Value" String="LA"/>
+                                                                                                                        </Record>
+                                                                                                                    </Collection>
+                                                                                                                </Annotation>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="processor.Genders_texts/locale">
+                                                                                                                <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                </Annotations>
+                                                                                                                <Annotations Target="processor.Genders_texts/name">
+                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                    </Annotations>
+                                                                                                                    <Annotations Target="processor.Genders_texts/descr">
+                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                        </Annotations>
+                                                                                                                        <Annotations Target="processor.Genders_texts/gender">
+                                                                                                                            <Annotation Term="Validation.AllowedValues">
+                                                                                                                                <Collection>
+                                                                                                                                    <Record Type="Validation.AllowedValue">
+                                                                                                                                        <Annotation Term="Core.SymbolicName" String="male"/>
+                                                                                                                                        <PropertyValue Property="Value" String="M"/>
+                                                                                                                                    </Record>
+                                                                                                                                    <Record Type="Validation.AllowedValue">
+                                                                                                                                        <Annotation Term="Core.SymbolicName" String="female"/>
+                                                                                                                                        <PropertyValue Property="Value" String="F"/>
+                                                                                                                                    </Record>
+                                                                                                                                    <Record Type="Validation.AllowedValue">
+                                                                                                                                        <Annotation Term="Core.SymbolicName" String="other"/>
+                                                                                                                                        <PropertyValue Property="Value" String="O"/>
+                                                                                                                                    </Record>
+                                                                                                                                </Collection>
+                                                                                                                            </Annotation>
+                                                                                                                        </Annotations>
+                                                                                                                        <Annotations Target="processor.Hobbies_texts/locale">
+                                                                                                                            <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                            </Annotations>
+                                                                                                                            <Annotations Target="processor.Hobbies_texts/name">
+                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                </Annotations>
+                                                                                                                                <Annotations Target="processor.Hobbies_texts/descr">
+                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                    </Annotations>
+                                                                                                                                    <Annotations Target="processor.Hobbies_texts/hobby">
+                                                                                                                                        <Annotation Term="Validation.AllowedValues">
+                                                                                                                                            <Collection>
+                                                                                                                                                <Record Type="Validation.AllowedValue">
+                                                                                                                                                    <Annotation Term="Core.SymbolicName" String="football"/>
+                                                                                                                                                    <PropertyValue Property="Value" String="F"/>
+                                                                                                                                                </Record>
+                                                                                                                                                <Record Type="Validation.AllowedValue">
+                                                                                                                                                    <Annotation Term="Core.SymbolicName" String="photograpy"/>
+                                                                                                                                                    <PropertyValue Property="Value" String="P"/>
+                                                                                                                                                </Record>
+                                                                                                                                                <Record Type="Validation.AllowedValue">
+                                                                                                                                                    <Annotation Term="Core.SymbolicName" String="jogging"/>
+                                                                                                                                                    <PropertyValue Property="Value" String="J"/>
+                                                                                                                                                </Record>
+                                                                                                                                                <Record Type="Validation.AllowedValue">
+                                                                                                                                                    <Annotation Term="Core.SymbolicName" String="swimming"/>
+                                                                                                                                                    <PropertyValue Property="Value" String="S"/>
+                                                                                                                                                </Record>
+                                                                                                                                                <Record Type="Validation.AllowedValue">
+                                                                                                                                                    <Annotation Term="Core.SymbolicName" String="chating"/>
+                                                                                                                                                    <PropertyValue Property="Value" String="C"/>
+                                                                                                                                                </Record>
+                                                                                                                                            </Collection>
+                                                                                                                                        </Annotation>
+                                                                                                                                    </Annotations>
+                                                                                                                                </Schema>
+                                                                                                                            </edmx:DataServices>
+                                                                                                                        </edmx:Edmx>

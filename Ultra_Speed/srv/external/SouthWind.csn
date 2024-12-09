@@ -1,0 +1,73 @@
+{
+ "meta": {
+  "creator": "cds-dk 7.3.2"
+ },
+ "$version": "2.0",
+ "definitions": {
+  "SouthWind.Snail": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": false,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "name": {
+     "type": "cds.LargeString"
+    },
+    "age": {
+     "type": "cds.Integer"
+    }
+   },
+   "@UI.LineItem": [
+    {
+     "$Type": "UI.DataField",
+     "Label": "name",
+     "Value": {
+      "=": "name"
+     }
+    },
+    {
+     "$Type": "UI.DataField",
+     "Label": "age",
+     "Value": {
+      "=": "age"
+     }
+    }
+   ],
+   "@UI.FieldGroup#GeneratedGroup1": {
+    "$Type": "UI.FieldGroupType",
+    "Data": [
+     {
+      "$Type": "UI.DataField",
+      "Label": "name",
+      "Value": {
+       "=": "name"
+      }
+     },
+     {
+      "$Type": "UI.DataField",
+      "Label": "age",
+      "Value": {
+       "=": "age"
+      }
+     }
+    ]
+   },
+   "@UI.Facets": [
+    {
+     "$Type": "UI.ReferenceFacet",
+     "ID": "GeneratedFacet1",
+     "Label": "General Information",
+     "Target": {}
+    }
+   ]
+  },
+  "SouthWind": {
+   "kind": "service",
+   "@cds.external": true
+  }
+ }
+}

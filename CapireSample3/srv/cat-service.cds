@@ -1,0 +1,18 @@
+using {User} from '@sap/cds/common';
+using { sap.capire as my } from '../db/schema';
+service CatalogService @(path:'/browse') {
+
+  /** For displaying lists of Books */
+  @readonly entity ListOfBooks as projection on Books
+  excluding { descr };
+
+  /** For display in details pages */
+  @readonly entity Books as projection on my.Books { *,
+    author.name as author
+  } excluding { createdBy, modifiedBy };
+
+//   @requires: 'authenticated-user'
+  action submitOrder ( book: Books:ID, quantity: Integer ) returns { stock: Integer };
+  action submitMe ( book: Books:ID, quantity: Integer,price:Decimal,user:String ) returns { stock: Integer };
+  event OrderedBook : { book: Books:ID; quantity: Integer; buyer: User };
+}

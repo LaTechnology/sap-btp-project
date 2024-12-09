@@ -1,0 +1,27 @@
+{
+  "name": "Pet-Shop",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/ux-specification": "^1.108.16"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-animalmodule": "cds watch --open animalmodule/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-petmodule": "cds watch --open petmodule/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-petmodule2": "cds watch --open petmodule2/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/animalmodule",
+    "app/petmodule",
+    "app/petmodule2"
+  ]
+}

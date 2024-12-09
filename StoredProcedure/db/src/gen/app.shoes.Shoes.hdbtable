@@ -1,0 +1,8 @@
+COLUMN TABLE app_shoes_Shoes (
+  ID NVARCHAR(10) NOT NULL,
+  category NVARCHAR(4),
+  type NVARCHAR(4),
+  PRIMARY KEY(ID)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN app_shoes_Lancer AS SItem ON (SItem.shoes_ID = ID)
+)

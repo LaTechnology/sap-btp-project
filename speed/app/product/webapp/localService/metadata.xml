@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="MyService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Customer" EntityType="MyService.Customer">
+                    <NavigationPropertyBinding Path="contactDetails" Target="ContactDetails"/>
+                    <NavigationPropertyBinding Path="addresses" Target="Address"/>
+                    <NavigationPropertyBinding Path="carts" Target="Cart"/>
+                    <NavigationPropertyBinding Path="orders" Target="Order"/>
+                </EntitySet>
+                <EntitySet Name="Order" EntityType="MyService.Order">
+                    <NavigationPropertyBinding Path="orderEntries" Target="OrderEntry"/>
+                    <NavigationPropertyBinding Path="customer" Target="Customer"/>
+                    <NavigationPropertyBinding Path="deliveryAddress" Target="Address"/>
+                    <NavigationPropertyBinding Path="billingAddress" Target="Address"/>
+                    <NavigationPropertyBinding Path="deliveryContact" Target="ContactDetails"/>
+                    <NavigationPropertyBinding Path="texts" Target="Order_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Order_texts"/>
+                </EntitySet>
+                <EntitySet Name="Product" EntityType="MyService.Product">
+                    <NavigationPropertyBinding Path="price" Target="PriceRow"/>
+                    <NavigationPropertyBinding Path="texts" Target="Product_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Product_texts"/>
+                </EntitySet>
+                <EntitySet Name="Warehouse" EntityType="MyService.Warehouse">
+                    <NavigationPropertyBinding Path="warehouseAddress" Target="Address"/>
+                    <NavigationPropertyBinding Path="contactDetails" Target="ContactDetails"/>
+                    <NavigationPropertyBinding Path="stocks" Target="StockLevel_warehouse"/>
+                </EntitySet>
+                <EntitySet Name="StockLevel" EntityType="MyService.StockLevel">
+                    <NavigationPropertyBinding Path="warehouse" Target="StockLevel_warehouse"/>
+                </EntitySet>
+                <EntitySet Name="ContactDetails" EntityType="MyService.ContactDetails">
+                    <NavigationPropertyBinding Path="customer" Target="Customer"/>
+                </EntitySet>
+                <EntitySet Name="Address" EntityType="MyService.Address">
+                    <NavigationPropertyBinding Path="country" Target="Countries"/>
+                    <NavigationPropertyBinding Path="customer" Target="Customer"/>
+                </EntitySet>
+                <EntitySet Name="Cart" EntityType="MyService.Cart">
+                    <NavigationPropertyBinding Path="cartEntries" Target="CartEntry"/>
+                    <NavigationPropertyBinding Path="customer" Target="Customer"/>
+                    <NavigationPropertyBinding Path="deliveryAddress" Target="Address"/>
+                    <NavigationPropertyBinding Path="contactDetail" Target="ContactDetails"/>
+                </EntitySet>
+                <EntitySet Name="OrderEntry" EntityType="MyService.OrderEntry">
+                    <NavigationPropertyBinding Path="products" Target="Product"/>
+                    <NavigationPropertyBinding Path="order" Target="Order"/>
+                </EntitySet>
+                <EntitySet Name="PriceRow" EntityType="MyService.PriceRow">
+                    <NavigationPropertyBinding Path="currency" Target="Currencies"/>
+                    <NavigationPropertyBinding Path="productId" Target="Product"/>
+                </EntitySet>
+                <EntitySet Name="Countries" EntityType="MyService.Countries">
+                    <NavigationPropertyBinding Path="texts" Target="Countries_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Countries_texts"/>
+                </EntitySet>
+                <EntitySet Name="CartEntry" EntityType="MyService.CartEntry">
+                    <NavigationPropertyBinding Path="product" Target="Product"/>
+                    <NavigationPropertyBinding Path="cart" Target="Cart"/>
+                </EntitySet>
+                <EntitySet Name="Currencies" EntityType="MyService.Currencies">
+                    <NavigationPropertyBinding Path="texts" Target="Currencies_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Currencies_texts"/>
+                </EntitySet>
+                <EntitySet Name="Order_texts" EntityType="MyService.Order_texts"/>
+                <EntitySet Name="Product_texts" EntityType="MyService.Product_texts"/>
+                <EntitySet Name="StockLevel_warehouse" EntityType="MyService.StockLevel_warehouse">
+                    <NavigationPropertyBinding Path="up_" Target="StockLevel"/>
+                    <NavigationPropertyBinding Path="warehouseId" Target="Warehouse"/>
+                </EntitySet>
+                <EntitySet Name="Countries_texts" EntityType="MyService.Countries_texts"/>
+                <EntitySet Name="Currencies_texts" EntityType="MyService.Currencies_texts"/>
+            </EntityContainer>
+            <EntityType Name="Customer">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="customerId" Type="Edm.String" MaxLength="50"/>
+                <Property Name="firstName" Type="Edm.String" MaxLength="50"/>
+                <Property Name="lastName" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="contactDetails" Type="Collection(MyService.ContactDetails)" Partner="customer">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="dateOfBirth" Type="Edm.Date"/>
+                <NavigationProperty Name="addresses" Type="Collection(MyService.Address)" Partner="customer">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="title_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="carts" Type="Collection(MyService.Cart)" Partner="customer">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="orders" Type="Collection(MyService.Order)" Partner="customer">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Order">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="orderCode" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="orderEntries" Type="Collection(MyService.OrderEntry)" Partner="order">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="customer" Type="MyService.Customer" Partner="orders">
+                    <ReferentialConstraint Property="customer_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="customer_id" Type="Edm.Int32"/>
+                <Property Name="totalPrice" Type="Edm.Decimal" Scale="2" Precision="10"/>
+                <NavigationProperty Name="deliveryAddress" Type="MyService.Address">
+                    <ReferentialConstraint Property="deliveryAddress_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="deliveryAddress_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="billingAddress" Type="MyService.Address">
+                    <ReferentialConstraint Property="billingAddress_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="billingAddress_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="deliveryContact" Type="MyService.ContactDetails">
+                    <ReferentialConstraint Property="deliveryContact_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="deliveryContact_id" Type="Edm.Int32"/>
+                <Property Name="paymentMode" Type="Edm.String"/>
+                <Property Name="shippingMethod_id" Type="Edm.Int32"/>
+                <Property Name="message" Type="Edm.String" MaxLength="200"/>
+                <NavigationProperty Name="texts" Type="Collection(MyService.Order_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="MyService.Order_texts">
+                    <ReferentialConstraint Property="id" ReferencedProperty="id"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Product">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="validFrom" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="validTo" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="code" Type="Edm.String" MaxLength="50"/>
+                <Property Name="name" Type="Edm.String" MaxLength="50"/>
+                <Property Name="productImage" Type="Edm.String" MaxLength="50"/>
+                <Property Name="description" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="price" Type="Collection(MyService.PriceRow)" Partner="productId">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="rating" Type="Edm.Double"/>
+                <Property Name="manufactureId" Type="Edm.String" MaxLength="50"/>
+                <Property Name="sellerId" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="texts" Type="Collection(MyService.Product_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="MyService.Product_texts">
+                    <ReferentialConstraint Property="id" ReferencedProperty="id"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Warehouse">
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="warehouseAddress" Type="MyService.Address">
+                    <ReferentialConstraint Property="warehouseAddress_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="warehouseAddress_id" Type="Edm.Int32"/>
+                <Property Name="contactPerson" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="contactDetails" Type="Collection(MyService.ContactDetails)"/>
+                <Property Name="contactDetails_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="stocks" Type="Collection(MyService.StockLevel_warehouse)" Partner="warehouseId"/>
+            </EntityType>
+            <EntityType Name="StockLevel">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="stockLevel" Type="Edm.String"/>
+                <Property Name="availability" Type="Edm.Int32"/>
+                <Property Name="threshold" Type="Edm.Int32"/>
+                <Property Name="location" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="warehouse" Type="Collection(MyService.StockLevel_warehouse)" Partner="up_">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ContactDetails">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="phoneNumber" Type="Edm.String" MaxLength="50"/>
+                <Property Name="emailId" Type="Edm.String" MaxLength="50"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="contactType" Type="Edm.String"/>
+                <NavigationProperty Name="customer" Type="MyService.Customer" Partner="contactDetails">
+                    <ReferentialConstraint Property="customer_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="customer_id" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="Address">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="addressLine1" Type="Edm.String" MaxLength="50"/>
+                <Property Name="addressLine2" Type="Edm.String" MaxLength="50"/>
+                <Property Name="addressLine3" Type="Edm.String" MaxLength="50"/>
+                <Property Name="addressLine4" Type="Edm.String" MaxLength="50"/>
+                <Property Name="city_id" Type="Edm.Int32"/>
+                <Property Name="state_id" Type="Edm.Int32"/>
+                <Property Name="pincode" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="country" Type="MyService.Countries">
+                    <ReferentialConstraint Property="country_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="country_code" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="customer" Type="MyService.Customer" Partner="addresses">
+                    <ReferentialConstraint Property="customer_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="customer_id" Type="Edm.Int32"/>
+                <Property Name="addressType_id" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="Cart">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="cartCode" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="cartEntries" Type="Collection(MyService.CartEntry)" Partner="cart">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="customer" Type="MyService.Customer" Partner="carts">
+                    <ReferentialConstraint Property="customer_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="customer_id" Type="Edm.Int32"/>
+                <Property Name="totalPrice" Type="Edm.Double"/>
+                <NavigationProperty Name="deliveryAddress" Type="MyService.Address">
+                    <ReferentialConstraint Property="deliveryAddress_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="deliveryAddress_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="contactDetail" Type="MyService.ContactDetails">
+                    <ReferentialConstraint Property="contactDetail_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="contactDetail_id" Type="Edm.Int32"/>
+                <Property Name="paymentMode" Type="Edm.String"/>
+                <Property Name="isActive" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="OrderEntry">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="entryNumber" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="products" Type="MyService.Product">
+                    <ReferentialConstraint Property="products_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="products_id" Type="Edm.Int32"/>
+                <Property Name="quantity" Type="Edm.Int32"/>
+                <Property Name="subTotal" Type="Edm.Decimal" Scale="2" Precision="10"/>
+                <Property Name="totalQuantity" Type="Edm.Int32"/>
+                <NavigationProperty Name="order" Type="MyService.Order" Partner="orderEntries">
+                    <ReferentialConstraint Property="order_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="order_id" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="PriceRow">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="price" Type="Edm.Double"/>
+                <NavigationProperty Name="currency" Type="MyService.Currencies">
+                    <ReferentialConstraint Property="currency_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="currency_code" Type="Edm.String" MaxLength="3"/>
+                <Property Name="unit" Type="Edm.String"/>
+                <NavigationProperty Name="productId" Type="MyService.Product" Partner="price">
+                    <ReferentialConstraint Property="productId_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="productId_id" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="Countries">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(MyService.Countries_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="MyService.Countries_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="CartEntry">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="entryNumber" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="product" Type="MyService.Product">
+                    <ReferentialConstraint Property="product_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="product_id" Type="Edm.Int32"/>
+                <Property Name="quantity" Type="Edm.Int32"/>
+                <Property Name="subTotal" Type="Edm.Decimal" Scale="2" Precision="10"/>
+                <Property Name="totalQuantity" Type="Edm.Decimal" Scale="2" Precision="10"/>
+                <NavigationProperty Name="cart" Type="MyService.Cart" Partner="cartEntries">
+                    <ReferentialConstraint Property="cart_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="cart_id" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="Currencies">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="symbol" Type="Edm.String" MaxLength="5"/>
+                <Property Name="minorUnit" Type="Edm.Int16"/>
+                <NavigationProperty Name="texts" Type="Collection(MyService.Currencies_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="MyService.Currencies_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Order_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="message" Type="Edm.String" MaxLength="200"/>
+            </EntityType>
+            <EntityType Name="Product_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="50"/>
+                <Property Name="description" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="StockLevel_warehouse">
+                <Key>
+                    <PropertyRef Name="up__id"/>
+                </Key>
+                <NavigationProperty Name="up_" Type="MyService.StockLevel" Nullable="false" Partner="warehouse">
+                    <ReferentialConstraint Property="up__id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="up__id" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="warehouseId" Type="MyService.Warehouse" Partner="stocks"/>
+            </EntityType>
+            <EntityType Name="Countries_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Currencies_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+            </EntityType>
+            <Annotations Target="MyService.Customer/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                </Annotations>
+                <Annotations Target="MyService.Customer/createdBy">
+                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                    <Annotation Term="Core.Immutable" Bool="true"/>
+                    <Annotation Term="Core.Computed" Bool="true"/>
+                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                        </Annotations>
+                        <Annotations Target="MyService.Customer/modifiedAt">
+                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                            <Annotation Term="Core.Computed" Bool="true"/>
+                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                            </Annotations>
+                            <Annotations Target="MyService.Customer/modifiedBy">
+                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                <Annotation Term="Core.Computed" Bool="true"/>
+                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                    </Annotations>
+                                    <Annotations Target="MyService.Customer/name">
+                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="MyService.Order/createdAt">
+                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                        </Annotations>
+                                        <Annotations Target="MyService.Order/createdBy">
+                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                </Annotations>
+                                                <Annotations Target="MyService.Order/modifiedAt">
+                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                    </Annotations>
+                                                    <Annotations Target="MyService.Order/modifiedBy">
+                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                            </Annotations>
+                                                            <Annotations Target="MyService.Product/createdAt">
+                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                </Annotations>
+                                                                <Annotations Target="MyService.Product/createdBy">
+                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                        </Annotations>
+                                                                        <Annotations Target="MyService.Product/modifiedAt">
+                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                            </Annotations>
+                                                                            <Annotations Target="MyService.Product/modifiedBy">
+                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="MyService.Warehouse/createdAt">
+                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="MyService.Warehouse/createdBy">
+                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="MyService.Warehouse/modifiedAt">
+                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                    </Annotations>
+                                                                                                    <Annotations Target="MyService.Warehouse/modifiedBy">
+                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="MyService.StockLevel/createdAt">
+                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                                </Annotations>
+                                                                                                                <Annotations Target="MyService.StockLevel/createdBy">
+                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                                        </Annotations>
+                                                                                                                        <Annotations Target="MyService.StockLevel/modifiedAt">
+                                                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                            </Annotations>
+                                                                                                                            <Annotations Target="MyService.StockLevel/modifiedBy">
+                                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                                    </Annotations>
+                                                                                                                                    <Annotations Target="MyService.ContactDetails/createdAt">
+                                                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                                                        </Annotations>
+                                                                                                                                        <Annotations Target="MyService.ContactDetails/createdBy">
+                                                                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                                                                </Annotations>
+                                                                                                                                                <Annotations Target="MyService.ContactDetails/modifiedAt">
+                                                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                                                    </Annotations>
+                                                                                                                                                    <Annotations Target="MyService.ContactDetails/modifiedBy">
+                                                                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                                                            </Annotations>
+                                                                                                                                                            <Annotations Target="MyService.ContactDetails/contactType">
+                                                                                                                                                                <Annotation Term="Validation.AllowedValues">
+                                                                                                                                                                    <Collection>
+                                                                                                                                                                        <Record Type="Validation.AllowedValue">
+                                                                                                                                                                            <Annotation Term="Core.SymbolicName" String="PRIMARY"/>
+                                                                                                                                                                            <PropertyValue Property="Value" String="PRIMARY"/>
+                                                                                                                                                                        </Record>
+                                                                                                                                                                        <Record Type="Validation.AllowedValue">
+                                                                                                                                                                            <Annotation Term="Core.SymbolicName" String="SECONDARY"/>
+                                                                                                                                                                            <PropertyValue Property="Value" String="SECONDARY"/>
+                                                                                                                                                                        </Record>
+                                                                                                                                                                    </Collection>
+                                                                                                                                                                </Annotation>
+                                                                                                                                                            </Annotations>
+                                                                                                                                                            <Annotations Target="MyService.Address/createdAt">
+                                                                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                                                                                </Annotations>
+                                                                                                                                                                <Annotations Target="MyService.Address/createdBy">
+                                                                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                                                                                        </Annotations>
+                                                                                                                                                                        <Annotations Target="MyService.Address/modifiedAt">
+                                                                                                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                                                                            </Annotations>
+                                                                                                                                                                            <Annotations Target="MyService.Address/modifiedBy">
+                                                                                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                    <Annotations Target="MyService.Address/country">
+                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                                                            <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                            <Annotations Target="MyService.Address/country_code">
+                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                                                                    <Annotation Term="Common.ValueList">
+                                                                                                                                                                                                        <Record Type="Common.ValueListType">
+                                                                                                                                                                                                            <PropertyValue Property="Label" String="{i18n>Country}"/>
+                                                                                                                                                                                                                <PropertyValue Property="CollectionPath" String="Countries"/>
+                                                                                                                                                                                                                <PropertyValue Property="Parameters">
+                                                                                                                                                                                                                    <Collection>
+                                                                                                                                                                                                                        <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                                                                                            <PropertyValue Property="LocalDataProperty" PropertyPath="country_code"/>
+                                                                                                                                                                                                                            <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                                                                                                        </Record>
+                                                                                                                                                                                                                        <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                                                                                            <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                                                                                                        </Record>
+                                                                                                                                                                                                                    </Collection>
+                                                                                                                                                                                                                </PropertyValue>
+                                                                                                                                                                                                            </Record>
+                                                                                                                                                                                                        </Annotation>
+                                                                                                                                                                                                        <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                        <Annotations Target="MyService.Cart/createdAt">
+                                                                                                                                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                            <Annotations Target="MyService.Cart/createdBy">
+                                                                                                                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                    <Annotations Target="MyService.Cart/modifiedAt">
+                                                                                                                                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                        <Annotations Target="MyService.Cart/modifiedBy">
+                                                                                                                                                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                <Annotations Target="MyService.OrderEntry/createdAt">
+                                                                                                                                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                    <Annotations Target="MyService.OrderEntry/createdBy">
+                                                                                                                                                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                            <Annotations Target="MyService.OrderEntry/modifiedAt">
+                                                                                                                                                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                <Annotations Target="MyService.OrderEntry/modifiedBy">
+                                                                                                                                                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                        <Annotations Target="MyService.PriceRow/createdAt">
+                                                                                                                                                                                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                            <Annotations Target="MyService.PriceRow/createdBy">
+                                                                                                                                                                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                    <Annotations Target="MyService.PriceRow/modifiedAt">
+                                                                                                                                                                                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                        <Annotations Target="MyService.PriceRow/modifiedBy">
+                                                                                                                                                                                                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                <Annotations Target="MyService.PriceRow/currency">
+                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Currency}"/>
+                                                                                                                                                                                                                                                                                        <Annotation Term="Core.Description" String="{i18n>CurrencyCode.Description}"/>
+                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                        <Annotations Target="MyService.PriceRow/currency_code">
+                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Currency}"/>
+                                                                                                                                                                                                                                                                                                <Annotation Term="Common.ValueList">
+                                                                                                                                                                                                                                                                                                    <Record Type="Common.ValueListType">
+                                                                                                                                                                                                                                                                                                        <PropertyValue Property="Label" String="{i18n>Currency}"/>
+                                                                                                                                                                                                                                                                                                            <PropertyValue Property="CollectionPath" String="Currencies"/>
+                                                                                                                                                                                                                                                                                                            <PropertyValue Property="Parameters">
+                                                                                                                                                                                                                                                                                                                <Collection>
+                                                                                                                                                                                                                                                                                                                    <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                                                                                                                                                                                        <PropertyValue Property="LocalDataProperty" PropertyPath="currency_code"/>
+                                                                                                                                                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                                                                                                                                                                                                    </Record>
+                                                                                                                                                                                                                                                                                                                    <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                                                                                                                                                                                                    </Record>
+                                                                                                                                                                                                                                                                                                                </Collection>
+                                                                                                                                                                                                                                                                                                            </PropertyValue>
+                                                                                                                                                                                                                                                                                                        </Record>
+                                                                                                                                                                                                                                                                                                    </Annotation>
+                                                                                                                                                                                                                                                                                                    <Annotation Term="Core.Description" String="{i18n>CurrencyCode.Description}"/>
+                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                    <Annotations Target="MyService.Countries">
+                                                                                                                                                                                                                                                                                                        <Annotation Term="UI.Identification">
+                                                                                                                                                                                                                                                                                                            <Collection>
+                                                                                                                                                                                                                                                                                                                <Record Type="UI.DataField">
+                                                                                                                                                                                                                                                                                                                    <PropertyValue Property="Value" Path="name"/>
+                                                                                                                                                                                                                                                                                                                </Record>
+                                                                                                                                                                                                                                                                                                            </Collection>
+                                                                                                                                                                                                                                                                                                        </Annotation>
+                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                    <Annotations Target="MyService.Countries/name">
+                                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                                        <Annotations Target="MyService.Countries/descr">
+                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                                            <Annotations Target="MyService.Countries/code">
+                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Text" Path="name"/>
+                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>CountryCode}"/>
+                                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                                <Annotations Target="MyService.CartEntry/createdAt">
+                                                                                                                                                                                                                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                                    <Annotations Target="MyService.CartEntry/createdBy">
+                                                                                                                                                                                                                                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                                                            <Annotations Target="MyService.CartEntry/modifiedAt">
+                                                                                                                                                                                                                                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                                                <Annotations Target="MyService.CartEntry/modifiedBy">
+                                                                                                                                                                                                                                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                                                                        <Annotations Target="MyService.Currencies">
+                                                                                                                                                                                                                                                                                                                                            <Annotation Term="UI.Identification">
+                                                                                                                                                                                                                                                                                                                                                <Collection>
+                                                                                                                                                                                                                                                                                                                                                    <Record Type="UI.DataField">
+                                                                                                                                                                                                                                                                                                                                                        <PropertyValue Property="Value" Path="name"/>
+                                                                                                                                                                                                                                                                                                                                                    </Record>
+                                                                                                                                                                                                                                                                                                                                                </Collection>
+                                                                                                                                                                                                                                                                                                                                            </Annotation>
+                                                                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                                                                        <Annotations Target="MyService.Currencies/name">
+                                                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                                                                            <Annotations Target="MyService.Currencies/descr">
+                                                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                                                                <Annotations Target="MyService.Currencies/code">
+                                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Text" Path="name"/>
+                                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CurrencyCode}"/>
+                                                                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="MyService.Currencies/symbol">
+                                                                                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>CurrencySymbol}"/>
+                                                                                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                                                                                        <Annotations Target="MyService.Currencies/minorUnit">
+                                                                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>CurrencyMinorUnit}"/>
+                                                                                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                                                                                            <Annotations Target="MyService.Order_texts/locale">
+                                                                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                <Annotations Target="MyService.Product_texts/locale">
+                                                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="MyService.Countries_texts/locale">
+                                                                                                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                        <Annotations Target="MyService.Countries_texts/name">
+                                                                                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                            <Annotations Target="MyService.Countries_texts/descr">
+                                                                                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                                <Annotations Target="MyService.Countries_texts/code">
+                                                                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Text" Path="name"/>
+                                                                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CountryCode}"/>
+                                                                                                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="MyService.Currencies_texts/locale">
+                                                                                                                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                                        <Annotations Target="MyService.Currencies_texts/name">
+                                                                                                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                                            <Annotations Target="MyService.Currencies_texts/descr">
+                                                                                                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                                                <Annotations Target="MyService.Currencies_texts/code">
+                                                                                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Text" Path="name"/>
+                                                                                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CurrencyCode}"/>
+                                                                                                                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                                                                                                                </Schema>
+                                                                                                                                                                                                                                                                                                                                                                                            </edmx:DataServices>
+                                                                                                                                                                                                                                                                                                                                                                                        </edmx:Edmx>

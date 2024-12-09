@@ -1,0 +1,39 @@
+{
+  "name": "CapireSample3",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4",
+    "@sap/cds-hana": "^2",
+    "@sap/xssec": "^3",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/ux-specification": "^1.120.1"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-listofbooks1": "cds watch --open listofbooks1/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-books": "cds watch --open books/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/listofbooks1",
+    "app/books"
+  ],
+  "cds": {
+    "requires": {
+      "messaging": {
+        "kind": "file-based-messaging",
+        "file": "../demo.cds-msg-box"
+      },
+      "db": "hana",
+      "auth": "mocked"
+    }
+  }
+}

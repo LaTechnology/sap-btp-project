@@ -1,0 +1,57 @@
+{
+  "namespace": "HanaSample3.db",
+  "definitions": {
+    "HanaSample3.db.Trainer": {
+      "kind": "entity",
+      "elements": {
+        "id": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "age": {
+          "type": "cds.Integer"
+        },
+        "subject": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "MyService": {
+      "@source": "srv/processor.cds",
+      "kind": "service"
+    },
+    "MyService.Trainers": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "HanaSample3.db.Trainer"
+          ]
+        }
+      },
+      "elements": {
+        "id": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "age": {
+          "type": "cds.Integer"
+        },
+        "subject": {
+          "type": "cds.String"
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v4.5.0",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}

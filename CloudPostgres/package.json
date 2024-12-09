@@ -1,0 +1,55 @@
+{
+  "name": "CloudPostgres",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.8.1",
+    "@sap/cds": "^7",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "mbt": "^1.2.27",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "NorthWind": {
+        "kind": "odata",
+        "model": "srv/external/NorthWind",
+        "[backend]": {
+          "credentials": {
+            "url": "https://services.odata.org/Experimental/OData/OData.svc"
+          }
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "NorthWind"
+          }
+        }
+      },
+      "cds.xt.SaasProvisioningService": true,
+      "[production]": {
+        "cds.xt.SaasProvisioningService": false,
+        "auth": {
+          "kind": "xsuaa",
+          "restrict_all_services": false
+        }
+      },
+      "cds.xt.DeploymentService": false,
+      "cds.xt.ModelProviderService": false,
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "auth": "xsuaa"
+    }
+  }
+}

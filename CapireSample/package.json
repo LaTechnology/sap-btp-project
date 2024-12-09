@@ -1,0 +1,30 @@
+{
+  "name": "CapireSample",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "CatalogService": {
+        "kind": "odata",
+        "model": "srv/services",
+        "impl":"srv/services2.js"
+      },
+      "ServeMe": { "kind": "odata", "model": "srv/services" },
+    "db": { "kind": "sqlite", "credentials": { "url":"db.sqlite" }}
+    }
+  }
+}

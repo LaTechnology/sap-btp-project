@@ -1,0 +1,7 @@
+COLUMN TABLE HanaSample3_db_Trainer (
+  id INTEGER NOT NULL,
+  name NVARCHAR(5000),
+  age INTEGER,
+  subject NVARCHAR(5000),
+  PRIMARY KEY(id)
+)

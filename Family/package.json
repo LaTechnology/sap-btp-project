@@ -1,0 +1,26 @@
+{
+  "name": "Family",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/ux-specification": "^1.108.16"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-child1": "cds watch --open child1/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-parent1": "cds watch --open parent1/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/child1",
+    "app/child1",
+    "app/parent1"
+  ]
+}

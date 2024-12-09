@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="Sales_Service" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="SalesHeaders" EntityType="Sales_Service.SalesHeaders">
+                    <NavigationPropertyBinding Path="SItem" Target="SalesItems"/>
+                </EntitySet>
+                <EntitySet Name="SalesItems" EntityType="Sales_Service.SalesItems">
+                    <NavigationPropertyBinding Path="SalesDoc" Target="SalesHeaders"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="SalesHeaders">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DocCategory" Type="Edm.String" MaxLength="4"/>
+                <Property Name="DocType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="SalesOrg" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="SItem" Type="Collection(Sales_Service.SalesItems)" Partner="SalesDoc"/>
+            </EntityType>
+            <EntityType Name="SalesItems">
+                <Key>
+                    <PropertyRef Name="SalesDoc_ID"/>
+                    <PropertyRef Name="SalesItem"/>
+                </Key>
+                <NavigationProperty Name="SalesDoc" Type="Sales_Service.SalesHeaders" Partner="SItem">
+                    <ReferentialConstraint Property="SalesDoc_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="SalesDoc_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="SalesItem" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MatType" Type="Edm.String" MaxLength="4"/>
+            </EntityType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

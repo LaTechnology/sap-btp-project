@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html><head>
+    <title>Ultra_Speed 1.0.0</title>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/367278d2a4.css" crossorigin="anonymous">
+
+    <meta name="color-scheme" content="dark light">
+    <style>
+        body {
+            width:95%;
+            font-family: Avenir Next, sans-serif;
+            margin: 44px;
+            line-height: 1.5em;
+            /* background-color: #d6ece4; */
+            background-color: #dbd6ea;
+        }
+        h1 {
+            margin-bottom: 0
+        }
+        h1 + .subtitle {
+            margin: .2em;
+            font-weight: 300;
+        }
+        h1, h2, h3 {
+            font-weight: 400;
+        }
+        h1, a {
+            text-decoration: none;
+        }
+        a.preview {
+            font-size: 90%;
+        }
+        header{
+            height: 70px;
+            display: flex;
+            /* margin-left: auto;
+            margin-right: auto; */
+            background-color: white;
+            box-shadow: 5px 5px 12px;
+            border-radius: 5px;
+        }
+        header div{
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #subsection{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            /* justify-content: center;
+            justify-items: center; */
+            
+        }
+        .subsectionchild{
+            /* align-content: center; */
+            text-align: center;
+            width: 90%;
+            background-color: #d6ece4;
+            
+            margin : 30px 200px 30px 100px;
+            box-shadow: 5px 5px 12px;
+        }
+        a:hover{
+            font-size: large;
+            cursor: pointer;
+            color: red;
+        }
+        button{
+            height: 30px;
+            width: fit-content;
+            border-radius: 10px;
+            border-color: #89a;
+        }
+        footer {
+           
+            background-color: rgb(152, 163, 174);
+            border-top: .5px solid;
+            margin-top: 44px;
+            margin-left: -47px;
+            /* margin-right: 50px; */
+            /* margin-bottom: 0px; */
+            padding-bottom: 80px;
+            padding-left: 10px;
+            padding-right: 55px;
+            margin-bottom: 0px;
+            height: 100px;
+            width: 100%;
+            font-size: 90%;
+        }
+        
+        footer div{
+            display: flex;
+            justify-content: space-between;
+        }
+    @media (prefers-color-scheme: dark) {
+        body {
+            background:#001119;
+            color: #789;
+        }
+        header{
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        header div{
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 + .subtitle {
+            color:#fb0;
+        }
+        h1, a {
+            color:#fb0;
+        }
+        h2, h3 {
+            color:#89a;
+        }
+        a.preview {
+            color: #678;
+        }
+        footer {
+            border-top: .5px solid #456;
+            color: #567;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+    <h1> <strong>Product List</strong></h1>
+    </div>
+    </header>
+    <div>
+    <p class="subtitle"> Serving Ultra_Speed 1.0.0 </p>
+
+    <p> These are the paths currently served …</p>
+
+    <div id="subsection">
+    <div class="subsectionchild">
+    <h2> Web Applications: </h2>
+    <ul>
+        
+<li><button><a href="index1.html">/index1.html</a></button></li><br>
+
+<li><button><a href="product/webapp/index.html">/product/webapp/index.html</a></button></li>
+    </ul>
+    </div>
+
+    <div class="subsectionchild">
+    <h2> Service Endpoints: </h2>
+    
+    <h3>
+    <button><a href="/odata/v4/catalog">/odata/v4/catalog</a></button> / <button><a href="/odata/v4/catalog/$metadata">$metadata</a> </button>
+    </h3>
+    <ul>
+      <li>
+    <button><a href="/odata/v4/catalog/Products">Products</a></button>  → <button><a class="preview" href="/$fiori-preview/CatalogService/Products#preview-app" title="Preview in Fiori elements"> Fiori preview</a></button>
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+
+    <footer>
+       <div>
+        <span><a class="icons" href="https://www.facebook.com/sapdevelopers"><i class="fa-brands fa-square-facebook"></i></a>  Follow me</span>
+        <span><a href="https://www.linkedin.com/company/sap-developers"><i class="fa-brands fa-linkedin"></i></a>  Linkedin Profile</span>
+        <span><a href="https://github.com/sap"><i class="fa-brands fa-github"></i></a>  Let's Pull it from Git</span>
+        <span><a href="mailto:developers@sap.com?body=Dear%20SAP%20Devs,&amp;subject=Feedback:%20(update%20subject%20here)"><i class="fa-solid fa-envelope"></i></a>  Mail Me</span>
+       </div>
+    </footer>
+
+<script src="http://[::1]:35729/livereload.js?snipver=1" async="" defer=""></script>
+
+</body></html>

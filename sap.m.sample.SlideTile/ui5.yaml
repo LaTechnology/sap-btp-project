@@ -1,0 +1,11 @@
+specVersion: '3.0'
+metadata:
+  name: sap-m-sample--slide-tile
+type: application
+framework:
+  name: SAPUI5
+  version: '1.120.0'
+  libraries:
+    - name: themelib_sap_horizon #It provides styles and design elements like the tile outlines
+    - name: sap.m  #It includes a variety of UI controls like buttons, input fields, lists, etc designed to be responsive and user-friendly on mobile devices.
+    - name: sap.ui.core  #It includes essential components such as the core framework, models, and other foundational elements needed for building SAPUI5 applications

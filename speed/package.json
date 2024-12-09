@@ -1,0 +1,56 @@
+{
+  "name": "utcl",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/ux-specification": "^1.108.18"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-oms": "cds watch --open oms/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-oms2": "cds watch --open oms2/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-oms3": "cds watch --open oms3/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-oms4": "cds watch --open oms4/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-oms5": "cds watch --open oms5/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-product": "cds watch --open product/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-order": "cds watch --open order/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "[development]": {
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "speed.support@tester.sap.com": {
+              "password": "passme",
+              "roles": ["support"]
+            },
+            "nitish": {
+              "roles": ["support"]
+            },
+            "ivin": {
+              "roles": ["support"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sapux": [
+    "app/oms",
+    "app/oms2",
+    "app/oms3",
+    "app/oms4",
+    "app/oms5",
+    "app/product",
+    "app/order"
+  ]
+}

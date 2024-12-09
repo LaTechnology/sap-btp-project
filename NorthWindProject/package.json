@@ -1,0 +1,53 @@
+{
+  "name": "NorthWindProject",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.10.0",
+    "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@sap/hana-client": "^2.19.21",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "node-cron": "^3.0.3",
+    "passport": "^0",
+    "sap-hdbext-promisfied": "^2.202401.1"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "NorthWind": {
+        "kind": "odata",
+        "model": "srv/external/NorthWind",
+        "[backend]": {
+          "credentials": {
+            "url": "https://services.odata.org/Experimental/OData/OData.svc"
+          }
+        }
+      },
+      "db": {
+        "[backend]": {
+          "kind": "sqlite",
+          "impl": "@cap-js/sqlite",
+          "credentials": {
+            "url": "db.sqlite"
+          }
+        },
+        "[production]": {
+          "kind": "hana",
+          "impl": "@sap/cds-hana",
+          "deploy-format": "hdbtable"
+        }
+      }
+    }
+  }
+}

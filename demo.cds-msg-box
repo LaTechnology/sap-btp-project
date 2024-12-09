@@ -1,0 +1,2 @@
+CatalogService.OrderedBook {"data":{"book":101,"quantity":1,"buyer":"anonymous"},"headers":{"x-correlation-id":"3e20d5de-8458-4e57-aa60-8687a21bcae1"}}
+CatalogService.OrderedBook {"data":{"book":101,"quantity":1,"buyer":"anonymous"},"headers":{"x-correlation-id":"858c07f3-8cc6-45bb-b92b-46bc04402e0b"}}

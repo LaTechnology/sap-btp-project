@@ -1,0 +1,1 @@
+using processor as service from '../../srv/Processor-service1';

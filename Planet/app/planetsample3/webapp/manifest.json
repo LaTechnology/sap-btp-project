@@ -1,0 +1,218 @@
+{
+    "_version": "1.58.0",
+    "sap.app": {
+        "id": "ns.planetsample3",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.11.3",
+            "toolsId": "79922a67-0f20-48fb-83e9-fb8f3e64dfa7"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/odata/v4/processor/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "ns.planetsample3.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "SolarSystemList",
+                    "target": "SolarSystemList"
+                },
+                {
+                    "pattern": "SolarSystem({key}):?query:",
+                    "name": "SolarSystemObjectPage",
+                    "target": "SolarSystemObjectPage"
+                },
+                {
+                    "pattern": "SolarSystem({key})/category({key2}):?query:",
+                    "name": "PlanetObjectPage",
+                    "target": "PlanetObjectPage"
+                }
+            ],
+            "targets": {
+                "SolarSystemList": {
+                    "type": "Component",
+                    "id": "SolarSystemList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "contextPath": "/SolarSystem",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "SolarSystem": {
+                                    "detail": {
+                                        "route": "SolarSystemObjectPage"
+                                    }
+                                }
+                            },
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "1111": {
+                                            "press": "ns.planetsample3.ext.controller.Imnitishraj.nitishraj",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Im in header"
+                                        }
+                                    }
+                                }
+                            },
+                            "views": {
+                                "paths": [
+                                    {
+                                        "key": "tableView1",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView1",
+                                        "keepPreviousPersonalization": true,
+                                        "visible": true
+                                    },
+                                    {
+                                        "key": "tableView2",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView2"
+                                    }
+                                ]
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem#tableView": {
+                                    "tableSettings": {
+                                        "condensedTableLayout": true,
+                                        "selectAll": true,
+                                        "selectionMode": "Multi",
+                                        "personalization": {
+                                            "column": true,
+                                            "filter": true,
+                                            "sort": true
+                                        }
+                                    },
+                                    "columns": {
+                                        "DataField::ID": {
+                                            "availability": "Default"
+                                        }
+                                    },
+                                    "actions": {
+                                        "123": {
+                                            "press": "ns.planetsample3.ext.controller.IVIN.ivinmethod",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "requiresSelection": true,
+                                            "text": "I M button"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "SolarSystemObjectPage": {
+                    "type": "Component",
+                    "id": "SolarSystemObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "contextPath": "/SolarSystem",
+                            "navigation": {
+                                "category": {
+                                    "detail": {
+                                        "route": "PlanetObjectPage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "PlanetObjectPage": {
+                    "type": "Component",
+                    "id": "PlanetObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "contextPath": "/SolarSystem/category"
+                        }
+                    }
+                }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {}
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

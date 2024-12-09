@@ -1,0 +1,47 @@
+{
+  "name": "FioriDeployApp",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@sap/hdi-deploy": "^4.9.1",
+    "@sap/xssec": "^3.6.0",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/ux-specification": "^1.120.1"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-sales": "cds watch --open sales/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-salesdetails": "cds watch --open salesdetails/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "build": {
+      "tasks": [
+        {
+          "for": "hana",
+          "dest": "../db"
+        },
+        {
+          "for": "node-cf"
+        }
+      ]
+    },
+    "requires": {
+      "db": {
+        "kind": "hana-cloud"
+      }
+    }
+  },
+  "sapux": [
+    "app/sales",
+    "app/salesdetails"
+  ]
+}

@@ -1,0 +1,19 @@
+PROCEDURE "sleep" ()
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN 
+   /*************************************
+       Write your procedure logic
+   *************************************/
+   USING SQLSCRIPT_SYNC as SyncLib;
+
+-- call SyncLib:SLEEP_SECONDS(5);
+select * from APP_SHOES_SHOES
+where id=1 and category='wear';
+
+select * from APP_SHOES_LANCER
+where lItem='11';
+
+END

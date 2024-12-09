@@ -1,0 +1,28 @@
+{
+  "name": "LaptopProject",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "@sap/hana-client": "^2.19.21",
+    "express": "^4",
+    "mysql2": "^3.8.0",
+    "sap-hdbext-promisfied": "^2.202401.1"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1"
+  },
+  "cds": { 
+    "requires": {
+    "db": {
+       "kind": "sqlite",
+       "credentials": { "url": "db.sqlite" } 
+    }
+ }},
+  "scripts": {
+    "start": "cds-serve"
+  }
+}

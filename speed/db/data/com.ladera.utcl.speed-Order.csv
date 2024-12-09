@@ -1,0 +1,2 @@
+id,orderCode,customer_id,totalPrice,deliveryAddress_id,billingAddress_id,deliveryContact_id,paymentMode,shippingMethod_id,message
+8901234567,order1234,1234567890,10000,2345678901,2345678901,7890123456,COD,9012345678,Hi, Its me..

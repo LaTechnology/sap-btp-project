@@ -1,0 +1,36 @@
+{
+  "name": "Planet",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/ux-specification": "^1.108.16"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-universe": "cds watch --open universe/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-planetsample": "cds watch --open planetsample/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-planetsample2": "cds watch --open planetsample2/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-planetsample3": "cds watch --open planetsample3/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-planetsample4": "cds watch --open planetsample4/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-planetsample5": "cds watch --open planetsample5/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-planetsample6": "cds watch --open planetsample6/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/universe",
+    "app/planetsample",
+    "app/planetsample2",
+    "app/planetsample3",
+    "app/planetsample4",
+    "app/planetsample5",
+    "app/planetsample5",
+    "app/planetsample6"
+  ]
+}

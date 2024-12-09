@@ -1,0 +1,18 @@
+{
+  "name": "cronapp",
+  "version": "1.0.0",
+  "description": "A cron job related project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Me",
+  "license": "ISC",
+  "dependencies": {
+    "@sap/cds": "^7.5.3",
+    "@sap/hana-client": "^2.19.21",
+    "mysql2": "^3.8.0",
+    "node-cron": "^3.0.3",
+    "sap-hdbext-promisfied": "^2.202401.1"
+  }
+}
