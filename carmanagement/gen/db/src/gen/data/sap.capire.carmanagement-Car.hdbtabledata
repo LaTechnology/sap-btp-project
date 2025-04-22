@@ -1,0 +1,33 @@
+{
+  "format_version": 1,
+  "imports": [
+    {
+      "target_table": "SAP_CAPIRE_CARMANAGEMENT_CAR",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "sap.capire.carmanagement-Car.csv",
+        "has_header": true,
+        "type_config": {
+          "delimiter": ","
+        }
+      },
+      "import_settings": {
+        "import_columns": [
+          "ID",
+          "CARNAME",
+          "MANUFACTUREDATE",
+          "CARIMAGE",
+          "DESCRIPTION"
+        ],
+        "include_filter": []
+      },
+      "column_mappings": {
+        "ID": "Id",
+        "CARNAME": "carName",
+        "MANUFACTUREDATE": "manufactureDate",
+        "CARIMAGE": "carimage",
+        "DESCRIPTION": "description"
+      }
+    }
+  ]
+}

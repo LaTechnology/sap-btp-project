@@ -1,0 +1,24 @@
+COLUMN TABLE com_ladera_sap_btp_contract_proposal_systems_PS_VENDOR_ORG_CONTACT (
+  id INTEGER NOT NULL,
+  addressLine1 NVARCHAR(30),
+  addressLine2 NVARCHAR(50),
+  addressLine3 NVARCHAR(50),
+  city NVARCHAR(50),
+  pincode NVARCHAR(50),
+  state NVARCHAR(50),
+  country NVARCHAR(50),
+  contact_person_1_mobileNumber NVARCHAR(50),
+  contact_person_1_telephoneNumber NVARCHAR(50),
+  contact_person_1_emailId NVARCHAR(50),
+  contact_person_2_mobileNumber NVARCHAR(50),
+  contact_person_2_telephoneNumber NVARCHAR(50),
+  contact_person_2_emailId NVARCHAR(50),
+  createdBy NVARCHAR(50),
+  createdAt TIMESTAMP,
+  modifiedBy NVARCHAR(50),
+  modifiedAt TIMESTAMP,
+  PS_VENDOR_ORG_id INTEGER,
+  PRIMARY KEY(id)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN com_ladera_sap_btp_contract_proposal_systems_PS_VENDOR_ORG AS PS_VENDOR_ORG ON (PS_VENDOR_ORG.id = PS_VENDOR_ORG_id)
+)

@@ -1,0 +1,36 @@
+<mvc:View controllerName="ns.north.controller.north"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+ <Shell id="_IDGenShell1">
+    <Page id="page" title="{i18n>title}">
+ <content>
+            <Table id="_IDGenTable1" items="{/Products}" >
+              <headerToolbar >
+         <Toolbar id="_IDGenToolbar1">
+            <Title id="_IDGenTitle1" text="{i18n>carListTitle}" />
+            <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+            <SearchField id="_IDGenSearchField1" 
+               width="50%" 
+               search=".onFilterCar"/>
+         </Toolbar>
+      </headerToolbar>
+                <columns>
+                    <Column id="_IDGenColumn1" >
+                        <Label id="_IDGenLabel1" text="Name" ></Label>
+                    </Column>
+                   </columns>
+                   <items>
+                
+                <ColumnListItem   type="Navigation"
+                press=".onPress" id="_IDGenColumnListItem1" >
+                        <cells>
+                            <Text id="_IDGenText1" text="{Name}" ></Text>
+                        
+                        </cells>                    
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>    </Page>
+        </Shell>
+
+</mvc:View>

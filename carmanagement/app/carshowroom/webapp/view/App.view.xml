@@ -1,0 +1,14 @@
+<mvc:View controllerName="ns.carshowroom.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+   	xmlns="sap.f"
+>
+    		<FlexibleColumnLayout id="flexibleColumnLayout" stateChange="onStateChanged" backgroundDesign="Solid">
+         		<beginColumnPages>
+                <mvc:XMLView viewName="ns.carshowroom.view.car" />
+                </beginColumnPages>
+                <midColumnPages>
+			<mvc:XMLView id="detailView" viewName="ns.carshowroom.view.Detail"/>
+		</midColumnPages>
+	</FlexibleColumnLayout>
+</mvc:View>

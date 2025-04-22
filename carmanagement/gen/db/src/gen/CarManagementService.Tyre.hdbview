@@ -1,0 +1,10 @@
+VIEW CarManagementService_Tyre AS SELECT
+  Tyre_0.Id,
+  Tyre_0.tyreBrand,
+  Tyre_0.carTyre_Id,
+  Tyre_0.type_Id
+FROM sap_capire_carmanagement_Tyre AS Tyre_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CarManagementService_ModelVarient AS carTyre ON (carTyre.Id = carTyre_Id),
+  MANY TO ONE JOIN CarManagementService_TyreType AS type ON (type.Id = type_Id)
+)

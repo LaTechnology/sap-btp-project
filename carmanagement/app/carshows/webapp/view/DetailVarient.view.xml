@@ -1,0 +1,25 @@
+<mvc:View 
+	controllerName="ns.carshows.controller.Detail"
+	xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" 
+    displayBlock="true">
+    	<m:Shell>
+				<m:Page showNavButton="true" navButtonPress="oNavButton" title="{i18n>detailPageTitle}">
+					<m:headerContent>
+						<m:Image src="{carimage}" width="62px" height="62px" press="handleImagePress" />
+			</m:headerContent>
+			            <mvc:XMLView viewName="ns.carshows.view.Detail" />
+
+			<f:FlexibleColumnLayout id="flexibleColumnLayout" backgroundDesign="Solid">
+		<f:beginColumnPages>
+			<mvc:XMLView viewName="ns.carshows.view.Varient"/>
+            		</f:beginColumnPages>
+					<f:midColumnPages>
+            <mvc:XMLView id="detailView" viewName="ns.carshows.view.ModelDetail" />
+		</f:midColumnPages>
+	</f:FlexibleColumnLayout>
+				</m:Page>
+	</m:Shell>
+</mvc:View>

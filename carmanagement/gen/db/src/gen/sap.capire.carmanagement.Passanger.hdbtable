@@ -1,0 +1,9 @@
+COLUMN TABLE sap_capire_carmanagement_Passanger (
+  Id INTEGER NOT NULL,
+  noOfPpl NVARCHAR(5000),
+  gender NVARCHAR(5000),
+  carPassanger_Id INTEGER,
+  PRIMARY KEY(Id)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN sap_capire_carmanagement_Car AS carPassanger ON (carPassanger.Id = carPassanger_Id)
+)

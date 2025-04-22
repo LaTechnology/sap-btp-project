@@ -1,0 +1,9 @@
+VIEW CarManagementService_Seat AS SELECT
+  Seat_0.Id,
+  Seat_0.capacity,
+  Seat_0.seatBrand,
+  Seat_0.carSeat_Id
+FROM sap_capire_carmanagement_Seat AS Seat_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CarManagementService_ModelVarient AS carSeat ON (carSeat.Id = carSeat_Id)
+)

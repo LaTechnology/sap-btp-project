@@ -1,0 +1,19 @@
+<mvc:View
+	controllerName="ns.carshows.controller.Detail"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true">
+	 <VBox
+        alignItems="Center"
+        justifyContent="Center"
+        height="100%"
+        class="centeredContainer">
+				<Label class="bigFont" text="Description"></Label>
+		        <HBox justifyContent="Center" width="80%">
+		<!-- <Text text="CARNAME : {noOfPpl}"/> -->
+        <!-- <Text class="bigFont" text="CARNAME     : {carName}"/> -->
+        <Text class="bigFont"             textAlign="Center"
+ text=" {description}"/>
+ </HBox>
+		<!-- <Button  press=".onListItemPress " text="VARIENT"></Button> -->
+		</VBox>
+</mvc:View>

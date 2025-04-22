@@ -1,0 +1,169 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "ns.carshows",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.12.1",
+      "toolsId": "2afe1fe2-fd77-4634-b4fd-92c8703cbca1"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/v2/odata/v4/car-management/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.4",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+				"sap.uxap": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ns.carshows.i18n.i18n",
+          "supportedLocales": ["en","ta","de","ja"],
+          "fallbackLocale": "en"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "ns.carshows.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "tilepage",
+          "pattern": "",
+          "target": ["tilepage"]
+        },
+        {
+          "name": "RoutecarShows",
+          "pattern": "RoutecarShows",
+          "target": ["TargetcarShows"]
+        },
+        {
+          "name": "detail",
+          "pattern": "detail/{invoicePath}",
+          "target": ["detail"]
+        },
+        {
+          "name": "createView",
+          "pattern": "createView",
+          "target": ["createView"]
+        },
+        {
+          "name": "modeldetail",
+          "pattern": "modeldetail/{modelpath}",
+          "target": ["modeldetail"]
+        }
+      ],
+      "targets": {
+        "tilepage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "TilePage",
+          "viewName": "TilePage"
+        },
+        "TargetcarShows": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "carShows",
+          "viewName": "carShows"
+        },
+        "modeldetail": {
+          "viewId": "DetailVarient",
+          "viewName": "DetailVarient"  
+              },
+              "createView": {
+                "viewId": "Create",
+                "viewName": "Create"  
+                    },
+        "detail": {
+          "viewType": "XML",
+          "clearControlAggregation": false,
+          "viewId": "DetailVarient",
+          "viewName": "DetailVarient",
+          "transition": "flip"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "ns.carshows.view.App",
+      "type": "XML",
+      "async": false,
+      "id": "fcl"
+    }
+  }
+}

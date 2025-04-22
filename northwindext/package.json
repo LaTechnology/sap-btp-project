@@ -1,0 +1,50 @@
+{
+  "name": "northwindext",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.9.0",
+    "@sap-cloud-sdk/resilience": "^3.9.0",
+    "@sap/cds": "^7",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/ux-specification": "^1.120.1"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-north": "cds watch --open north/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "NorthWind": {
+        "kind": "odata",
+        "model": "srv/external/NorthWind",
+        "[backend]": {
+          "credentials": {
+            "url": "https://services.odata.org/Experimental/OData/OData.svc"
+          }
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "NORTHWIND_DEVELOPMENT_DESTINATION"
+          }
+        }
+      },
+      "[production]": {
+        "auth": {
+          "kind": "mocked",
+          "restrict_all_services": true
+        }
+      },
+      "auth": "xsuaa"
+    }
+  }
+}

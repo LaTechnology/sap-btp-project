@@ -1,0 +1,184 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "ns.car",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.11.5",
+            "toolsId": "707ca943-747a-403e-89ca-d8da1e70f74c"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/odata/v4/car-management/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "ns.car.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "CarList",
+                    "target": "CarList"
+                },
+                {
+                    "pattern": "Car({key}):?query:",
+                    "name": "CarObjectPage",
+                    "target": "CarObjectPage"
+                },
+                {
+                    "pattern": "Car({key})/modelVarient({key2}):?query:",
+                    "name": "ModelVarientObjectPage",
+                    "target": "ModelVarientObjectPage"
+                }
+            ],
+            "targets": {
+                "CarList": {
+                    "type": "Component",
+                    "id": "CarList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "contextPath": "/Car",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "Car": {
+                                    "detail": {
+                                        "route": "CarObjectPage"
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled"
+                        }
+                    }
+                },
+                "CarObjectPage": {
+                    "type": "Component",
+                    "id": "CarObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "contextPath": "/Car",
+                            "navigation": {
+                                "modelVarient": {
+                                    "detail": {
+                                        "route": "ModelVarientObjectPage"
+                                    }
+                                }
+                            },
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "101": {
+                                            "press": "ns.car.ext.controller.SecondBack.SecondBack",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Go to back"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "ModelVarientObjectPage": {
+                    "type": "Component",
+                    "id": "ModelVarientObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "contextPath": "/Car/modelVarient",
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "100": {
+                                            "press": "ns.car.ext.controller.BackButton.BackButton",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Go to back"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

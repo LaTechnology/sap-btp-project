@@ -1,0 +1,29 @@
+{
+  "format_version": 1,
+  "imports": [
+    {
+      "target_table": "SAP_CAPIRE_CARMANAGEMENT_PRICES",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "sap.capire.carmanagement-Prices.csv",
+        "has_header": true,
+        "type_config": {
+          "delimiter": ","
+        }
+      },
+      "import_settings": {
+        "import_columns": [
+          "ID",
+          "PRICE_ID",
+          "PRICERANGE"
+        ],
+        "include_filter": []
+      },
+      "column_mappings": {
+        "ID": "Id",
+        "PRICE_ID": "price_Id",
+        "PRICERANGE": "priceRange"
+      }
+    }
+  ]
+}

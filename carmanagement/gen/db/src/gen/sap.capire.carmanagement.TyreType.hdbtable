@@ -1,0 +1,8 @@
+COLUMN TABLE sap_capire_carmanagement_TyreType (
+  Id INTEGER NOT NULL,
+  tyreType NVARCHAR(5000),
+  typeTyre_Id INTEGER,
+  PRIMARY KEY(Id)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN sap_capire_carmanagement_Tyre AS typeTyre ON (typeTyre.Id = typeTyre_Id)
+)

@@ -1,0 +1,27 @@
+<mvc:View controllerName="ns.carshows.controller.Create"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:f="sap.ui.layout.form">
+    <Page title="Create product" showNavButton="true" navButtonPress="oNavButton">
+    <content>
+    <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanL="2">
+    <f:content>
+    <Label text="Id" required="true"></Label>
+    <Input id="_IDGenLabel1"></Input>
+     <Label text="car name" required="true"></Label>
+    <Input id="_IDGenLabel2"></Input>
+     <Label text="Manufature date" required="true"></Label>
+    <Input id="_IDGenLabel3"></Input>
+    </f:content>
+    </f:SimpleForm>
+    </content>
+    <footer>
+    <Bar >
+    <contentRight>
+    <Button text="Save" icon="sap-icon://save" press="onSave"></Button>
+    <Button text="Cancel" icon="sap-icon://cancel" press="oNavButton"></Button>
+    </contentRight>
+    </Bar>
+    </footer>
+    </Page>
+</mvc:View>

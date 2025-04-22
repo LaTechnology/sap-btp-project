@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="AdminService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="Car" EntityType="AdminService.Car">
+          <NavigationPropertyBinding Path="noOfPassanger" Target="Passanger"/>
+          <NavigationPropertyBinding Path="modelVarient" Target="ModelVarient"/>
+        </EntitySet>
+        <EntitySet Name="ModelVarient" EntityType="AdminService.ModelVarient">
+          <NavigationPropertyBinding Path="colour" Target="Colours"/>
+          <NavigationPropertyBinding Path="price" Target="Prices"/>
+          <NavigationPropertyBinding Path="engineType" Target="Engine"/>
+          <NavigationPropertyBinding Path="noOfTyre" Target="Tyre"/>
+          <NavigationPropertyBinding Path="models" Target="Car"/>
+          <NavigationPropertyBinding Path="seatCapacity" Target="Seat"/>
+        </EntitySet>
+        <EntitySet Name="Colours" EntityType="AdminService.Colours">
+          <NavigationPropertyBinding Path="colour" Target="ModelVarient"/>
+          <NavigationPropertyBinding Path="cars" Target="Car"/>
+        </EntitySet>
+        <EntitySet Name="Prices" EntityType="AdminService.Prices">
+          <NavigationPropertyBinding Path="price" Target="ModelVarient"/>
+        </EntitySet>
+        <EntitySet Name="Seat" EntityType="AdminService.Seat">
+          <NavigationPropertyBinding Path="carSeat" Target="ModelVarient"/>
+        </EntitySet>
+        <EntitySet Name="Tyre" EntityType="AdminService.Tyre">
+          <NavigationPropertyBinding Path="carTyre" Target="ModelVarient"/>
+          <NavigationPropertyBinding Path="type" Target="TyreType"/>
+        </EntitySet>
+        <EntitySet Name="Engine" EntityType="AdminService.Engine">
+          <NavigationPropertyBinding Path="engines" Target="ModelVarient"/>
+        </EntitySet>
+        <EntitySet Name="Passanger" EntityType="AdminService.Passanger">
+          <NavigationPropertyBinding Path="carPassanger" Target="Car"/>
+        </EntitySet>
+        <EntitySet Name="TyreType" EntityType="AdminService.TyreType"/>
+      </EntityContainer>
+      <EntityType Name="Car">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="carName" Type="Edm.String"/>
+        <Property Name="manufactureDate" Type="Edm.String"/>
+        <NavigationProperty Name="noOfPassanger" Type="Collection(AdminService.Passanger)" Partner="carPassanger"/>
+        <NavigationProperty Name="modelVarient" Type="Collection(AdminService.ModelVarient)" Partner="models">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="ModelVarient">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="modelName" Type="Edm.String"/>
+        <NavigationProperty Name="colour" Type="AdminService.Colours" Partner="colour">
+          <OnDelete Action="Cascade"/>
+          <ReferentialConstraint Property="Id" ReferencedProperty="colour_Id"/>
+        </NavigationProperty>
+        <NavigationProperty Name="price" Type="AdminService.Prices" Partner="price">
+          <OnDelete Action="Cascade"/>
+          <ReferentialConstraint Property="Id" ReferencedProperty="price_Id"/>
+        </NavigationProperty>
+        <NavigationProperty Name="engineType" Type="Collection(AdminService.Engine)" Partner="engines">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="noOfTyre" Type="Collection(AdminService.Tyre)" Partner="carTyre">
+          <OnDelete Action="Cascade"/>
+        </NavigationProperty>
+        <NavigationProperty Name="models" Type="AdminService.Car" Partner="modelVarient">
+          <ReferentialConstraint Property="models_Id" ReferencedProperty="Id"/>
+        </NavigationProperty>
+        <Property Name="models_Id" Type="Edm.Int32"/>
+        <NavigationProperty Name="seatCapacity" Type="Collection(AdminService.Seat)" Partner="carSeat"/>
+      </EntityType>
+      <EntityType Name="Colours">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="colours" Type="Edm.String"/>
+        <NavigationProperty Name="colour" Type="AdminService.ModelVarient" Partner="colour">
+          <ReferentialConstraint Property="colour_Id" ReferencedProperty="Id"/>
+        </NavigationProperty>
+        <Property Name="colour_Id" Type="Edm.Int32"/>
+        <NavigationProperty Name="cars" Type="AdminService.Car">
+          <ReferentialConstraint Property="cars_Id" ReferencedProperty="Id"/>
+        </NavigationProperty>
+        <Property Name="cars_Id" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="Prices">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <NavigationProperty Name="price" Type="AdminService.ModelVarient" Partner="price">
+          <ReferentialConstraint Property="price_Id" ReferencedProperty="Id"/>
+        </NavigationProperty>
+        <Property Name="price_Id" Type="Edm.Int32"/>
+        <Property Name="priceRange" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="Seat">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="capacity" Type="Edm.String"/>
+        <Property Name="seatBrand" Type="Edm.String"/>
+        <NavigationProperty Name="carSeat" Type="AdminService.ModelVarient" Partner="seatCapacity">
+          <ReferentialConstraint Property="carSeat_Id" ReferencedProperty="Id"/>
+        </NavigationProperty>
+        <Property Name="carSeat_Id" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="Tyre">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="tyreBrand" Type="Edm.String"/>
+        <NavigationProperty Name="carTyre" Type="AdminService.ModelVarient" Partner="noOfTyre">
+          <ReferentialConstraint Property="carTyre_Id" ReferencedProperty="Id"/>
+        </NavigationProperty>
+        <Property Name="carTyre_Id" Type="Edm.Int32"/>
+        <NavigationProperty Name="type" Type="AdminService.TyreType">
+          <OnDelete Action="Cascade"/>
+          <ReferentialConstraint Property="type_Id" ReferencedProperty="Id"/>
+        </NavigationProperty>
+        <Property Name="type_Id" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="Engine">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="modelNumber" Type="Edm.String"/>
+        <Property Name="engineType" Type="Edm.String"/>
+        <NavigationProperty Name="engines" Type="AdminService.ModelVarient" Partner="engineType">
+          <ReferentialConstraint Property="engines_Id" ReferencedProperty="Id"/>
+        </NavigationProperty>
+        <Property Name="engines_Id" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="Passanger">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="noOfPpl" Type="Edm.String"/>
+        <Property Name="gender" Type="Edm.String"/>
+        <NavigationProperty Name="carPassanger" Type="AdminService.Car" Partner="noOfPassanger">
+          <ReferentialConstraint Property="carPassanger_Id" ReferencedProperty="Id"/>
+        </NavigationProperty>
+        <Property Name="carPassanger_Id" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="TyreType">
+        <Key>
+          <PropertyRef Name="Id"/>
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="tyreType" Type="Edm.String"/>
+      </EntityType>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

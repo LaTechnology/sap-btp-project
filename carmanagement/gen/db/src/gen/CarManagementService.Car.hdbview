@@ -1,0 +1,11 @@
+VIEW CarManagementService_Car AS SELECT
+  Car_0.Id,
+  Car_0.carName,
+  Car_0.manufactureDate,
+  Car_0.carimage,
+  Car_0.description
+FROM sap_capire_carmanagement_Car AS Car_0
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN CarManagementService_Passanger AS noOfPassanger ON (noOfPassanger.carPassanger_Id = Id),
+  MANY TO MANY JOIN CarManagementService_ModelVarient AS modelVarient ON (modelVarient.models_Id = Id)
+)

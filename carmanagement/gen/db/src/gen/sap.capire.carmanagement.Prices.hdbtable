@@ -1,0 +1,8 @@
+COLUMN TABLE sap_capire_carmanagement_Prices (
+  Id INTEGER NOT NULL,
+  price_Id INTEGER,
+  priceRange NVARCHAR(5000),
+  PRIMARY KEY(Id)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN sap_capire_carmanagement_ModelVarient AS price ON (price.Id = price_Id)
+)

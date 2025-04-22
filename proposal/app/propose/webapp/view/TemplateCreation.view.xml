@@ -1,0 +1,474 @@
+<mvc:View
+    controllerName="ns.propose.controller.TemplateCreation"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:wizard="sap.m.Wizard"
+>
+    <NavContainer id="_IDGenNavContainer1">
+        <pages>
+            <Page
+                id="_IDGenPage1"
+                title="Proposal Client Form"
+                class="prorposal"
+            >
+                <customHeader>
+                    <Bar id="_IDGenBar1">
+                        <contentMiddle>
+                            <Title id="_IDGenTitle1" text="Proposal Client Form" />
+                        </contentMiddle>
+                    </Bar>
+                </customHeader>
+
+                <Bar id="_IDGenBar2">
+                    <contentLeft>
+                        <Image id="_IDGenImage1"
+                            src="{i18n>headerimage}"
+                            width="50%"
+                        />
+                    </contentLeft>
+
+                    <contentRight>
+                        <Image id="_IDGenImage2"
+                            src="https://tier4marketing.com/wp-content/uploads/2015/10/Client-Logo-Placeholder.png"
+                            width="40%"
+                        />
+                    </contentRight>
+                </Bar>
+
+                <Wizard
+                    id="wizard"
+                    stepActivate="onStepChanged"
+                    showNextButton="true"
+                    class="proposalform"
+                >
+                    <steps>
+                        <WizardStep
+                            id="wizard1"
+                            title="Step 1"
+                            nextStep="nextstep1"
+                            complete="true"
+                            class="proposalform"
+                        >
+                            <MessageStrip id="_IDGenMessageStrip1"
+                                class="sapUiSmallMarginBottom"
+                                text="Enter the required details"
+                                showIcon="true"
+                            />
+                            <VBox id="_IDGenVBox1">
+                                <Table
+                                    id="idFrame0"
+                                    growing="true"
+                                    growingDirection="Downwards"
+                                    class="table"
+                                >
+                                    <headerToolbar>
+                                        <Toolbar id="_IDGenToolbar1">
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer1"
+                                            />
+                                            <Button
+                                                id="_IDGenButton1"
+                                                press="onAddRowTextArea"
+                                                text="Add Description"
+                                                class="buttonfortool"
+                                                icon="sap-icon://add-coursebook"
+                                                iconDensityAware="true"
+                                            />
+
+                                            <Button id="_IDGenButton9"
+                                                text="Add Sub-Section"
+                                                class="buttonfortool"
+                                                press="onSubSection"
+                                                icon="sap-icon://sys-add"
+                                            />
+
+                                            <Button id="_IDGenButton10"
+                                                    
+                                                    text="Add Image"
+                                                    press="onAddImage"
+                                                    class="buttonfortool"
+                                                    icon="sap-icon://picture"/>
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column id="coloumn1" />
+                                    </columns>
+
+                                    <items>
+                                        <ColumnListItem
+                                            id="_IDGenColumnListItem1"
+                                        >
+                                            <cells />
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </WizardStep>
+
+                        <WizardStep
+                            title="Step 2"
+                            id="wizard2"
+                            class="proposalform"
+                        >
+                            <VBox id="_IDGenVBox2">
+                                <Table
+                                    id="idFrame1"
+                                    growing="true"
+                                    growingDirection="Downwards"
+                                    class="table"
+                                >
+                                    <headerToolbar>
+                                        <Toolbar id="_IDGenToolbar2">
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer2"
+                                            />
+                                            <Button
+                                                id="_IDGenButton2"
+                                                press="onAddRowTextArea"
+                                                text="Add Description"
+                                                class="buttonfortool"
+                                                icon="sap-icon://add-coursebook"
+                                            />
+
+                                            <Button id="_IDGenButton11"
+                                                text="Add Sub-Section"
+                                                class="buttonfortool"
+                                                press="onSubSection"
+                                                 icon="sap-icon://sys-add"
+                                            />
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column id="coloumn2" />
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem
+                                            id="_IDGenColumnListItem2"
+                                        >
+                                            <cells />
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </WizardStep>
+
+                        <WizardStep
+                            title="Step 3"
+                            id="wizard3"
+                            class="proposalform"
+                        >
+                            <VBox id="_IDGenVBox3">
+                                <Table
+                                    id="idFrame2"
+                                    growing="true"
+                                    growingDirection="Downwards"
+                                    class="table"
+                                >
+                                    <headerToolbar>
+                                        <Toolbar id="_IDGenToolbar3">
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer3"
+                                            />
+                                            <Button
+                                                id="_IDGenButton3"
+                                                press="onAddRowTextArea"
+                                                text="Add Description"
+                                                class="buttonfortool"
+                                                icon="sap-icon://add-coursebook"
+                                            />
+
+                                            <Button id="_IDGenButton12"
+                                                text="Add Sub-Section"
+                                                class="buttonfortool"
+                                                press="onSubSection"
+                                                 icon="sap-icon://sys-add"
+                                            />
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column id="coloumn3" />
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem
+                                            id="_IDGenColumnListItem3"
+                                        >
+                                            <cells />
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </WizardStep>
+
+                        <WizardStep
+                            title="Step 4"
+                            id="wizard4"
+                            class="proposalform"
+                        >
+                            <VBox id="_IDGenVBox4">
+                                <Table
+                                    id="idFrame3"
+                                    growing="true"
+                                    growingDirection="Downwards"
+                                    class="table"
+                                >
+                                    <headerToolbar>
+                                        <Toolbar id="_IDGenToolbar4">
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer4"
+                                            />
+                                            <Button
+                                                id="_IDGenButton4"
+                                                press="onAddRowTextArea"
+                                                text="Add Description"
+                                                class="buttonfortool"
+                                                icon="sap-icon://add-coursebook"
+                                            />
+
+                                            <Button id="_IDGenButton13"
+                                                text="Add Sub-Section"
+                                                class="buttonfortool"
+                                                press="onSubSection"
+                                                 icon="sap-icon://sys-add"
+                                            />
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column id="coloumn4" />
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem
+                                            id="_IDGenColumnListItem4"
+                                        >
+                                            <cells />
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </WizardStep>
+
+                        <WizardStep
+                            title="Step 5"
+                            id="wizard5"
+                            class="proposalform"
+                        >
+                            <VBox id="_IDGenVBox5">
+                                <Table
+                                    id="idFrame4"
+                                    growing="true"
+                                    growingDirection="Downwards"
+                                    class="table"
+                                >
+                                    <headerToolbar>
+                                        <Toolbar id="_IDGenToolbar5">
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer5"
+                                            />
+                                            <Button
+                                                id="_IDGenButton5"
+                                                press="onAddRowTextArea"
+                                                text="Add Description"
+                                                class="buttonfortool"
+                                                icon="sap-icon://add-coursebook"
+                                            />
+
+                                            <Button id="_IDGenButton14"
+                                                text="Add Sub-Section"
+                                                class="buttonfortool"
+                                                press="onSubSection"
+                                                 icon="sap-icon://sys-add"
+
+                                            />
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column id="coloumn5" />
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem
+                                            id="_IDGenColumnListItem5"
+                                        >
+                                            <cells />
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </WizardStep>
+
+                        <WizardStep
+                            title="Step 6"
+                            id="wizard6"
+                            class="proposalform"
+                        >
+                            <VBox id="_IDGenVBox6">
+                                <Table
+                                    id="idFrame5"
+                                    growing="true"
+                                    growingDirection="Downwards"
+                                    class="table"
+                                >
+                                    <headerToolbar>
+                                        <Toolbar id="_IDGenToolbar6">
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer6"
+                                            />
+                                            <Button
+                                                id="_IDGenButton6"
+                                                press="onAddRowTextArea"
+                                                text="Add Description"
+                                                class="buttonfortool"
+                                                icon="sap-icon://add-coursebook"
+                                            />
+
+                                            <Button id="_IDGenButton15"
+                                                text="Add Sub-Section"
+                                                class="buttonfortool"
+                                                press="onSubSection"
+                                                 icon="sap-icon://sys-add"
+                                            />
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column id="coloumn6" />
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem
+                                            id="_IDGenColumnListItem6"
+                                        >
+                                            <cells />
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </WizardStep>
+
+                        <WizardStep
+                            title="Step 7"
+                            id="wizard7"
+                            class="proposalform"
+                        >
+                            <VBox id="_IDGenVBox7">
+                                <Table
+                                    id="idFrame6"
+                                    growing="true"
+                                    growingDirection="Downwards"
+                                    class="table"
+                                >
+                                    <headerToolbar>
+                                        <Toolbar id="_IDGenToolbar7">
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer7"
+                                            />
+                                            <Button
+                                                id="_IDGenButton7"
+                                                press="onAddRowTextArea"
+                                                text="Add Description"
+                                                class="buttonfortool"
+                                                icon="sap-icon://add-coursebook"
+                                            />
+
+                                            <Button id="_IDGenButton16"
+                                                text="Add Sub-Section"
+                                                class="buttonfortool"
+                                                press="onSubSection"
+                                                 icon="sap-icon://sys-add"
+                                            />
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column id="coloumn7" />
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem
+                                            id="_IDGenColumnListItem7"
+                                        >
+                                            <cells />
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </WizardStep>
+
+                        <WizardStep
+                            title="Step 8"
+                            id="wizard8"
+                            class="proposalform"
+                        >
+                            <VBox id="_IDGenVBox8">
+                                <Table
+                                    id="idFrame7"
+                                    growing="true"
+                                    growingDirection="Downwards"
+                                    class="table"
+                                >
+                                    <headerToolbar>
+                                        <Toolbar id="_IDGenToolbar8">
+                                            <ToolbarSpacer
+                                                id="_IDGenToolbarSpacer8"
+                                            />
+                                            <Button
+                                                id="_IDGenButton8"
+                                                press="onAddRowTextArea"
+                                                text="Add Description"
+                                                class="buttonfortool"
+                                                icon="sap-icon://add-coursebook"
+                                            />
+
+                                            <Button id="_IDGenButton17"
+                                                text="Add Sub-Section"
+                                                class="buttonfortool"
+                                                press="onSubSection"
+                                                 icon="sap-icon://sys-add"
+                                            />
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column id="coloumn8" />
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem
+                                            id="_IDGenColumnListItem8"
+                                        >
+                                            <cells />
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </WizardStep>
+
+                      
+                    </steps>
+                </Wizard>
+
+                <footer>
+                    <Bar id="_IDGenBar3">
+                        <contentRight>
+                            <Button id="_IDGenButton18"
+                                text="Next"
+                                press="onContinue"
+                                type="Emphasized"
+                            />
+                            <Button id="_IDGenButton19"
+                                text="Save"
+                                press="onSave"
+                                type="Emphasized"
+                            />
+                            <Button id="_IDGenButton20"
+                                text="Complete"
+                                press="onComplete"
+                                type="Emphasized"
+                            />
+
+                            <Button id="_IDGenButton21"
+                                text="Cancel"
+                                press="onCancel"
+                                type="Emphasized"
+                            />
+                        </contentRight>
+                    </Bar>
+                </footer>
+            </Page>
+        </pages>
+    </NavContainer>
+</mvc:View>

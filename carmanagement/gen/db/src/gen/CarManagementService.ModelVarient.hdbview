@@ -1,0 +1,13 @@
+VIEW CarManagementService_ModelVarient AS SELECT
+  ModelVarient_0.Id,
+  ModelVarient_0.modelName,
+  ModelVarient_0.models_Id
+FROM sap_capire_carmanagement_ModelVarient AS ModelVarient_0
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN CarManagementService_Colours AS colour ON (colour.colour_Id = Id),
+  MANY TO MANY JOIN CarManagementService_Prices AS price ON (price.price_Id = Id),
+  MANY TO MANY JOIN CarManagementService_Engine AS engineType ON (engineType.engines_Id = Id),
+  MANY TO MANY JOIN CarManagementService_Tyre AS noOfTyre ON (noOfTyre.carTyre_Id = Id),
+  MANY TO ONE JOIN CarManagementService_Car AS models ON (models.Id = models_Id),
+  MANY TO MANY JOIN CarManagementService_Seat AS seatCapacity ON (seatCapacity.carSeat_Id = Id)
+)

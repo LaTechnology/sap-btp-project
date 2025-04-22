@@ -1,0 +1,9 @@
+VIEW CarManagementService_Engine AS SELECT
+  Engine_0.Id,
+  Engine_0.modelNumber,
+  Engine_0.engineType,
+  Engine_0.engines_Id
+FROM sap_capire_carmanagement_Engine AS Engine_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CarManagementService_ModelVarient AS engines ON (engines.Id = engines_Id)
+)

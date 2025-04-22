@@ -1,0 +1,13 @@
+VIEW proposal_service_proposal_ProposalCustomer AS SELECT
+  PS_CUSTOMER_ORG_0.id,
+  PS_CUSTOMER_ORG_0.name,
+  PS_CUSTOMER_ORG_0.logo,
+  PS_CUSTOMER_ORG_0.website,
+  PS_CUSTOMER_ORG_0.createdBy,
+  PS_CUSTOMER_ORG_0.createdAt,
+  PS_CUSTOMER_ORG_0.modifiedBy,
+  PS_CUSTOMER_ORG_0.modifiedAt
+FROM com_ladera_sap_btp_contract_proposal_systems_PS_CUSTOMER_ORG AS PS_CUSTOMER_ORG_0
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN proposal_service_proposal_ProposalCustomerContact AS PS_CUSTOMER_ORG_CONTACT ON (PS_CUSTOMER_ORG_CONTACT.PS_CUSTOMER_ORG_id = id)
+)

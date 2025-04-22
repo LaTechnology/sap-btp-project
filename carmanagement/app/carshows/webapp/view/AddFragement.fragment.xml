@@ -1,0 +1,55 @@
+<core:FragmentDefinition
+    controllerName="ns.carshows.controller.carShows"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+>
+    <Dialog 
+        id="AddcarDialog"
+        title="{i18n>addCar}"
+        visible="true"
+    >
+        <VBox class="edit">
+            <Label text="ID:" />
+            <Input
+                id="_IDLabel1"
+                value="{}"
+                placeholder="id"
+            />
+
+            <Label text="Car Name:" />
+            <Input
+                id="_IDLabel2"
+                value="{}"
+                placeholder="name"
+            />
+
+            <Label text="manufactureDate:" />
+            <Input
+                id="_IDLabel3"
+                value="{}"
+                placeholder="model"
+            />
+            <Page class ="carfooter">
+                <footer>
+                    <Bar>
+                        <contentRight>
+                            <Button
+                                text="Save"
+                                icon="sap-icon://save"
+                                press=".onSave"
+                            />
+                            <Button
+                                text="Cancel"
+                                icon="sap-icon://cancel"
+                                press=".onCloseDialog"
+                            />
+                        </contentRight>
+                    </Bar>
+                </footer>
+            </Page>
+        </VBox>
+    </Dialog>
+</core:FragmentDefinition>

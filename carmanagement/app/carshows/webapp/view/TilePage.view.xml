@@ -1,0 +1,30 @@
+<mvc:View
+    controllerName="ns.carshows.controller.TilePage"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+>
+    <FlexBox
+        alignItems="Center"
+        justifyContent="Center"
+        height="100%"
+        class="sapUiResponsiveMargin"
+        direction="Column"
+    >
+        <Title titleStyle="H2" text="Car Showroom" class="sapUiTinyMarginBegin" />
+        <GenericTile
+            class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+            header=""
+            press=".onNavToFlow"
+            backgroundImage="https://www.shutterstock.com/image-vector/car-shop-logo-text-written-260nw-2070183179.jpg"
+        />
+        <GenericTile
+            backgroundImage="./images/help.png"
+            class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+            header=""
+            press=".onNavToHelp"
+            />
+                        
+    </FlexBox>
+</mvc:View>

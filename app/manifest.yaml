@@ -1,0 +1,9 @@
+applications:
+- name: nodeapp
+  random-route: true  # for development only
+  path: ./
+  memory: 64M
+  buildpack: nodejs_buildpack
+  services:
+  - app_xsuaa
+  - jobscheduler

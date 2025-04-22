@@ -1,0 +1,14 @@
+{
+  "cds": {
+    "requires": {
+      "NorthWind": {
+        "kind": "odata",
+        "model": "srv/external/NorthWind"
+      }
+    }
+  },
+  "devDependencies": {
+    "prettier": "^3.1.1",
+    "prettier-plugin-xml": "^0.1.0"
+  }
+}

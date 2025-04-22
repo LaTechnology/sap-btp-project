@@ -1,0 +1,8 @@
+VIEW CarManagementService_Prices AS SELECT
+  Prices_0.Id,
+  Prices_0.price_Id,
+  Prices_0.priceRange
+FROM sap_capire_carmanagement_Prices AS Prices_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CarManagementService_ModelVarient AS price ON (price.Id = price_Id)
+)

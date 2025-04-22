@@ -1,0 +1,12 @@
+<mvc:View
+	controllerName="ns.north.controller.Detail"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page id="page"
+		showNavButton="true" navButtonPress="oNavButton" title="{i18n>detailPageTitle}">
+		<content>
+		<Text id="_IDGenText1" text="{Name}"/>
+		<Text id="_IDGenText2" text="{Description}"/>
+		</content>
+        </Page>
+</mvc:View>

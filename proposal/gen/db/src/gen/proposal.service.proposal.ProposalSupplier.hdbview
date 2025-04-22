@@ -1,0 +1,13 @@
+VIEW proposal_service_proposal_ProposalSupplier AS SELECT
+  PS_VENDOR_ORG_0.id,
+  PS_VENDOR_ORG_0.name,
+  PS_VENDOR_ORG_0.logo,
+  PS_VENDOR_ORG_0.website,
+  PS_VENDOR_ORG_0.createdBy,
+  PS_VENDOR_ORG_0.createdAt,
+  PS_VENDOR_ORG_0.modifiedBy,
+  PS_VENDOR_ORG_0.modifiedAt
+FROM com_ladera_sap_btp_contract_proposal_systems_PS_VENDOR_ORG AS PS_VENDOR_ORG_0
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN proposal_service_proposal_ProposalSupplierContact AS PS_VENDOR_ORG_CONTACT ON (PS_VENDOR_ORG_CONTACT.PS_VENDOR_ORG_id = id)
+)

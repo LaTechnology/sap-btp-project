@@ -1,0 +1,13 @@
+COLUMN TABLE com_ladera_sap_btp_contract_proposal_systems_PS_CUSTOMER_ORG (
+  id INTEGER NOT NULL,
+  name NVARCHAR(100),
+  logo BLOB,
+  website NVARCHAR(5000),
+  createdBy NVARCHAR(50),
+  createdAt TIMESTAMP,
+  modifiedBy NVARCHAR(50),
+  modifiedAt TIMESTAMP,
+  PRIMARY KEY(id)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN com_ladera_sap_btp_contract_proposal_systems_PS_CUSTOMER_ORG_CONTACT AS PS_CUSTOMER_ORG_CONTACT ON (PS_CUSTOMER_ORG_CONTACT.PS_CUSTOMER_ORG_id = id)
+)

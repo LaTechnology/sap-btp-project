@@ -1,0 +1,9 @@
+COLUMN TABLE sap_capire_carmanagement_Engine (
+  Id INTEGER NOT NULL,
+  modelNumber NVARCHAR(5000),
+  engineType NVARCHAR(5000),
+  engines_Id INTEGER,
+  PRIMARY KEY(Id)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN sap_capire_carmanagement_ModelVarient AS engines ON (engines.Id = engines_Id)
+)

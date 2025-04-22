@@ -1,0 +1,18 @@
+/* Enter your custom styles here */
+.bigFont{
+    font-weight: bold;
+    font-size: large;
+    font-style:normal;
+}
+.customHorizontalLayout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+}
+

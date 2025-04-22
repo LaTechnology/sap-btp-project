@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CarManagementService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Car" EntityType="CarManagementService.Car">
+                    <NavigationPropertyBinding Path="noOfPassanger" Target="Passanger"/>
+                    <NavigationPropertyBinding Path="modelVarient" Target="ModelVarient"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Car"/>
+                </EntitySet>
+                <EntitySet Name="ModelVarient" EntityType="CarManagementService.ModelVarient">
+                    <NavigationPropertyBinding Path="colour" Target="Colours"/>
+                    <NavigationPropertyBinding Path="price" Target="Prices"/>
+                    <NavigationPropertyBinding Path="engineType" Target="Engine"/>
+                    <NavigationPropertyBinding Path="noOfTyre" Target="Tyre"/>
+                    <NavigationPropertyBinding Path="models" Target="Car"/>
+                    <NavigationPropertyBinding Path="seatCapacity" Target="Seat"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="ModelVarient"/>
+                </EntitySet>
+                <EntitySet Name="Colours" EntityType="CarManagementService.Colours">
+                    <NavigationPropertyBinding Path="colour" Target="ModelVarient"/>
+                    <NavigationPropertyBinding Path="cars" Target="Car"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Colours"/>
+                </EntitySet>
+                <EntitySet Name="Prices" EntityType="CarManagementService.Prices">
+                    <NavigationPropertyBinding Path="price" Target="ModelVarient"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Prices"/>
+                </EntitySet>
+                <EntitySet Name="Seat" EntityType="CarManagementService.Seat">
+                    <NavigationPropertyBinding Path="carSeat" Target="ModelVarient"/>
+                </EntitySet>
+                <EntitySet Name="Tyre" EntityType="CarManagementService.Tyre">
+                    <NavigationPropertyBinding Path="carTyre" Target="ModelVarient"/>
+                    <NavigationPropertyBinding Path="type" Target="TyreType"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Tyre"/>
+                </EntitySet>
+                <EntitySet Name="Engine" EntityType="CarManagementService.Engine">
+                    <NavigationPropertyBinding Path="engines" Target="ModelVarient"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Engine"/>
+                </EntitySet>
+                <EntitySet Name="Passanger" EntityType="CarManagementService.Passanger">
+                    <NavigationPropertyBinding Path="carPassanger" Target="Car"/>
+                </EntitySet>
+                <EntitySet Name="TyreType" EntityType="CarManagementService.TyreType">
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="TyreType"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="Car">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="carName" Type="Edm.String"/>
+                <Property Name="manufactureDate" Type="Edm.String"/>
+                <NavigationProperty Name="noOfPassanger" Type="Collection(CarManagementService.Passanger)" Partner="carPassanger"/>
+                <NavigationProperty Name="modelVarient" Type="Collection(CarManagementService.ModelVarient)" Partner="models">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="carimage" Type="Edm.String"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CarManagementService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CarManagementService.Car"/>
+            </EntityType>
+            <EntityType Name="ModelVarient">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="modelName" Type="Edm.String"/>
+                <NavigationProperty Name="colour" Type="CarManagementService.Colours" Partner="colour">
+                    <OnDelete Action="Cascade"/>
+                    <ReferentialConstraint Property="Id" ReferencedProperty="colour_Id"/>
+                </NavigationProperty>
+                <NavigationProperty Name="price" Type="CarManagementService.Prices" Partner="price">
+                    <OnDelete Action="Cascade"/>
+                    <ReferentialConstraint Property="Id" ReferencedProperty="price_Id"/>
+                </NavigationProperty>
+                <NavigationProperty Name="engineType" Type="Collection(CarManagementService.Engine)" Partner="engines">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="noOfTyre" Type="Collection(CarManagementService.Tyre)" Partner="carTyre">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="models" Type="CarManagementService.Car" Partner="modelVarient">
+                    <ReferentialConstraint Property="models_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="models_Id" Type="Edm.Int32"/>
+                <NavigationProperty Name="seatCapacity" Type="Collection(CarManagementService.Seat)" Partner="carSeat"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CarManagementService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CarManagementService.ModelVarient"/>
+            </EntityType>
+            <EntityType Name="Colours">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="colours" Type="Edm.String"/>
+                <NavigationProperty Name="colour" Type="CarManagementService.ModelVarient" Partner="colour">
+                    <ReferentialConstraint Property="colour_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="colour_Id" Type="Edm.Int32"/>
+                <NavigationProperty Name="cars" Type="CarManagementService.Car">
+                    <ReferentialConstraint Property="cars_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="cars_Id" Type="Edm.Int32"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CarManagementService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CarManagementService.Colours"/>
+            </EntityType>
+            <EntityType Name="Prices">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="price" Type="CarManagementService.ModelVarient" Partner="price">
+                    <ReferentialConstraint Property="price_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="price_Id" Type="Edm.Int32"/>
+                <Property Name="priceRange" Type="Edm.String"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CarManagementService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CarManagementService.Prices"/>
+            </EntityType>
+            <EntityType Name="Seat">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="capacity" Type="Edm.String"/>
+                <Property Name="seatBrand" Type="Edm.String"/>
+                <NavigationProperty Name="carSeat" Type="CarManagementService.ModelVarient" Partner="seatCapacity">
+                    <ReferentialConstraint Property="carSeat_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="carSeat_Id" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="Tyre">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="tyreBrand" Type="Edm.String"/>
+                <NavigationProperty Name="carTyre" Type="CarManagementService.ModelVarient" Partner="noOfTyre">
+                    <ReferentialConstraint Property="carTyre_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="carTyre_Id" Type="Edm.Int32"/>
+                <NavigationProperty Name="type" Type="CarManagementService.TyreType">
+                    <OnDelete Action="Cascade"/>
+                    <ReferentialConstraint Property="type_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="type_Id" Type="Edm.Int32"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CarManagementService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CarManagementService.Tyre"/>
+            </EntityType>
+            <EntityType Name="Engine">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="modelNumber" Type="Edm.String"/>
+                <Property Name="engineType" Type="Edm.String"/>
+                <NavigationProperty Name="engines" Type="CarManagementService.ModelVarient" Partner="engineType">
+                    <ReferentialConstraint Property="engines_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="engines_Id" Type="Edm.Int32"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CarManagementService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CarManagementService.Engine"/>
+            </EntityType>
+            <EntityType Name="Passanger">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="noOfPpl" Type="Edm.String"/>
+                <Property Name="gender" Type="Edm.String"/>
+                <NavigationProperty Name="carPassanger" Type="CarManagementService.Car" Partner="noOfPassanger">
+                    <ReferentialConstraint Property="carPassanger_Id" ReferencedProperty="Id"/>
+                </NavigationProperty>
+                <Property Name="carPassanger_Id" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="TyreType">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="tyreType" Type="Edm.String"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CarManagementService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CarManagementService.TyreType"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CarManagementService.Car"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CarManagementService.Car"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CarManagementService.ModelVarient"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CarManagementService.ModelVarient"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CarManagementService.Colours"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CarManagementService.Colours"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CarManagementService.Prices"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CarManagementService.Prices"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CarManagementService.Tyre"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CarManagementService.Tyre"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CarManagementService.Engine"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CarManagementService.Engine"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CarManagementService.TyreType"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CarManagementService.TyreType"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CarManagementService.Car"/>
+                <ReturnType Type="CarManagementService.Car"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CarManagementService.Car"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="CarManagementService.Car"/>
+            </Action>
+            <Annotations Target="CarManagementService.Car">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Id"/>
+                            <PropertyValue Property="Value" Path="Id"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="carName"/>
+                            <PropertyValue Property="Value" Path="carName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="manufactureDate"/>
+                            <PropertyValue Property="Value" Path="manufactureDate"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup1">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Id"/>
+                                    <PropertyValue Property="Value" Path="Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="carName"/>
+                                    <PropertyValue Property="Value" Path="carName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="manufactureDate"/>
+                                    <PropertyValue Property="Value" Path="manufactureDate"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="GeneratedFacet1"/>
+                            <PropertyValue Property="Label" String="Car Details"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneratedGroup1"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Model Details"/>
+                            <PropertyValue Property="ID" String="ModelDetails"/>
+                            <PropertyValue Property="Target" AnnotationPath="modelVarient/@UI.LineItem#ModelDetails"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeImageUrl" String=""/>
+                        <PropertyValue Property="TypeName" String=""/>
+                        <PropertyValue Property="TypeNamePlural" String=""/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="carName"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" String="Tough looking in any angle"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="ImageUrl" Path="carimage"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Modeldetails">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="modelVarient/Id"/>
+                                    <PropertyValue Property="Label" String="Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="modelVarient/models_Id"/>
+                                    <PropertyValue Property="Label" String="models_Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="modelVarient/modelName"/>
+                                    <PropertyValue Property="Label" String="modelName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="Id">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="Id"/>
+                        <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
+                        <PropertyValue Property="TargetValue" Int="5"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.EntityContainer/Car">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="CarManagementService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="CarManagementService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="CarManagementService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.Car/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Car/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Car/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Car/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.ModelVarient">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Model Details"/>
+                            <PropertyValue Property="ID" String="ModelDetails"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#ModelDetails"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="colors"/>
+                            <PropertyValue Property="ID" String="colors"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#colors"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Engine type"/>
+                            <PropertyValue Property="ID" String="Enginetype"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Enginetype"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="prices"/>
+                            <PropertyValue Property="ID" String="prices"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#prices"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Tyres"/>
+                            <PropertyValue Property="ID" String="Numberoftyres"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Numberoftyres"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Seat capacity"/>
+                            <PropertyValue Property="ID" String="Seatcapacity"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Seatcapacity"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="car">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Id"/>
+                                    <PropertyValue Property="Label" String="Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="modelName"/>
+                                    <PropertyValue Property="Label" String="modelName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="models_Id"/>
+                                    <PropertyValue Property="Label" String="models_Id"/>
+                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="ModelDetails">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="modelName"/>
+                                    <PropertyValue Property="Label" String="modelName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem" Qualifier="ModelDetails">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Id"/>
+                            <PropertyValue Property="Label" String="Id"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="modelName"/>
+                            <PropertyValue Property="Label" String="modelName"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeImageUrl" String=""/>
+                        <PropertyValue Property="TypeName" String=""/>
+                        <PropertyValue Property="TypeNamePlural" String=""/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="colour/cars/carName"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" String="Tough looking in any angle"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="colors">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="colour/Id"/>
+                                    <PropertyValue Property="Label" String="Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="colour/colours"/>
+                                    <PropertyValue Property="Label" String="colours"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Enginetype">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="engineType/Id"/>
+                                    <PropertyValue Property="Label" String="Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="engineType/modelNumber"/>
+                                    <PropertyValue Property="Label" String="modelNumber"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="engineType/engineType"/>
+                                    <PropertyValue Property="Label" String="engineType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="prices">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="price/Id"/>
+                                    <PropertyValue Property="Label" String="Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="price/priceRange"/>
+                                    <PropertyValue Property="Label" String="priceRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Numberoftyres">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="noOfTyre/Id"/>
+                                    <PropertyValue Property="Label" String="Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="noOfTyre/tyreBrand"/>
+                                    <PropertyValue Property="Label" String="tyreBrand"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="noOfTyre/type/tyreType"/>
+                                    <PropertyValue Property="Label" String="tyreType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Seatcapacity">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="seatCapacity/Id"/>
+                                    <PropertyValue Property="Label" String="Id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="seatCapacity/seatBrand"/>
+                                    <PropertyValue Property="Label" String="seatBrand"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="seatCapacity/capacity"/>
+                                    <PropertyValue Property="Label" String="capacity"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="models_Id">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="models_Id"/>
+                        <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
+                        <PropertyValue Property="TargetValue" Int="5"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="Id">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="Id"/>
+                        <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Rating"/>
+                        <PropertyValue Property="TargetValue" Int="5"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Tyre">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection/>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Id"/>
+                            <PropertyValue Property="Value" Path="Id"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="modelName"/>
+                            <PropertyValue Property="Value" Path="modelName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="models_Id"/>
+                            <PropertyValue Property="Value" Path="models_Id"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.EntityContainer/ModelVarient">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="CarManagementService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.ModelVarient/models_Id">
+                <Annotation Term="Common.Text" Path="modelName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Car"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="models_Id"/>
+                                    <PropertyValue Property="ValueListProperty" String="Id"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="carName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="manufactureDate"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.ModelVarient/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.ModelVarient/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.ModelVarient/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.ModelVarient/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.EntityContainer/Colours">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="CarManagementService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.Colours/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Colours/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Colours/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Colours/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.EntityContainer/Prices">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="CarManagementService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.Prices/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Prices/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Prices/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Prices/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.EntityContainer/Tyre">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="CarManagementService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.Tyre/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Tyre/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Tyre/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Tyre/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.EntityContainer/Engine">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="CarManagementService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.Engine/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Engine/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Engine/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.Engine/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.EntityContainer/TyreType">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="CarManagementService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CarManagementService.TyreType/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.TyreType/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.TyreType/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.TyreType/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CarManagementService.DraftAdministrativeData">
+                <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                </Annotations>
+                <Annotations Target="CarManagementService.DraftAdministrativeData/DraftUUID">
+                    <Annotation Term="UI.Hidden" Bool="true"/>
+                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+                    </Annotations>
+                    <Annotations Target="CarManagementService.DraftAdministrativeData/CreationDateTime">
+                        <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                        </Annotations>
+                        <Annotations Target="CarManagementService.DraftAdministrativeData/CreatedByUser">
+                            <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+                            </Annotations>
+                            <Annotations Target="CarManagementService.DraftAdministrativeData/DraftIsCreatedByMe">
+                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                </Annotations>
+                                <Annotations Target="CarManagementService.DraftAdministrativeData/LastChangeDateTime">
+                                    <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+                                    </Annotations>
+                                    <Annotations Target="CarManagementService.DraftAdministrativeData/LastChangedByUser">
+                                        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+                                        </Annotations>
+                                        <Annotations Target="CarManagementService.DraftAdministrativeData/InProcessByUser">
+                                            <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+                                            </Annotations>
+                                            <Annotations Target="CarManagementService.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+                                                </Annotations>
+                                            </Schema>
+                                        </edmx:DataServices>
+                                    </edmx:Edmx>

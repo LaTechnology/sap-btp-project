@@ -1,0 +1,734 @@
+{
+ "meta": {
+  "creator": "cds-dk 7.4.0"
+ },
+ "$version": "2.0",
+ "definitions": {
+  "proposalMetadata": {
+   "kind": "service",
+   "@cds.external": true,
+   "@m.IsDefaultEntityContainer": "true"
+  },
+  "proposalMetadata.LoginCredentials": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "emailId": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "password": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "modifiedBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "modifiedAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    }
+   }
+  },
+  "proposalMetadata.ProposalSupplier": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "name": {
+     "type": "cds.String",
+     "length": 100
+    },
+    "logo": {
+     "type": "cds.LargeBinary"
+    },
+    "website": {
+     "type": "cds.LargeString"
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "modifiedBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "modifiedAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "PS_VENDOR_ORG_CONTACT": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.ProposalSupplierContact",
+     "cardinality": {
+      "max": "*"
+     },
+     "on": [
+      {
+       "ref": [
+        "PS_VENDOR_ORG_CONTACT",
+        "PS_VENDOR_ORG_id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "id"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "proposalMetadata.ProposalSupplierContact": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "addressLine1": {
+     "type": "cds.String",
+     "length": 30
+    },
+    "addressLine2": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "addressLine3": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "city": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "pincode": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "state": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "country": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_1_mobileNumber": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_1_telephoneNumber": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_1_emailId": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_2_mobileNumber": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_2_telephoneNumber": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_2_emailId": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "modifiedBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "modifiedAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "PS_VENDOR_ORG_id": {
+     "type": "cds.Integer"
+    },
+    "PS_VENDOR_ORG": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.ProposalSupplier",
+     "on": [
+      {
+       "ref": [
+        "PS_VENDOR_ORG",
+        "id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "PS_VENDOR_ORG_id"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "proposalMetadata.ProposalCustomer": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "name": {
+     "type": "cds.String",
+     "length": 100
+    },
+    "logo": {
+     "type": "cds.LargeBinary"
+    },
+    "website": {
+     "type": "cds.LargeString"
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "modifiedBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "modifiedAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "PS_CUSTOMER_ORG_CONTACT": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.ProposalCustomerContact",
+     "cardinality": {
+      "max": "*"
+     },
+     "on": [
+      {
+       "ref": [
+        "PS_CUSTOMER_ORG_CONTACT",
+        "PS_CUSTOMER_ORG_id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "id"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "proposalMetadata.ProposalCustomerContact": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "addressLine1": {
+     "type": "cds.String",
+     "length": 30
+    },
+    "addressLine2": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "addressLine3": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "city": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "pincode": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "state": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "country": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_1_mobileNumber": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_1_telephoneNumber": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_1_emailId": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_2_mobileNumber": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_2_telephoneNumber": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "contact_person_2_emailId": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "modifiedBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "modifiedAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "PS_CUSTOMER_ORG_id": {
+     "type": "cds.Integer"
+    },
+    "PS_CUSTOMER_ORG": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.ProposalCustomer",
+     "on": [
+      {
+       "ref": [
+        "PS_CUSTOMER_ORG",
+        "id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "PS_CUSTOMER_ORG_id"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "proposalMetadata.PS_DETAILS": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "referenceId": {
+     "type": "cds.LargeString"
+    },
+    "projectName": {
+     "type": "cds.LargeString"
+    },
+    "PS_PROJECT_TYPE_id": {
+     "type": "cds.Integer"
+    },
+    "proposedDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date"
+    },
+    "validTillDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date"
+    },
+    "proposedBy": {
+     "type": "cds.LargeString"
+    },
+    "proposerRole": {
+     "type": "cds.LargeString"
+    },
+    "proposerDepartment": {
+     "type": "cds.LargeString"
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "modifiedBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "modifiedAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "PS_PROJECT_TYPE": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.PS_PROJECT_TYPE",
+     "on": [
+      {
+       "ref": [
+        "PS_PROJECT_TYPE",
+        "id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "PS_PROJECT_TYPE_id"
+       ]
+      }
+     ]
+    },
+    "PS_MAIN_SECTION": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.PS_MAIN_SECTION",
+     "cardinality": {
+      "max": "*"
+     },
+     "on": [
+      {
+       "ref": [
+        "PS_MAIN_SECTION",
+        "PS_DETAILS_id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "id"
+       ]
+      }
+     ]
+    },
+    "PS_TEMPLATE": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.PS_TEMPLATE",
+     "cardinality": {
+      "max": "*"
+     },
+     "on": [
+      {
+       "ref": [
+        "PS_TEMPLATE",
+        "PS_DETAILS_id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "id"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "proposalMetadata.PS_MAIN_SECTION": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "title": {
+     "type": "cds.LargeString"
+    },
+    "description": {
+     "type": "cds.LargeString"
+    },
+    "section_image": {
+     "type": "cds.LargeBinary"
+    },
+    "table_data": {
+     "type": "cds.LargeBinary"
+    },
+    "tableArea": {
+     "type": "cds.LargeBinary"
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "modifiedBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "modifiedAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "PS_DETAILS_id": {
+     "type": "cds.Integer"
+    },
+    "section_table": {
+     "type": "cds.LargeBinary"
+    },
+    "PS_DETAILS": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.PS_DETAILS",
+     "on": [
+      {
+       "ref": [
+        "PS_DETAILS",
+        "id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "PS_DETAILS_id"
+       ]
+      }
+     ]
+    },
+    "PS_SUB_SECTION": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.PS_SUB_SECTION",
+     "cardinality": {
+      "max": "*"
+     },
+     "on": [
+      {
+       "ref": [
+        "PS_SUB_SECTION",
+        "PS_MAIN_SECTION_id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "id"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "proposalMetadata.PS_SUB_SECTION": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "sub_title": {
+     "type": "cds.LargeString"
+    },
+    "sub_description": {
+     "type": "cds.LargeString"
+    },
+    "sub_section_image": {
+     "type": "cds.LargeBinary"
+    },
+    "sub_table_data": {
+     "type": "cds.LargeBinary"
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "modifiedBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "modifiedAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "sub_section_table": {
+     "type": "cds.LargeBinary"
+    },
+    "PS_MAIN_SECTION_id": {
+     "type": "cds.Integer"
+    },
+    "PS_MAIN_SECTION": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.PS_MAIN_SECTION",
+     "on": [
+      {
+       "ref": [
+        "PS_MAIN_SECTION",
+        "id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "PS_MAIN_SECTION_id"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "proposalMetadata.PS_PROJECT_TYPE": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "projectType": {
+     "type": "cds.LargeString"
+    }
+   }
+  },
+  "proposalMetadata.PS_TEMPLATE": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer",
+     "notNull": true
+    },
+    "name": {
+     "type": "cds.LargeString"
+    },
+    "description": {
+     "type": "cds.LargeString"
+    },
+    "createdBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "createdAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "modifiedBy": {
+     "type": "cds.String",
+     "length": 50
+    },
+    "modifiedAt": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7
+    },
+    "PS_DETAILS_id": {
+     "type": "cds.Integer"
+    },
+    "PS_DETAILS": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "proposalMetadata.PS_DETAILS",
+     "on": [
+      {
+       "ref": [
+        "PS_DETAILS",
+        "id"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "PS_DETAILS_id"
+       ]
+      }
+     ]
+    }
+   }
+  }
+ }
+}

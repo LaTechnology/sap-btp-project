@@ -1,0 +1,9 @@
+<mvc:View
+   controllerName="carmanagement.controller.App"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns="sap.m" >
+   <Shell>
+   <App class="myAppDemoWT" id="app">
+   </App>
+   </Shell>
+</mvc:View>

@@ -1,0 +1,10 @@
+COLUMN TABLE com_ladera_sap_btp_contract_proposal_systems_PS_USER (
+  id INTEGER NOT NULL,
+  emailId NVARCHAR(50),
+  password NVARCHAR(50),
+  createdBy NVARCHAR(50),
+  createdAt TIMESTAMP,
+  modifiedBy NVARCHAR(50),
+  modifiedAt TIMESTAMP,
+  PRIMARY KEY(id)
+)

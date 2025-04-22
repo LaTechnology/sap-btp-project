@@ -1,0 +1,24 @@
+VIEW proposal_service_proposal_ProposalSupplierContact AS SELECT
+  PS_VENDOR_ORG_CONTACT_0.id,
+  PS_VENDOR_ORG_CONTACT_0.addressLine1,
+  PS_VENDOR_ORG_CONTACT_0.addressLine2,
+  PS_VENDOR_ORG_CONTACT_0.addressLine3,
+  PS_VENDOR_ORG_CONTACT_0.city,
+  PS_VENDOR_ORG_CONTACT_0.pincode,
+  PS_VENDOR_ORG_CONTACT_0.state,
+  PS_VENDOR_ORG_CONTACT_0.country,
+  PS_VENDOR_ORG_CONTACT_0.contact_person_1_mobileNumber,
+  PS_VENDOR_ORG_CONTACT_0.contact_person_1_telephoneNumber,
+  PS_VENDOR_ORG_CONTACT_0.contact_person_1_emailId,
+  PS_VENDOR_ORG_CONTACT_0.contact_person_2_mobileNumber,
+  PS_VENDOR_ORG_CONTACT_0.contact_person_2_telephoneNumber,
+  PS_VENDOR_ORG_CONTACT_0.contact_person_2_emailId,
+  PS_VENDOR_ORG_CONTACT_0.createdBy,
+  PS_VENDOR_ORG_CONTACT_0.createdAt,
+  PS_VENDOR_ORG_CONTACT_0.modifiedBy,
+  PS_VENDOR_ORG_CONTACT_0.modifiedAt,
+  PS_VENDOR_ORG_CONTACT_0.PS_VENDOR_ORG_id
+FROM com_ladera_sap_btp_contract_proposal_systems_PS_VENDOR_ORG_CONTACT AS PS_VENDOR_ORG_CONTACT_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN proposal_service_proposal_ProposalSupplier AS PS_VENDOR_ORG ON (PS_VENDOR_ORG.id = PS_VENDOR_ORG_id)
+)

@@ -1,0 +1,41 @@
+<core:FragmentDefinition
+    controllerName="ns.carshows.controller.ModelDetail"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="TubeDialog"
+        title="{carName} car"
+    >
+
+        <Bar>
+            <contentLeft>
+                <Title
+                    text="Tube Details"
+                    level="H1"
+                    titleStyle="H3"
+                />
+            </contentLeft>
+        </Bar>
+
+        <List
+            items="{path: 'noOfTyre', parameters: {expand: 'type'}}"
+        >
+            <ObjectListItem>
+                <attributes>
+                    <ObjectAttribute
+                        class="bigFont1"
+                        text="{type/tyreType}"
+                    />
+                </attributes>
+            </ObjectListItem>
+        </List>
+
+        <beginButton>
+            <Button
+                text="{i18n>CloseButtonText}"
+                press=".onCloseDialog"
+            />
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,55 @@
+<core:FragmentDefinition
+    controllerName="ns.carshows.controller.TilePage"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+>
+    <Dialog 
+        id="AddcarDialog"
+    >
+        <VBox class="edit customHorizontalLayout">
+            <HBox class="item">
+                <Image
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/WhatsApp_icon.png/479px-WhatsApp_icon.png"
+                    alt=""
+                    width="40px"
+                    height="40px"
+                />
+                <Link
+                    text="Send WhatsApp"
+                    href="https://wa.me/9659361604?text=chat%20from%20carshowroom"
+                    target="_blank"
+                />
+            </HBox>
+            <HBox class="item">
+                <Image
+                    src="https://pngimg.com/d/email_PNG11.png"
+                    alt=""
+                    width="40px"
+                    height="40px"
+                />
+                <Link
+                    text="Send Email"
+                    href="mailto:vasanthkarthikn@gmail.com?subject=Subject%20body=Hello%20from%20SAPUI5"
+                    target="_blank"
+                />
+            </HBox>
+            <HBox class="item">
+                <Image
+                    src="https://pngimg.com/d/phone_PNG48927.png"
+                    alt=""
+                    width="40px"
+                    height="40px"
+                />
+                <Link
+                    text="Send mobile"
+                    href="tel:+1234567890"
+                    target="_blank"
+                />
+            </HBox>
+            <Button text="close" press=".onClose"></Button>
+        </VBox>
+    </Dialog>
+</core:FragmentDefinition>

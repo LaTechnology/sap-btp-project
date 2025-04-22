@@ -1,0 +1,8 @@
+COLUMN TABLE sap_capire_carmanagement_Colours (
+  Id INTEGER NOT NULL,
+  colours NVARCHAR(5000),
+  colour_Id INTEGER,
+  PRIMARY KEY(Id)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN sap_capire_carmanagement_ModelVarient AS colour ON (colour.Id = colour_Id)
+)

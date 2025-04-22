@@ -1,0 +1,9 @@
+COLUMN TABLE sap_capire_carmanagement_Seat (
+  Id INTEGER NOT NULL,
+  capacity NVARCHAR(5000),
+  seatBrand NVARCHAR(5000),
+  carSeat_Id INTEGER,
+  PRIMARY KEY(Id)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN sap_capire_carmanagement_ModelVarient AS carSeat ON (carSeat.Id = carSeat_Id)
+)

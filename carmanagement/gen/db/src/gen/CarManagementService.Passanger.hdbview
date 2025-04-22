@@ -1,0 +1,9 @@
+VIEW CarManagementService_Passanger AS SELECT
+  Passanger_0.Id,
+  Passanger_0.noOfPpl,
+  Passanger_0.gender,
+  Passanger_0.carPassanger_Id
+FROM sap_capire_carmanagement_Passanger AS Passanger_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CarManagementService_Car AS carPassanger ON (carPassanger.Id = carPassanger_Id)
+)

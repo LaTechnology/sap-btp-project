@@ -1,0 +1,8 @@
+specVersion: "3.2"
+metadata:
+  name: carmanagement
+type: application
+framework:
+  name: SAPUI5
+  version: "1.120.4"
+

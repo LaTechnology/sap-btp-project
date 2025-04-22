@@ -1,0 +1,11 @@
+COLUMN TABLE sap_capire_carmanagement_Car (
+  Id INTEGER NOT NULL,
+  carName NVARCHAR(5000),
+  manufactureDate NVARCHAR(5000),
+  carimage NVARCHAR(5000),
+  description NVARCHAR(5000),
+  PRIMARY KEY(Id)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN sap_capire_carmanagement_Passanger AS noOfPassanger ON (noOfPassanger.carPassanger_Id = Id),
+  MANY TO MANY JOIN sap_capire_carmanagement_ModelVarient AS modelVarient ON (modelVarient.models_Id = Id)
+)

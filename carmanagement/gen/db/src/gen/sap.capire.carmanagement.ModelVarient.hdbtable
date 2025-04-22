@@ -1,0 +1,13 @@
+COLUMN TABLE sap_capire_carmanagement_ModelVarient (
+  Id INTEGER NOT NULL,
+  modelName NVARCHAR(5000),
+  models_Id INTEGER,
+  PRIMARY KEY(Id)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN sap_capire_carmanagement_Colours AS colour ON (colour.colour_Id = Id),
+  MANY TO MANY JOIN sap_capire_carmanagement_Prices AS price ON (price.price_Id = Id),
+  MANY TO MANY JOIN sap_capire_carmanagement_Engine AS engineType ON (engineType.engines_Id = Id),
+  MANY TO MANY JOIN sap_capire_carmanagement_Tyre AS noOfTyre ON (noOfTyre.carTyre_Id = Id),
+  MANY TO ONE JOIN sap_capire_carmanagement_Car AS models ON (models.Id = models_Id),
+  MANY TO MANY JOIN sap_capire_carmanagement_Seat AS seatCapacity ON (seatCapacity.carSeat_Id = Id)
+)

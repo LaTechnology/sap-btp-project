@@ -1,0 +1,31 @@
+{
+  "format_version": 1,
+  "imports": [
+    {
+      "target_table": "SAP_CAPIRE_CARMANAGEMENT_TYRE",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "sap.capire.carmanagement-Tyre.csv",
+        "has_header": true,
+        "type_config": {
+          "delimiter": ","
+        }
+      },
+      "import_settings": {
+        "import_columns": [
+          "ID",
+          "TYREBRAND",
+          "CARTYRE_ID",
+          "TYPE_ID"
+        ],
+        "include_filter": []
+      },
+      "column_mappings": {
+        "ID": "Id",
+        "TYREBRAND": "tyreBrand",
+        "CARTYRE_ID": "carTyre_Id",
+        "TYPE_ID": "type_Id"
+      }
+    }
+  ]
+}

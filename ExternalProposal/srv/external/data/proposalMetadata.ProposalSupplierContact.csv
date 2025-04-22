@@ -1,0 +1,3 @@
+id,addressLine1,addressLine2,addressLine3,city,pincode,state,country,contact_person_1_mobileNumber,contact_person_1_emailId,contact_person_2_mobileNumber,contact_person_2_emailId,PS_VENDOR_ORG_id
+11,"thanjavur","thanjavur1","thanjavur2","thanjavur3","613006","tamilnadu","india","1234567890","vasf@gj.com","1234567890","vasf@gj.com",1
+22,"thanjavur","thanjavur1","thanjavur2","thanjavur3","613006","tamilnadu","","1234567890","vasf@gj.com","1234567890","vasf@gj.com",2

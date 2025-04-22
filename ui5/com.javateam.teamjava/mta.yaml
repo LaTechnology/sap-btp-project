@@ -1,0 +1,80 @@
+ID: teamjava
+_schema-version: 3.2.0
+version: 0.0.1
+parameters:
+  enable-parallel-deployments: true
+modules:
+  - name: webapp_deployer
+    type: com.sap.application.content
+    path: deployer
+    requires:
+      - name: teamjava_html5_repo_host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: uimodule
+          artifacts:
+            - dist/uimodule.zip
+          target-path: resources/
+  - name: teamjavadestination-content
+    type: com.sap.application.content
+    build-parameters:
+      no-source: true
+    requires:
+      - name: teamjava_uaa
+        parameters:
+          service-key:
+            name: teamjava_uaa-key
+      - name: teamjava_html5_repo_host
+        parameters:
+          service-key:
+            name: teamjava_html5_repo_host-key
+      - name: teamjava_destination
+        parameters:
+          content-target: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: teamjava_html5_repo_host
+              ServiceInstanceName: teamjava_html5_repo_host
+              ServiceKeyName: teamjava_html5_repo_host-key
+              sap.cloud.service: teamjava.service
+            - Name: teamjava_uaa
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: teamjava_uaa
+              ServiceKeyName: teamjava_uaa-key
+              sap.cloud.service: teamjava.service
+  - name: uimodule
+    type: html5
+    path: uimodule
+    build-parameters:
+      builder: custom
+      commands:
+        - npm run build:uimodule --prefix ..
+      supported-platforms: []
+resources:
+  - name: teamjava_destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: destination
+      config:
+        HTML5Runtime_enabled: true
+        version: 1.0.0
+  - name: teamjava_html5_repo_host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+      config:
+        sizeLimit: 2
+  - name: teamjava_uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa

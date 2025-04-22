@@ -1,0 +1,13 @@
+{
+  "name": "carmanagement",
+  "version": "1.0.0",
+  "description": "This is ui5 for car project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ui5 serve -o test/mockServer.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
