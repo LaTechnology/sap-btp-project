@@ -1,0 +1,18 @@
+# Generated manifest.yml based on template version 0.1.0
+# appName = BpaIntegration
+# language=nodejs
+# multitenancy=
+---
+applications:
+# -----------------------------------------------------------------------------------
+# Backend Service
+# -----------------------------------------------------------------------------------
+- name: BpaIntegration-srv
+  random-route: true  # for development only
+  path: gen/srv
+  memory: 256M
+  buildpack: nodejs_buildpack
+# -----------------------------------------------------------------------------------
+# HANA Database Content Deployer App
+# -----------------------------------------------------------------------------------
+

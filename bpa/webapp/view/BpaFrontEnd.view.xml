@@ -1,0 +1,28 @@
+<mvc:View xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" controllerName="bpa.controller.BpaFrontEnd"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+  <f:SimpleForm
+    id="form"
+    layout="ResponsiveGridLayout"
+    labelSpanL="4"
+    labelSpanM="4"
+    labelSpanS="12"
+    adjustLabelSpan="false"
+    columnsL="2"
+    columnsM="2"
+    width="100%">
+
+    <Label text="Reason" required="true" />
+    <Input id="reasonInput" placeholder="Enter reason" />
+
+    <Label text="From Date" required="true" />
+    <DatePicker id="fromDate" />
+
+    <Label text="To Date" required="true" />
+    <DatePicker id="toDate" />
+
+    <Button text="Submit" type="Emphasized" press="onSubmitPress" />
+
+  </f:SimpleForm>
+
+</mvc:View>

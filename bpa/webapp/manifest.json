@@ -1,0 +1,132 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "bpa",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.17.3",
+      "toolsId": "38b9420e-6f1d-4fae-bfda-ca5c6443f47f"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/v2/odata/v4/my/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "bpaintegration-bpaintegration": {
+          "semanticObject": "bpaintegration",
+          "action": "bpaintegration",
+          "title": "{{bpaintegration-bpaintegration.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.134.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "bpa.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "bpa.view",
+        "async": true,
+        "viewPath": "bpa.view"
+      },
+      "routes": [
+        {
+          "name": "RouteBpaFrontEnd",
+          "pattern": ":?query:",
+          "target": [
+            "TargetBpaFrontEnd"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetBpaFrontEnd": {
+          "id": "BpaFrontEnd",
+          "name": "BpaFrontEnd"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "bpa.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "bpa"
+  }
+}

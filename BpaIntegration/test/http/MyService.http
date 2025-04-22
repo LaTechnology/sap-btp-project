@@ -1,0 +1,15 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### pushData
+# @name pushData_POST
+POST {{server}}/odata/v4/my/pushData
+Content-Type: application/json
+{{auth}}
+
+{
+  "reason": "due to fever",
+  "from": "2025-04-22",
+  "_to": "2025-04-24"
+}
