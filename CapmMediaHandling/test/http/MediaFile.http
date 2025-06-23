@@ -1,0 +1,53 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### MediaFile
+# @name MediaFile_GET
+GET {{server}}/media/MediaFile
+{{auth}}
+
+
+### MediaFile
+# @name MediaFile_POST
+POST {{server}}/media/MediaFile
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "26470998-148d-4426-8ef9-eddda1445d81",
+  "fileName": "fileName-26470998",
+  "mediaType": "mediaType-26470998",
+  "url": "url-26470998"
+}
+
+
+### MediaFile
+# @name MediaFile_PATCH
+PATCH {{server}}/media/MediaFile/26470998-148d-4426-8ef9-eddda1445d81
+Content-Type: text/csv
+{{auth}}
+
+{
+  "ID": "26470998-148d-4426-8ef9-eddda1445d81",
+  "fileName": "fileName-26470998",
+  "mediaType": "mediaType-26470998",
+  "url": "url-26470998"
+}
+
+
+### MediaFile
+# @name MediaFile_DELETE
+DELETE {{server}}/media/MediaFile/26470998-148d-4426-8ef9-eddda1445d81
+Content-Type: application/json
+{{auth}}
+
+
+### MediaFile
+# @name MediaFile_POST
+POST {{server}}/v2/media/MediaFile
+Content-Type: application/pdf
+slug: voter.pdf
+
+
+< ./voter.pdf
