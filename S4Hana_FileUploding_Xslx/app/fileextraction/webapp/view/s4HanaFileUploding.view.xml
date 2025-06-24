@@ -1,0 +1,83 @@
+<mvc:View controllerName="fileextraction.controller.s4HanaFileUploding"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:smartFilter="sap.ui.comp.smartfilterbar"
+    class="viewPadding">
+
+    <Page id="page" title="{i18n>title}" showFooter="false">
+
+        <VBox class="sapUiContentPadding" fitContainer="true">
+
+            <!-- Smart Filter Bar -->
+            <smartFilter:SmartFilterBar id="smartFilterBar" entitySet="TcodeMapping">
+                <smartFilter:controlConfiguration>
+                    <smartFilter:ControlConfiguration 
+                        id="_IDGenControlConfiguration2"
+                        key="s4HanaForSelfServiceUse"
+                        label="Hana For SelfServiceUse"
+                        visibleInAdvancedArea="true" />
+                </smartFilter:controlConfiguration>
+            </smartFilter:SmartFilterBar>
+
+            <!-- Optional Search Toolbar -->
+            <Bar>
+            <contentLeft>
+            <Button
+        text="Upload File"
+        press=".fragmenthandleUploadPress"
+        type="Emphasized" />
+            </contentLeft>
+                <contentRight>
+                    <Toolbar>
+                        <SearchField id="_IDGenSearchField1" 
+                                     placeholder="{i18n>search}" 
+                                     width="100%" 
+                                     search=".onFilter" />
+                    </Toolbar>
+                </contentRight>
+            </Bar>
+
+            <!-- Smart Table -->
+            <smarttable:SmartTable
+                id="idSmarTable"
+                smartFilterId="smartFilterBar"
+                entitySet="TcodeMapping"
+                enableAutoBinding="true"
+                tableType="ResponsiveTable"
+                initiallyVisibleFields="secruityRoleLevel,s4HanaForSelfServiceUse,tCode"
+                editTogglable="true"
+                header="Tcode Mapping Table">
+                
+                <Table
+                    id="idResponsiveTable"
+                    selectionChange="handleSelectionChange"
+                    mode="SingleSelectMaster"
+                    growing="true"
+                    growingThreshold="10"
+                    growingDirection="Downwards"
+                    growingTriggerText="Load more..." />
+            </smarttable:SmartTable>
+
+            <!-- File Upload Section Below -->
+            <Panel headerText="Upload XLSX File" expandable="true" expanded="false" class="sapUiSmallMarginTop">
+                <VBox class="sapUiSmallMargin">
+                    <u:FileUploader
+                        id="fileUploader"
+                        name="myFileUpload"
+                        uploadUrl="upload/"
+                        tooltip="Upload your file to the local server"
+                        uploadComplete="handleUploadComplete" />
+                    <Button
+                        id="_IDGenButton"
+                        text="Upload File"
+                        press="handleUploadPress"
+                        class="sapUiTinyMarginTop" />
+                </VBox>
+            </Panel>
+
+        </VBox>
+    </Page>
+</mvc:View>
