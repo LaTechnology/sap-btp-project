@@ -1,0 +1,72 @@
+<mvc:View xmlns:unified="sap.ui.unified"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:f="sap.ui.layout.form" controllerName="ns.fileuploadback.controller.FileUploadView">
+    <Page id="_IDGenPage1">
+        
+        <content>
+            <IconTabBar class="sapUiSmallMarginBottom sapUiResponsiveContentPadding" id="iconTabBar">
+                <items>
+                    <IconTabFilter id="_IDGenIconTabFilter1" text="File Uploding Form" iconColor="NonInteractive" key="contactTab3">
+                        
+                        <f:SimpleForm id="excelForm" title="Excel File Uploader" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false">
+                            <f:content>
+                                <VBox id="_IDGenVBox1">
+                            
+                                    <Label text="File Upload" />
+                                    <u:FileUploader
+  id="idDP"
+  fileType="xlsx,csv"
+  maximumFilenameLength="30"
+  maximumFileSize="1"
+  multiple="false"
+  sameFilenameAllowed="false"
+  change="onChangeDP"
+  filenameLengthExceed="onFilenameLengthExceed"
+  fileSizeExceed="on2MBFileSizeExceed"
+  typeMissmatch="onTypeMissmatch"
+  uploadComplete="onUploadDPComplete"
+/>
+
+<Button text="Submit" press="onUpload" type="Success" />
+
+<VBox >
+    <Title text="Customer Details" level="H3" class="sapUiMediumMarginTop"/>
+<Table id="customerTable" items="{/customer}">
+        <columns>
+          <Column id="_IDGenColumn"><Text id="_IDGenText" text="ID"/></Column>
+          <Column id="_IDGenColumn1"><Text id="_IDGenText1" text="Name"/></Column>
+          <Column id="_IDGenColumn2"><Text id="_IDGenText2" text="Location"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem id="_IDGenColumnListItem">
+            <cells>
+              <Text id="_IDGenText3" text="{id}"/>
+              <Text id="_IDGenText4" text="{name}"/>
+              <Text id="_IDGenText5" text="{location}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+</VBox>
+
+<Button
+                    id="loadMoreButton"
+                    text="Load More"
+                    press="onLoadMore"
+                    class="sapUiTinyMarginTop"
+                    type="Default" />
+                    
+                                </VBox>
+                            </f:content>
+                        </f:SimpleForm>
+                        
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

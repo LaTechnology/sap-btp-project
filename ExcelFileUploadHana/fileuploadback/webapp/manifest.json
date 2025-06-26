@@ -1,0 +1,118 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "ns.fileuploadback",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.18.0",
+      "toolsId": "234b4e1a-f6f2-46fd-bb56-8370df22595f"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/my/$metadata/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.136.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ns.fileuploadback.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "ns.fileuploadback.view",
+        "async": true,
+        "viewPath": "ns.fileuploadback.view"
+      },
+      "routes": [
+        {
+          "name": "RouteFileUploadView",
+          "pattern": ":?query:",
+          "target": [
+            "TargetFileUploadView"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetFileUploadView": {
+          "id": "FileUploadView",
+          "name": "FileUploadView"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "ns.fileuploadback.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}
