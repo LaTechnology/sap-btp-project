@@ -1,0 +1,48 @@
+<mvc:View controllerName="fileextraction.controller.s4HanaFileUploding"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+        xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    class="viewPadding">
+    <Page id="page" title="{i18n>title}">
+        <l:VerticalLayout id="_IDGenVerticalLayout">
+		<u:FileUploader
+			id="fileUploader"
+			name="myFileUpload"
+			uploadUrl="upload/"
+			tooltip="Upload your file to the local server"
+			uploadComplete="handleUploadComplete"/>
+		<Button id="_IDGenButton"
+			text="Upload File"
+			press="handleUploadPress"/>
+	</l:VerticalLayout>
+       <Table id="myTable" items="{path: '/TcodeMapping'}">
+  <columns>
+    <!-- Do NOT define a column for ID if you want to hide it -->
+    <Column id="_IDGenColumn">
+      <Text id="_IDGenText" text="s4HanaForSelf ServiceUse"/>
+    </Column>
+    <Column id="_IDGenColumn1">
+      <Text id="_IDGenText1" text="secruity RoleLevel"/>
+    </Column>
+    <Column id="_IDGenColumn2">
+      <Text id="_IDGenText2" text="T-Code"/>
+    </Column>
+  </columns>
+  <items>
+    <ColumnListItem id="_IDGenColumnListItem1">
+      <!-- Do NOT bind the ID field -->
+      <cells>
+        <Text id="_IDGenText3" text="{s4HanaForSelfServiceUse}"/>
+        <Text id="_IDGenText4" text="{secruityRoleLevel}"/>
+        <Text id="_IDGenText5" text="{tCode}"/>
+      </cells>
+    </ColumnListItem>
+  </items>
+</Table>
+
+
+    </Page>
+</mvc:View>
